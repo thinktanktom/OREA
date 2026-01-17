@@ -56,9 +56,26 @@
             box-shadow: 0 2px 20px rgba(74, 63, 53, 0.05);
         }
         
+        /* Logo with icon */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .logo-icon {
+            width: 26px;
+            height: 32px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover .logo-icon {
+            transform: rotate(90deg);
+        }
+        
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 300;
             letter-spacing: 0.15em;
             color: var(--espresso-brown);
@@ -117,22 +134,55 @@
             animation: fadeInBackground 2s ease forwards;
         }
         
-        .hero-botanical {
-            position: absolute;
-            top: 10%;
-            right: 5%;
-            width: 400px;
-            height: 500px;
-            opacity: 0.15;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 250"><path d="M100,220 Q80,180 85,140 Q90,100 100,80 Q110,100 115,140 Q120,180 100,220 M70,160 Q60,140 65,120 Q70,100 75,90 M130,160 Q140,140 135,120 Q130,100 125,90 M100,80 L100,40 M100,40 Q95,35 90,35 Q85,35 82,38 M100,40 Q105,35 110,35 Q115,35 118,38" fill="none" stroke="%234A3F35" stroke-width="2" stroke-linecap="round"/><circle cx="100" cy="20" r="8" fill="%234A3F35" opacity="0.3"/></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-            animation: floatBotanical 20s ease-in-out infinite;
+        /* Botanical SVG Logo in Hero */
+        .hero-logo {
+            width: 120px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            opacity: 0;
+            animation: fadeInLogo 1.5s ease 0.3s forwards;
+            position: relative;
+            z-index: 10;
         }
         
-        @keyframes floatBotanical {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
+        .hero-logo svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 25px rgba(74, 63, 53, 0.1));
+        }
+        
+        @keyframes fadeInLogo {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .hero-botanical {
+            display: none; /* Hidden - botanical is now the logo */
+        }
+        
+        /* Faded Orchid Photo Background */
+        .hero-orchid-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 50%;
+            background-image: url('images/diamond_encrusted_orchid.jpeg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            filter: blur(1px);
+            animation: fadeInOrchid 2.5s ease 1s forwards;
+            z-index: 1;
+        }
+        
+        @keyframes fadeInOrchid {
+            to {
+                opacity: 0.10;
+            }
         }
         
         .hero-content {
@@ -643,6 +693,16 @@
                 display: none;
             }
             
+            .hero-logo {
+                width: 100px;
+                height: 125px;
+            }
+            
+            .hero-orchid-bg {
+                width: 70%;
+                height: 60%;
+            }
+            
             .story-section {
                 grid-template-columns: 1fr;
             }
@@ -669,6 +729,12 @@
                 font-size: 2.5rem;
             }
             
+            .hero-logo {
+                width: 80px;
+                height: 100px;
+                margin-bottom: 1.5rem;
+            }
+            
             .hero-subtitle {
                 font-size: 1rem;
             }
@@ -681,6 +747,15 @@
             .btn {
                 width: 100%;
                 text-align: center;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .logo-icon {
+                width: 20px;
+                height: 25px;
             }
             
             .nav-grid, .value-prop, .featured-collection {
@@ -697,7 +772,18 @@
 <body>
     <!-- Navigation -->
     <nav id="nav">
-        <div class="logo">ORÉA</div>
+        <div class="logo-container">
+            <!-- Botanical Logo SVG -->
+            <svg class="logo-icon" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100,220 Q80,180 85,140 Q90,100 100,80 Q110,100 115,140 Q120,180 100,220 M70,160 Q60,140 65,120 Q70,100 75,90 M130,160 Q140,140 135,120 Q130,100 125,90 M100,80 L100,40 M100,40 Q95,35 90,35 Q85,35 82,38 M100,40 Q105,35 110,35 Q115,35 118,38" 
+                      fill="none" 
+                      stroke="#2C2419" 
+                      stroke-width="3" 
+                      stroke-linecap="round"/>
+                <circle cx="100" cy="20" r="8" fill="#2C2419" opacity="0.7"/>
+            </svg>
+            <div class="logo">ORÉA</div>
+        </div>
         <ul class="nav-links">
             <li><a href="#shop">Shop</a></li>
             <li><a href="#bespoke">Bespoke</a></li>
@@ -709,8 +795,19 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-background"></div>
+        <div class="hero-orchid-bg"></div>
         <div class="hero-botanical"></div>
         <div class="hero-content">
+            <div class="hero-logo">
+                <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,220 Q80,180 85,140 Q90,100 100,80 Q110,100 115,140 Q120,180 100,220 M70,160 Q60,140 65,120 Q70,100 75,90 M130,160 Q140,140 135,120 Q130,100 125,90 M100,80 L100,40 M100,40 Q95,35 90,35 Q85,35 82,38 M100,40 Q105,35 110,35 Q115,35 118,38" 
+                          fill="none" 
+                          stroke="#4A3F35" 
+                          stroke-width="2.5" 
+                          stroke-linecap="round"/>
+                    <circle cx="100" cy="20" r="8" fill="#4A3F35" opacity="0.5"/>
+                </svg>
+            </div>
             <h1>Where Nature Meets Brilliance</h1>
             <p class="hero-subtitle">Lab-grown diamonds, organically inspired, consciously created</p>
             <div class="cta-group">
