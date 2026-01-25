@@ -1,0 +1,12 @@
+/* Add to assets/styles.css */
+:root {
+  --orchid-white: #fcfcf9;
+  --petal-pink: #fff5f7;
+  --growth-green: #e8f3eb;
+  --diamond-sparkle: #f0f0f0;
+  --natural-stone: #78716c;
+}
+
+.bg-brand-orchid { background-color: var(--orchid-white); }
+.bg-brand-petal { background-color: var(--petal-pink); }
+.bg-brand-growth { background-color: var(--growth-green); }
