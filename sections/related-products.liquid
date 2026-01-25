@@ -1,0 +1,80 @@
+<div class="space-y-16">
+  <div class="text-center space-y-4">
+    <h3 class="text-4xl font-light text-stone-900 serif italic">
+      {{ section.settings.heading }}
+    </h3>
+    <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-400">
+      {{ section.settings.subheading }}
+    </p>
+  </div>
+  
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
+    {% if section.settings.product_list != blank %}
+      {% for product in section.settings.product_list %}
+        <div class="group cursor-pointer">
+          <a href="{{ product.url }}">
+            <div class="bg-stone-50 aspect-[3/4] overflow-hidden mb-6 relative">
+              {% if product.featured_image %}
+                <img 
+                  src="{{ product.featured_image | image_url: width: 600 }}" 
+                  alt="{{ product.title | escape }}" 
+                  class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  loading="lazy"
+                />
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+              {% endif %}
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500"></div>
+            </div>
+            <div class="space-y-1 text-center lg:text-left">
+              <h4 class="text-[11px] font-bold uppercase tracking-[0.15em] text-stone-800">
+                {{ product.title }}
+              </h4>
+              <p class="text-[13px] text-stone-500 font-light">
+                {{ product.price | money }} {{ cart.currency.iso_code }}
+              </p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    {% else %}
+      {% for i in (1..4) %}
+        <div class="group cursor-pointer">
+          <div class="bg-stone-50 aspect-[3/4] overflow-hidden mb-6 relative">
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+          </div>
+          <div class="space-y-1 text-center lg:text-left">
+            <h4 class="text-[11px] font-bold uppercase tracking-[0.15em] text-stone-800">Product {{ i }}</h4>
+            <p class="text-[13px] text-stone-500 font-light">$1,200 NZD</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Related Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Complete the Look"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Curated Pairings for the Solitaire"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Products",
+      "limit": 4
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,195 @@
+<div id="send-hint-modal" class="fixed inset-0 z-[150] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-[2px]">
+  <div class="bg-[#fcfcf9] w-full max-w-5xl rounded-sm shadow-2xl overflow-hidden flex flex-col md:flex-row relative min-h-[600px]">
+    
+    <button class="modal-close absolute top-8 right-8 z-30 text-stone-300 hover:text-black transition-all">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Form Container -->
+    <div class="w-full md:w-5/12 p-10 md:p-14 bg-white border-r border-stone-50 flex flex-col">
+      <div class="mb-12">
+        <h3 class="text-3xl font-light serif italic text-stone-800 mb-2">Send a Hint</h3>
+        <p class="text-[9px] font-bold uppercase tracking-[0.3em] text-stone-400">Share your vision with someone special</p>
+      </div>
+      
+      <form id="send-hint-form" class="flex-grow flex flex-col justify-between">
+        <div class="space-y-6">
+          <div class="grid grid-cols-1 gap-6">
+            <div class="space-y-1">
+              <p class="text-[8px] font-bold uppercase tracking-widest text-stone-400">From</p>
+              <input 
+                type="text" 
+                name="sender_name"
+                placeholder="Your Name" 
+                class="hint-input w-full py-4 bg-transparent border-b border-stone-100 text-[13px] focus:outline-none focus:border-stone-400 transition-all duration-500 placeholder:text-stone-300 font-light tracking-widest text-stone-800"
+                required
+              />
+              <input 
+                type="email"
+                name="sender_email" 
+                placeholder="Your Email Address" 
+                class="hint-input w-full py-4 bg-transparent border-b border-stone-100 text-[13px] focus:outline-none focus:border-stone-400 transition-all duration-500 placeholder:text-stone-300 font-light tracking-widest text-stone-800"
+                required
+              />
+            </div>
+
+            <div class="py-2 flex items-center">
+              <div class="h-px bg-stone-100 flex-grow"></div>
+              <div class="mx-4 text-[8px] font-bold uppercase tracking-widest text-stone-200">Recipient</div>
+              <div class="h-px bg-stone-100 flex-grow"></div>
+            </div>
+
+            <div class="space-y-1">
+              <p class="text-[8px] font-bold uppercase tracking-widest text-stone-400">To</p>
+              <input 
+                type="text"
+                name="receiver_name" 
+                placeholder="Their Name" 
+                class="hint-input w-full py-4 bg-transparent border-b border-stone-100 text-[13px] focus:outline-none focus:border-stone-400 transition-all duration-500 placeholder:text-stone-300 font-light tracking-widest text-stone-800"
+                required
+              />
+              <input 
+                type="email"
+                name="receiver_email" 
+                placeholder="Their Email Address" 
+                class="hint-input w-full py-4 bg-transparent border-b border-stone-100 text-[13px] focus:outline-none focus:border-stone-400 transition-all duration-500 placeholder:text-stone-300 font-light tracking-widest text-stone-800"
+                required
+              />
+            </div>
+
+            <div class="pt-4">
+              <textarea 
+                name="message"
+                placeholder="Write a personal message (optional)..." 
+                rows="2"
+                class="hint-input w-full py-4 bg-transparent border-b border-stone-50 text-[13px] focus:outline-none focus:border-stone-200 transition-all duration-500 placeholder:text-stone-300 font-light tracking-widest text-stone-800 resize-none italic serif"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 space-y-6">
+          <button 
+            type="submit"
+            class="w-full py-6 text-[10px] font-bold uppercase tracking-[0.4em] transition-all duration-700 flex items-center justify-center bg-black text-white hover:bg-stone-800"
+          >
+            Send Hint
+          </button>
+          
+          <div class="text-[7px] font-bold uppercase tracking-[0.2em] text-stone-300 text-center">
+            We'll only send this once, unless they choose to hear from us.
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Preview Container -->
+    <div class="w-full md:w-7/12 bg-[#f9f9f7] p-10 md:p-20 flex items-center justify-center relative" id="hint-preview">
+      <div class="absolute top-0 right-0 p-20 opacity-5 pointer-events-none">
+        <svg class="w-64 h-64 text-stone-800" viewBox="0 0 24 24" fill="none">
+          <path d="M12 4V6M12 18V20M6 12H4M20 12H18M17.657 6.343L16.243 7.757M7.757 16.243L6.343 17.657M17.657 17.657L16.243 16.243M7.757 7.757L6.343 6.343" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <div class="w-full max-w-sm bg-white shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] p-12 relative flex flex-col items-center">
+        <div class="mb-10 text-center">
+          <p class="text-[10px] font-light tracking-[0.5em] text-stone-900 mb-1">OREA</p>
+          <div class="w-4 h-[1px] bg-stone-100 mx-auto"></div>
+        </div>
+
+        <div class="space-y-8 text-center w-full">
+          <div class="space-y-4">
+            <p class="serif italic text-xl text-stone-800 truncate px-4">Dear <span id="preview-receiver">[Recipient Name]</span></p>
+            <div class="px-2">
+              <p class="serif italic text-[14px] text-stone-500 leading-relaxed">
+                We thought you might like to see something that's been on <span id="preview-sender">[Your Name]</span>'s mind lately.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative group mx-auto w-fit py-2">
+            <div class="bg-[#fcfcf9] p-2 shadow-sm">
+              <img 
+                id="preview-image"
+                src="{{ product.featured_image | image_url: width: 400 }}" 
+                alt="Hint Product" 
+                class="w-48 h-60 object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000"
+              />
+            </div>
+          </div>
+
+          <div class="space-y-6 pt-2">
+            <div>
+              <h4 class="text-[9px] font-bold uppercase tracking-[0.3em] text-stone-800 mb-1" id="preview-product-name">{{ product.title }}</h4>
+            </div>
+            
+            <div id="preview-message-container" class="pt-4 border-t border-stone-50 hidden">
+              <p class="serif italic text-[13px] text-stone-600 line-clamp-3" id="preview-message"></p>
+            </div>
+
+            <div class="pt-4">
+              <p class="serif italic text-[10px] text-stone-400 mb-2">With love,</p>
+              <p class="text-[9px] font-bold uppercase tracking-[0.4em] text-stone-900">ORÉA</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#f9f9f7] border border-white shadow-inner flex items-center justify-center">
+          <div class="w-1 h-1 rounded-full bg-stone-300"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Success Screen (hidden by default) -->
+<div id="hint-success-screen" class="fixed inset-0 z-[150] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-[2px]">
+  <div class="bg-[#fcfcf9] w-full max-w-5xl rounded-sm shadow-2xl overflow-hidden relative min-h-[600px] flex items-center justify-center">
+    <button class="modal-close absolute top-8 right-8 z-30 text-stone-300 hover:text-black transition-all">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="w-full flex flex-col items-center justify-center p-12 md:p-24 text-center">
+      <div class="mb-12 relative">
+        <svg class="w-20 h-20 text-stone-100 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 4V6M12 18V20M6 12H4M20 12H18M17.657 6.343L16.243 7.757M7.757 16.243L6.343 17.657M17.657 17.657L16.243 16.243M7.757 7.757L6.343 6.343" stroke-width="0.5" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="3" stroke-width="0.5"/>
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-6 h-6 text-stone-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+      </div>
+      
+      <div class="max-w-md space-y-6">
+        <h3 class="text-4xl font-light serif italic text-stone-800">Sent with Care</h3>
+        <p class="text-[14px] text-stone-500 font-light leading-relaxed serif italic">
+          A thoughtful gesture for a beautiful future. Your hint has been shared.
+        </p>
+        
+        <div class="pt-12 flex flex-col items-center space-y-8">
+          <div class="h-px w-12 bg-stone-100"></div>
+          
+          <div class="flex flex-col md:flex-row gap-8">
+            <button 
+              class="modal-close text-[10px] font-bold uppercase tracking-[0.3em] text-black border-b border-black pb-2 hover:text-stone-400 hover:border-stone-400 transition-all"
+            >
+              Return to the Piece
+            </button>
+            <button 
+              class="open-concierge text-[10px] font-bold uppercase tracking-[0.3em] text-stone-400 hover:text-black transition-all"
+            >
+              Discuss Bespoke Sourcing
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

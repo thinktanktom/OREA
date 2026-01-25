@@ -1,0 +1,120 @@
+<div id="gift-reminder-modal" class="fixed inset-0 z-[150] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-[2px]">
+  <div class="bg-[#fcfcf9] w-full max-w-4xl rounded-sm shadow-2xl overflow-hidden flex flex-col md:flex-row relative">
+    
+    <button class="modal-close absolute top-8 right-8 z-30 text-stone-300 hover:text-black transition-all">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Form Container -->
+    <div class="w-full md:w-1/2 p-10 md:p-14 bg-white border-r border-stone-50 flex flex-col">
+      <div class="mb-10">
+        <h3 class="text-3xl font-light serif italic text-stone-800 mb-2">Save for Occasion</h3>
+        <p class="text-[9px] font-bold uppercase tracking-[0.3em] text-stone-400">A considered reminder for a meaningful moment</p>
+      </div>
+      
+      <form id="gift-reminder-form" class="flex-grow flex flex-col justify-between">
+        <div class="space-y-6">
+          <div class="grid grid-cols-1 gap-6">
+            <div class="space-y-4">
+              <div>
+                <label class="text-[8px] font-bold uppercase tracking-widest text-stone-400 block mb-1">Your details</label>
+                <input 
+                  type="text"
+                  name="name" 
+                  placeholder="Full Name" 
+                  class="reminder-input w-full py-4 bg-transparent border-b border-stone-100 text-[13px] focus:outline-none focus:border-stone-400 transition-all duration-500 placeholder:text-stone-300 font-light tracking-widest text-stone-800"
+                  required
+                />
+                <input 
+                  type="email"
+                  name="email" 
+                  placeholder="Email Address" 
+                  class="reminder-input w-full py-4 bg-transparent border-b border-stone-100 text-[13px] focus:outline-none focus:border-stone-400 transition-all duration-500 placeholder:text-stone-300 font-light tracking-widest text-stone-800"
+                  required
+                />
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-[8px] font-bold uppercase tracking-widest text-stone-400 block mb-1">Occasion</label>
+                  <select 
+                    name="occasion"
+                    class="reminder-input w-full py-4 bg-transparent border-b border-stone-100 text-[13px] focus:outline-none focus:border-stone-400 transition-all duration-500 text-stone-800"
+                  >
+                    <option>Anniversary</option>
+                    <option>Birthday</option>
+                    <option>Proposal</option>
+                    <option>Holiday</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-[8px] font-bold uppercase tracking-widest text-stone-400 block mb-1">Occasion date</label>
+                  <input 
+                    type="date"
+                    name="date" 
+                    class="reminder-input w-full py-4 bg-transparent border-b border-stone-100 text-[13px] focus:outline-none focus:border-stone-400 transition-all duration-500 text-stone-800"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="text-[8px] font-bold uppercase tracking-widest text-stone-400 block mb-1">Choose when you'd like to be reminded.</label>
+                <div class="flex space-x-3 pt-2">
+                  <button
+                    type="button"
+                    class="lead-time-btn flex-1 py-3 text-[9px] font-bold uppercase tracking-widest border transition-all bg-black text-white border-black shadow-sm"
+                    data-days="30"
+                  >
+                    30 Days Prior
+                  </button>
+                  <button
+                    type="button"
+                    class="lead-time-btn flex-1 py-3 text-[9px] font-bold uppercase tracking-widest border transition-all border-stone-100 text-stone-400 hover:border-stone-200"
+                    data-days="45"
+                  >
+                    45 Days Prior
+                  </button>
+                  <button
+                    type="button"
+                    class="lead-time-btn flex-1 py-3 text-[9px] font-bold uppercase tracking-widest border transition-all border-stone-100 text-stone-400 hover:border-stone-200"
+                    data-days="60"
+                  >
+                    60 Days Prior
+                  </button>
+                </div>
+                <input type="hidden" name="lead_time" value="30" id="selected-lead-time" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 space-y-4">
+          <button 
+            type="submit"
+            class="w-full py-6 text-[10px] font-bold uppercase tracking-[0.4em] transition-all duration-700 flex items-center justify-center bg-black text-white hover:bg-stone-800"
+          >
+            Schedule Reminder
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Content Side -->
+    <div class="w-full md:w-1/2 bg-[#f9f9f7] p-10 md:p-16 flex flex-col items-center justify-center text-center">
+      <div class="w-full max-w-xs bg-white shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] p-10 relative flex flex-col items-center space-y-8">
+        <div class="text-[10px] font-light tracking-[0.5em] text-stone-900">OREA</div>
+        
+        <div class="w-12 h-12 rounded-full bg-stone-50 flex items-center justify-center text-stone-300">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+
+        <div class="space-y-4">
+          <p class="serif italic text-[14px] text-stone-500 leading-relaxed px-2">
+            We'll gently remind you <span id="reminder-preview-days">30</span> days before your upcoming <span id="reminder-preview-occasion">anniversary</span> - so you have time to prepare.
+          </p>

@@ -1,0 +1,96 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "OREA",
+    "theme_version": "1.0.0",
+    "theme_author": "OREA",
+    "theme_documentation_url": "https://orea.co.nz",
+    "theme_support_url": "https://orea.co.nz/pages/support"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_orchid_white",
+        "label": "Orchid White",
+        "default": "#fcfcf9"
+      },
+      {
+        "type": "color",
+        "id": "color_petal_pink",
+        "label": "Petal Pink",
+        "default": "#fff5f7"
+      },
+      {
+        "type": "color",
+        "id": "color_growth_green",
+        "label": "Growth Green",
+        "default": "#e8f3eb"
+      },
+      {
+        "type": "color",
+        "id": "color_diamond_sparkle",
+        "label": "Diamond Sparkle",
+        "default": "#f0f0f0"
+      }
+    ]
+  },
+  {
+    "name": "AI Assistant",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Gemini API Settings"
+      },
+      {
+        "type": "text",
+        "id": "gemini_api_key",
+        "label": "Gemini API Key",
+        "info": "Enter your Google Gemini API key for the AI assistant"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_ai_assistant",
+        "label": "Enable AI Assistant",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Product Pages",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product Display"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sku",
+        "label": "Show SKU",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "image_size",
+        "label": "Product image size",
+        "options": [
+          { "value": "small", "label": "Small" },
+          { "value": "medium", "label": "Medium" },
+          { "value": "large", "label": "Large" }
+        ],
+        "default": "large"
+      }
+    ]
+  }
+]

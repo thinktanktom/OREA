@@ -1,4 +1,4 @@
-/* Add to assets/styles.css */
+/* OREA Brand Styles */
 :root {
   --orchid-white: #fcfcf9;
   --petal-pink: #fff5f7;
@@ -7,6 +7,134 @@
   --natural-stone: #78716c;
 }
 
-.bg-brand-orchid { background-color: var(--orchid-white); }
-.bg-brand-petal { background-color: var(--petal-pink); }
-.bg-brand-growth { background-color: var(--growth-green); }
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.fade-in {
+  animation: fadeIn 0.7s ease-out;
+}
+
+.slide-in-from-bottom-8 {
+  animation: slideInFromBottom 0.5s ease-out;
+}
+
+.zoom-in-95 {
+  animation: zoomIn 0.5s ease-out;
+}
+
+/* Metal gradients */
+.metal-gradient-platinum {
+  background: linear-gradient(135deg, #f0f0f0 0%, #d1d1d1 50%, #e8e8e8 100%);
+}
+
+.metal-gradient-18k-yellow {
+  background: linear-gradient(135deg, #efd695 0%, #dfbc5e 50%, #f7e8c1 100%);
+}
+
+.metal-gradient-18k-white {
+  background: linear-gradient(135deg, #f8f8f8 0%, #e2e2e2 50%, #ffffff 100%);
+}
+
+.metal-gradient-14k-yellow {
+  background: linear-gradient(135deg, #efd695 0%, #dfbc5e 50%, #f7e8c1 100%);
+}
+
+.metal-gradient-14k-white {
+  background: linear-gradient(135deg, #f8f8f8 0%, #e2e2e2 50%, #ffffff 100%);
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Pulse animation for typing indicator */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.delay-75 {
+  animation-delay: 75ms;
+}
+
+.delay-150 {
+  animation-delay: 150ms;
+}
+
+/* Custom selection color */
+::selection {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Focus styles */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Backdrop blur fallback */
+@supports not (backdrop-filter: blur(2px)) {
+  .backdrop-blur-sm {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .backdrop-blur-\[2px\] {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}

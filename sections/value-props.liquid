@@ -1,0 +1,67 @@
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-8" id="value-props">
+  <!-- Precious Metal -->
+  <button 
+    class="value-prop-trigger flex flex-col items-center justify-center p-6 bg-transparent border border-stone-100 hover:bg-stone-50 transition-all space-y-3 group text-center aspect-square"
+    data-modal="precious-metal"
+  >
+    <span class="text-stone-400 group-hover:text-black transition-colors">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M12 2v20M2 12h20" stroke-width="0.5" stroke-opacity="0.3" />
+        <circle cx="12" cy="12" r="9" stroke-width="0.8" />
+        <circle cx="12" cy="12" r="4" stroke-width="0.8" />
+      </svg>
+    </span>
+    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">Precious Metal</span>
+  </button>
+
+  <!-- Premium Diamond -->
+  <button 
+    class="value-prop-trigger flex flex-col items-center justify-center p-6 bg-transparent border border-stone-100 hover:bg-stone-50 transition-all space-y-3 group text-center aspect-square"
+    data-modal="premium-diamond"
+  >
+    <span class="text-stone-400 group-hover:text-black transition-colors">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M12 2L4.5 9L12 22L19.5 9L12 2Z" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M4.5 9H19.5" stroke-width="0.8" />
+        <path d="M8 9L12 2L16 9" stroke-width="0.8" />
+      </svg>
+    </span>
+    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">Premium Diamond</span>
+  </button>
+
+  <!-- Free Shipping -->
+  <button 
+    class="value-prop-trigger flex flex-col items-center justify-center p-6 bg-transparent border border-stone-100 hover:bg-stone-50 transition-all space-y-3 group text-center aspect-square"
+    data-modal="free-shipping"
+  >
+    <span class="text-stone-400 group-hover:text-black transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+      </svg>
+    </span>
+    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">Free Shipping</span>
+  </button>
+
+  <!-- Sustainable Practices -->
+  <button 
+    class="value-prop-trigger flex flex-col items-center justify-center p-6 bg-transparent border border-stone-100 hover:bg-stone-50 transition-all space-y-3 group text-center aspect-square"
+    data-modal="sustainable"
+  >
+    <span class="text-stone-400 group-hover:text-black transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A11.952 11.952 0 0112 13.5a11.952 11.952 0 01-8.716 1.247M3.284 14.253A8.959 8.959 0 013 12c0-.778.099-1.533.284-2.253" />
+      </svg>
+    </span>
+    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">sustainable practices</span>
+  </button>
+</div>
+
+<!-- Value Prop Modals Container -->
+<div id="value-prop-modals"></div>
+
+{% schema %}
+{
+  "name": "Value Props",
+  "settings": []
+}
+{% endschema %}
