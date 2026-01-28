@@ -1,0 +1,124 @@
+{% comment %}
+  ORÉA Lab-Grown Diamond Introduction Section
+  Add this file to: sections/lab-grown-intro.liquid
+{% endcomment %}
+
+<section class="relative max-w-7xl mx-auto px-6 lg:px-12 py-24">
+  <div class="absolute left-1/2 top-0 bottom-0 w-px bg-stone-100 hidden lg:block -z-10"></div>
+  
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+    
+    <div class="lg:col-span-6 space-y-12">
+      <div class="space-y-4">
+        <h2 class="text-5xl md:text-7xl font-light text-stone-900 leading-[1.05] tracking-tight serif">
+          {{ section.settings.heading_line1 }} <br />
+          <span class="text-stone-500">{{ section.settings.heading_line2 }}</span> <br />
+          {{ section.settings.heading_line3 }}
+        </h2>
+      </div>
+      
+      <div class="max-w-md">
+        <h4 class="text-xs md:text-sm uppercase tracking-[0.6em] text-stone-900 font-bold mb-10 border-l-2 border-stone-900 pl-6 py-1 leading-relaxed">
+          {{ section.settings.subheading | newline_to_br }}
+        </h4>
+        <p class="text-stone-600 font-light text-xl leading-relaxed">
+          {{ section.settings.main_text }}
+        </p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-6 lg:pt-32 space-y-16">
+      <div class="space-y-8 max-w-lg">
+        <div class="flex items-center space-x-6">
+          <div class="w-12 h-px bg-stone-900"></div>
+          <span class="text-[10px] uppercase tracking-[0.4em] text-stone-900 font-bold">{{ section.settings.distinction_label }}</span>
+        </div>
+        
+        <p class="text-stone-500 font-light text-lg leading-loose">
+          {{ section.settings.distinction_text }}
+        </p>
+      </div>
+
+      <div class="relative group cursor-default">
+        <div class="absolute -inset-4 border border-stone-100 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        <div class="space-y-2">
+          <p class="text-stone-900 text-3xl tracking-wide leading-tight serif">
+            {{ section.settings.statement | newline_to_br }}
+          </p>
+        </div>
+        
+        <div class="mt-12 flex items-center space-x-4">
+          <div class="w-4 h-4 border border-stone-900 rotate-45 flex items-center justify-center">
+            <div class="w-1 h-1 bg-stone-900"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-32 border-t border-stone-100"></div>
+</section>
+
+{% schema %}
+{
+  "name": "Lab-Grown Intro",
+  "tag": "section",
+  "class": "orea-lab-grown-intro",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading Line 1",
+      "default": "What Is a"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading Line 2 (Highlighted)",
+      "default": "Lab-Grown"
+    },
+    {
+      "type": "text",
+      "id": "heading_line3",
+      "label": "Heading Line 3",
+      "default": "Diamond"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Real diamonds.\nModern origins."
+    },
+    {
+      "type": "textarea",
+      "id": "main_text",
+      "label": "Main Text",
+      "default": "A lab-grown diamond is chemically, physically, and optically identical to an earth-mined diamond - with the same brilliance, hardness, and fire."
+    },
+    {
+      "type": "text",
+      "id": "distinction_label",
+      "label": "Distinction Label",
+      "default": "The Distinction"
+    },
+    {
+      "type": "textarea",
+      "id": "distinction_text",
+      "label": "Distinction Text",
+      "default": "The only difference is creation — grown in a controlled environment rather than extracted through mining. A modern approach to nature's most enduring material."
+    },
+    {
+      "type": "textarea",
+      "id": "statement",
+      "label": "Statement Text",
+      "default": "Same diamond.\nSame beauty.\nA more intentional origin."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lab-Grown Intro"
+    }
+  ]
+}
+{% endschema %}
