@@ -1,14 +1,12 @@
-export interface DiamondShape {
-  name: string;
-  description: string;
-  technicalNote: string;
-  image: string;
-}
 
-export interface ComparisonSpec {
+export interface StandardPillar {
   label: string;
-  lab: string;
-  mined: string;
+  title: string;
+  description: string;
 }
 
-export type DiamondModality = 'Cut' | 'Color' | 'Clarity' | 'Carat';
+export interface DiamondSpec {
+  label: string;
+  value: string;
+  sub: string;
+}
