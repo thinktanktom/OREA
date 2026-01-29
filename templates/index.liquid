@@ -1,37 +1,273 @@
 {% comment %}
   ORÉA Fine Jewellery - Homepage Template
   =======================================
-  The main landing page showcasing the brand's values:
-  - Lab-grown diamonds
-  - Solid precious metals
-  - Bespoke craftsmanship
-  - Sustainable practices
-  
-  Converted from: App.tsx, Hero.tsx, OriginText.tsx, OreaStandards.tsx,
-                  BespokeProcess.tsx, SustainabilityBadge.tsx, LocationContact.tsx
+  The main landing page focused on driving to collections and products.
+  Distinct from the About page which tells the full brand story.
 {% endcomment %}
 
-<div class="animate-in">
+<main class="min-h-screen bg-[#fcfcf9]">
+
   <!-- Hero Section -->
-  {% section 'homepage-hero' %}
-  
-  <!-- Main Content Container -->
-  <div class="space-y-32 md:space-y-48 pb-32 md:pb-48 max-w-7xl mx-auto px-6">
+  <section class="relative min-h-[90vh] flex flex-col items-center justify-center pt-24 pb-20 px-6">
+    <div class="w-full max-w-5xl mx-auto text-center space-y-10 z-10">
+      <div class="space-y-6">
+        <h4 class="text-[10px] uppercase tracking-[0.6em] text-stone-400 font-bold">Fine Jewellery, Consciously Crafted</h4>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-stone-900 leading-tight tracking-tight">
+          Timeless Design.<br />
+          Modern Origins.
+        </h1>
+        <p class="text-lg md:text-xl text-stone-500 font-light max-w-xl mx-auto leading-relaxed">
+          Handcrafted in solid precious metals, set with certified lab-grown diamonds. Made to last, designed to be loved.
+        </p>
+      </div>
+      
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+        <a href="/collections/engagement-rings" class="px-12 py-5 bg-stone-900 text-white text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-stone-800 transition-all duration-500">
+          Shop Engagement
+        </a>
+        <a href="/collections/all" class="px-12 py-5 border border-stone-900 text-stone-900 text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-stone-900 hover:text-white transition-all duration-500">
+          Explore All
+        </a>
+      </div>
+    </div>
     
-    <!-- Lab-Grown Diamond Origin Statement -->
-    {% section 'origin-text' %}
-    
-    <!-- The ORÉA Standards (Metals, Diamonds, Experience, Warranty) -->
-    {% section 'orea-standards' %}
-    
-    <!-- Bespoke Process Description -->
-    {% section 'bespoke-process' %}
-    
-    <!-- Sustainability Badge & Commitment -->
-    {% section 'sustainability-badge' %}
-    
-    <!-- Contact CTA -->
-    {% section 'location-contact' %}
-    
-  </div>
-</div>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 opacity-40">
+      <span class="text-[8px] uppercase tracking-[0.3em] text-stone-400 font-bold">Scroll</span>
+      <div class="w-px h-8 bg-stone-300"></div>
+    </div>
+  </section>
+
+  <!-- Featured Collections -->
+  <section class="py-24 md:py-32 border-t border-stone-100">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center mb-16 md:mb-20">
+        <h2 class="text-3xl md:text-4xl font-serif text-stone-900 mb-4">Our Collections</h2>
+        <p class="text-stone-500 font-light">Explore our curated selection of fine jewellery</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        
+        <!-- Engagement Rings -->
+        <a href="/collections/engagement-rings" class="group block">
+          <div class="aspect-[3/4] bg-stone-100 border border-stone-100 overflow-hidden mb-6 relative">
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10"></div>
+            <div class="w-full h-full flex items-center justify-center">
+              <span class="text-[9px] uppercase tracking-[0.4em] text-stone-300 font-bold">Collection Image</span>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3 class="text-lg font-serif text-stone-900 mb-2 group-hover:text-stone-600 transition-colors">Engagement Rings</h3>
+            <span class="text-[10px] uppercase tracking-[0.3em] text-stone-400 font-bold group-hover:text-stone-600 transition-colors">Shop Now →</span>
+          </div>
+        </a>
+        
+        <!-- Wedding Bands -->
+        <a href="/collections/wedding-bands" class="group block">
+          <div class="aspect-[3/4] bg-stone-100 border border-stone-100 overflow-hidden mb-6 relative">
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10"></div>
+            <div class="w-full h-full flex items-center justify-center">
+              <span class="text-[9px] uppercase tracking-[0.4em] text-stone-300 font-bold">Collection Image</span>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3 class="text-lg font-serif text-stone-900 mb-2 group-hover:text-stone-600 transition-colors">Wedding Bands</h3>
+            <span class="text-[10px] uppercase tracking-[0.3em] text-stone-400 font-bold group-hover:text-stone-600 transition-colors">Shop Now →</span>
+          </div>
+        </a>
+        
+        <!-- Fine Jewellery -->
+        <a href="/collections/fine-jewellery" class="group block">
+          <div class="aspect-[3/4] bg-stone-100 border border-stone-100 overflow-hidden mb-6 relative">
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10"></div>
+            <div class="w-full h-full flex items-center justify-center">
+              <span class="text-[9px] uppercase tracking-[0.4em] text-stone-300 font-bold">Collection Image</span>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3 class="text-lg font-serif text-stone-900 mb-2 group-hover:text-stone-600 transition-colors">Fine Jewellery</h3>
+            <span class="text-[10px] uppercase tracking-[0.3em] text-stone-400 font-bold group-hover:text-stone-600 transition-colors">Shop Now →</span>
+          </div>
+        </a>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Promise Banner -->
+  <section class="py-20 md:py-28 bg-stone-900 text-white">
+    <div class="max-w-4xl mx-auto px-6 text-center space-y-8">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-serif leading-tight">
+        Lab-grown diamonds. Solid precious metals.<br />
+        Crafted to last a lifetime.
+      </h2>
+      <p class="text-stone-400 font-light max-w-xl mx-auto">
+        Every ORÉA piece is made with certified lab-grown diamonds and solid 14k/18k gold or platinum — never plated, never compromised.
+      </p>
+      <div class="pt-4">
+        <a href="/pages/about" class="text-[10px] uppercase tracking-[0.4em] font-bold text-white border-b border-white pb-2 hover:text-stone-300 hover:border-stone-300 transition-all">
+          Learn Our Story →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 md:mb-20 gap-4">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-serif text-stone-900 mb-2">Bestsellers</h2>
+          <p class="text-stone-500 font-light">Our most loved pieces</p>
+        </div>
+        <a href="/collections/bestsellers" class="text-[10px] uppercase tracking-[0.3em] text-stone-900 font-bold hover:text-stone-500 transition-colors">
+          View All →
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        {% for product in collections.all.products limit: 4 %}
+          <a href="{{ product.url }}" class="group block">
+            <div class="aspect-[3/4] bg-stone-50 overflow-hidden mb-4 relative">
+              {% if product.featured_image %}
+                <img 
+                  src="{{ product.featured_image | image_url: width: 600 }}" 
+                  alt="{{ product.title | escape }}" 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+              {% else %}
+                <div class="w-full h-full flex items-center justify-center">
+                  <span class="text-[9px] uppercase tracking-[0.4em] text-stone-300 font-bold">Product Image</span>
+                </div>
+              {% endif %}
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500"></div>
+            </div>
+            <div class="space-y-1">
+              <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-stone-800 group-hover:text-stone-600 transition-colors">
+                {{ product.title }}
+              </h3>
+              <p class="text-[13px] text-stone-500 font-light">
+                {{ product.price | money }}
+              </p>
+            </div>
+          </a>
+        {% else %}
+          {% for i in (1..4) %}
+            <div class="group">
+              <div class="aspect-[3/4] bg-stone-100 border border-stone-100 mb-4 flex items-center justify-center">
+                <span class="text-[9px] uppercase tracking-[0.4em] text-stone-300 font-bold">Product {{ i }}</span>
+              </div>
+              <div class="space-y-1">
+                <h3 class="text-[11px] font-bold uppercase tracking-[0.15em] text-stone-800">Sample Ring {{ i }}</h3>
+                <p class="text-[13px] text-stone-500 font-light">$2,400 NZD</p>
+              </div>
+            </div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Props -->
+  <section class="py-16 border-y border-stone-100 bg-stone-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        
+        <div class="text-center space-y-3">
+          <div class="w-12 h-12 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-stone-600">
+              <path d="M6 3h12l4 6-10 12L2 9l4-6z" />
+            </svg>
+          </div>
+          <h4 class="text-[9px] font-bold uppercase tracking-[0.2em] text-stone-900">Lab-Grown Diamonds</h4>
+          <p class="text-[11px] text-stone-500 font-light">Certified & traceable</p>
+        </div>
+        
+        <div class="text-center space-y-3">
+          <div class="w-12 h-12 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-stone-600">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="6" />
+            </svg>
+          </div>
+          <h4 class="text-[9px] font-bold uppercase tracking-[0.2em] text-stone-900">Solid Precious Metals</h4>
+          <p class="text-[11px] text-stone-500 font-light">14k, 18k gold & platinum</p>
+        </div>
+        
+        <div class="text-center space-y-3">
+          <div class="w-12 h-12 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-stone-600">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h4 class="text-[9px] font-bold uppercase tracking-[0.2em] text-stone-900">Lifetime Warranty</h4>
+          <p class="text-[11px] text-stone-500 font-light">On engagement rings</p>
+        </div>
+        
+        <div class="text-center space-y-3">
+          <div class="w-12 h-12 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-stone-600">
+              <path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8" />
+            </svg>
+          </div>
+          <h4 class="text-[9px] font-bold uppercase tracking-[0.2em] text-stone-900">Free NZ Shipping</h4>
+          <p class="text-[11px] text-stone-500 font-light">Fully insured delivery</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Bespoke CTA -->
+  <section class="py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        
+        <div class="aspect-[4/3] bg-stone-100 border border-stone-100 flex items-center justify-center order-2 lg:order-1">
+          <span class="text-[9px] uppercase tracking-[0.4em] text-stone-300 font-bold">Bespoke Design Image</span>
+        </div>
+        
+        <div class="space-y-6 order-1 lg:order-2">
+          <h4 class="text-[10px] uppercase tracking-[0.6em] text-stone-400 font-bold">Bespoke Design</h4>
+          <h2 class="text-3xl md:text-4xl font-serif text-stone-900 leading-tight">
+            Create Something Entirely Your Own
+          </h2>
+          <p class="text-stone-600 font-light text-lg leading-relaxed">
+            Work with our designers to bring your vision to life. From subtle modifications to fully custom creations, we guide you through every step.
+          </p>
+          <div class="pt-4">
+            <a href="/pages/bespoke" class="inline-block px-10 py-4 bg-stone-900 text-white text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-stone-800 transition-all duration-500">
+              Start Your Design →
+            </a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagram / Social -->
+  <section class="py-16 md:py-24 border-t border-stone-100">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center mb-12">
+        <h4 class="text-[10px] uppercase tracking-[0.5em] text-stone-400 font-bold mb-2">@oreajewellery</h4>
+        <p class="text-stone-500 font-light">Follow our journey</p>
+      </div>
+      
+      <div class="grid grid-cols-4 md:grid-cols-6 gap-2">
+        {% for i in (1..6) %}
+          <div class="aspect-square bg-stone-100 border border-stone-50 flex items-center justify-center">
+            <span class="text-[8px] uppercase tracking-widest text-stone-200 font-bold">IG</span>
+          </div>
+        {% endfor %}
+      </div>
+      
+    </div>
+  </section>
+
+</main>
