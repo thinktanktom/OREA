@@ -1,0 +1,162 @@
+{% comment %}
+  ORÉA Bespoke Design Page Template
+  
+  To use this template:
+  1. Go to Online Store → Pages → Add page
+  2. Enter your title (e.g., "Bespoke Design")
+  3. In the Template dropdown at the bottom, select "page.bespoke"
+{% endcomment %}
+
+<main class="min-h-screen bg-[#fcfcf9]">
+  
+  <!-- Hero Section -->
+  <section class="relative min-h-[60vh] flex flex-col items-center justify-center pt-32 pb-20 px-6">
+    <div class="w-full max-w-4xl mx-auto text-center space-y-8">
+      <h4 class="text-[10px] uppercase tracking-[0.6em] text-stone-400 font-bold">Bespoke Design</h4>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-stone-900 leading-tight">
+        {{ page.title | default: 'Your Vision, Realised' }}
+      </h1>
+      <p class="text-lg md:text-xl text-stone-500 font-light max-w-2xl mx-auto leading-relaxed">
+        Create something entirely your own. From concept to creation, we guide you through every step of the bespoke journey.
+      </p>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-24 md:py-32 border-t border-stone-100">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="text-center mb-20">
+        <h2 class="text-3xl md:text-4xl font-serif text-stone-900 mb-4">The Bespoke Process</h2>
+        <p class="text-stone-500 font-light">A considered journey from inspiration to heirloom</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+        
+        <!-- Step 1: Consultation -->
+        <div class="text-center space-y-6 p-8 border border-stone-100 bg-white">
+          <div class="w-16 h-16 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
+            <span class="text-2xl font-serif text-stone-900">1</span>
+          </div>
+          <h3 class="text-lg font-serif text-stone-900 uppercase tracking-wide">Consultation</h3>
+          <p class="text-stone-500 font-light text-sm leading-relaxed">
+            We begin with a conversation — understanding your vision, preferences, and the story you want your piece to tell.
+          </p>
+        </div>
+        
+        <!-- Step 2: Design -->
+        <div class="text-center space-y-6 p-8 border border-stone-100 bg-white">
+          <div class="w-16 h-16 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
+            <span class="text-2xl font-serif text-stone-900">2</span>
+          </div>
+          <h3 class="text-lg font-serif text-stone-900 uppercase tracking-wide">Design</h3>
+          <p class="text-stone-500 font-light text-sm leading-relaxed">
+            Our designers translate your vision into detailed renderings. We refine together until every detail is perfect.
+          </p>
+        </div>
+        
+        <!-- Step 3: Creation -->
+        <div class="text-center space-y-6 p-8 border border-stone-100 bg-white">
+          <div class="w-16 h-16 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
+            <span class="text-2xl font-serif text-stone-900">3</span>
+          </div>
+          <h3 class="text-lg font-serif text-stone-900 uppercase tracking-wide">Creation</h3>
+          <p class="text-stone-500 font-light text-sm leading-relaxed">
+            Master craftspeople bring your design to life using the finest materials and time-honoured techniques.
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Options Section -->
+  <section class="py-24 md:py-32 bg-stone-50 border-y border-stone-100">
+    <div class="max-w-5xl mx-auto px-6">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+        
+        <!-- Partial Bespoke -->
+        <div class="space-y-6">
+          <h3 class="text-2xl font-serif text-stone-900">Partial Bespoke</h3>
+          <p class="text-stone-600 font-light leading-relaxed">
+            Start with one of our signature designs and personalise it to your preferences. Choose your diamond, metal, and subtle modifications to make it uniquely yours.
+          </p>
+          <ul class="space-y-3 text-stone-500 font-light text-sm">
+            <li class="flex items-start">
+              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span>Select from existing ORÉA designs</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span>Customise metal, diamond specifications</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span>Add personal engravings</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span>4-6 week timeline</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Full Bespoke -->
+        <div class="space-y-6">
+          <h3 class="text-2xl font-serif text-stone-900">Full Bespoke</h3>
+          <p class="text-stone-600 font-light leading-relaxed">
+            Create something entirely new. Work directly with our design team to bring a completely original piece to life, from initial sketch to final masterpiece.
+          </p>
+          <ul class="space-y-3 text-stone-500 font-light text-sm">
+            <li class="flex items-start">
+              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span>Original design from concept</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span>Multiple design iterations</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span>3D rendering and prototyping</span>
+            </li>
+            <li class="flex items-start">
+              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              <span>8-12 week timeline</span>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Content (from Shopify admin) -->
+  {% if page.content != blank %}
+    <section class="py-24 md:py-32">
+      <div class="max-w-3xl mx-auto px-6 prose prose-stone font-light">
+        {{ page.content }}
+      </div>
+    </section>
+  {% endif %}
+
+  <!-- CTA Section -->
+  <section class="py-24 md:py-32 text-center px-6">
+    <div class="max-w-2xl mx-auto space-y-8">
+      <h2 class="text-3xl font-serif text-stone-900">Begin Your Bespoke Journey</h2>
+      <p class="text-stone-500 font-light leading-relaxed">
+        Every bespoke piece starts with a conversation. Share your vision and we'll guide you from there.
+      </p>
+      <div class="pt-4">
+        <a 
+          href="/pages/contact" 
+          class="inline-block px-16 py-5 bg-stone-900 text-white text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-stone-800 transition-all duration-500"
+        >
+          Schedule a Consultation
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
