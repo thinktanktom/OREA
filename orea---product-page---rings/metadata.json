@@ -1,0 +1,7 @@
+{
+  "name": "OREA - Product Page - Rings",
+  "description": "A high-end product page inspired by OREA New Zealand, featuring the Classic Solitaire Emerald ring and a bespoke AI concierge.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

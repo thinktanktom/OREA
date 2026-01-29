@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About ORÉA | Fine Jewellery & Bespoke Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-cream: #F9F6F1;
+            --color-primary: #4A3F35;
+            --color-secondary: #7D6B5C;
+            --color-linen: #E8DFD3;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-cream);
+            color: var(--color-primary);
+            overflow-x: hidden;
+        }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .grain::after {
+            content: "";
+            position: fixed;
+            top: -100%; left: -100%;
+            width: 300%; height: 300%;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_noise_gray.png");
+            opacity: 0.015;
+            pointer-events: none;
+            z-index: 9999;
+            animation: noise 8s steps(10) infinite;
+        }
+        @keyframes noise {
+            0% { transform: translate(0,0) }
+            100% { transform: translate(3%,3%) }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom": "https://esm.sh/react-dom@^19.2.3",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="grain">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

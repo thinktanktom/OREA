@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About ORÉA | Fine Jewellery & Bespoke Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bone: #F9F6F1;
+            --color-carbon: #4A3F35;
+            --color-taupe: #7D6B5C;
+            --color-champagne: #D4C4A8;
+            --color-gold: #C5B8A0;
+            --color-linen: #E8DFD3;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-bone);
+            color: var(--color-carbon);
+            overflow-x: hidden;
+        }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: normal !important;
+        }
+        .glass-effect {
+            background: rgba(249, 246, 241, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+        .grain::after {
+            content: "";
+            position: fixed;
+            top: -100%; left: -100%;
+            width: 300%; height: 300%;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_noise_gray.png");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 9999;
+            animation: noise 8s steps(10) infinite;
+        }
+        @keyframes noise {
+            0% { transform: translate(0,0) }
+            100% { transform: translate(3%,3%) }
+        }
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-reveal {
+            animation: reveal 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .hover-lift {
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+        }
+
+        /* Enforce no italics across the board */
+        * {
+            font-style: normal !important;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom": "https://esm.sh/react-dom@^19.2.3",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="grain">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

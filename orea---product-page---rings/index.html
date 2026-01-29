@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en" class="overflow-x-hidden max-w-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OREA — Classic Solitaire Ring - Emerald</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'orea-cream': '#F9F6F1',
+              'orea-dark': '#4A3F35',
+              'orea-taupe': '#7D6B5C',
+              'orea-champagne': '#D4C4A8',
+              'orea-gold': '#C5B8A0',
+              'orea-linen': '#E8DFD3',
+            },
+            fontFamily: {
+              serif: ['"Cormorant Garamond"', 'serif'],
+              sans: ['"Montserrat"', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+            position: relative;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F9F6F1;
+            color: #4A3F35;
+            -webkit-font-smoothing: antialiased;
+        }
+        .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .tracking-widest-plus {
+            letter-spacing: 0.25em;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F9F6F1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C5B8A0;
+        }
+        /* Essential for horizontal image galleries and tabs */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="overflow-x-hidden max-w-full">
+    <div id="root" class="overflow-x-hidden max-w-full"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
