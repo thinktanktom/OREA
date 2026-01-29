@@ -1,0 +1,30 @@
+{% comment %}
+  ORÉA About Page Template
+  
+  To use this template:
+  1. Go to Online Store → Pages → Add page
+  2. Enter your title (e.g., "About ORÉA")
+  3. In the Template dropdown at the bottom, select "page.about"
+{% endcomment %}
+
+<div class="animate-in">
+  {% comment %} Hero Section {% endcomment %}
+  {% section 'homepage-hero' %}
+  
+  <div class="space-y-32 md:space-y-48 pb-32 md:pb-48 max-w-7xl mx-auto px-6">
+    {% comment %} Lab-Grown Diamond Origin Statement {% endcomment %}
+    {% section 'origin-text' %}
+    
+    {% comment %} The ORÉA Standards {% endcomment %}
+    {% section 'orea-standards' %}
+    
+    {% comment %} Bespoke Process {% endcomment %}
+    {% section 'bespoke-process' %}
+    
+    {% comment %} Sustainability Badge {% endcomment %}
+    {% section 'sustainability-badge' %}
+    
+    {% comment %} Contact CTA {% endcomment %}
+    {% section 'location-contact' %}
+  </div>
+</div>

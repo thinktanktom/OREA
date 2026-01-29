@@ -1,10 +1,15 @@
+{% comment %}
+  ORÉA Product Tabs Section
+  Displays product information in a tabbed interface
+{% endcomment %}
+
 <div class="border-t border-stone-100">
   <div class="flex border-b border-stone-100 overflow-x-auto no-scrollbar scroll-smooth">
     <button
       class="product-tab py-6 px-5 text-[9px] font-bold tracking-[0.2em] uppercase transition-all relative whitespace-nowrap outline-none text-black"
       data-tab="description"
     >
-      Description
+      {{ section.settings.tab_description_label }}
       <div class="absolute bottom-0 left-0 right-0 h-[1.5px] bg-black"></div>
     </button>
     
@@ -12,28 +17,28 @@
       class="product-tab py-6 px-5 text-[9px] font-bold tracking-[0.2em] uppercase transition-all relative whitespace-nowrap outline-none text-stone-300 hover:text-stone-400"
       data-tab="details"
     >
-      Product Details
+      {{ section.settings.tab_details_label }}
     </button>
     
     <button
       class="product-tab py-6 px-5 text-[9px] font-bold tracking-[0.2em] uppercase transition-all relative whitespace-nowrap outline-none text-stone-300 hover:text-stone-400"
       data-tab="shipping"
     >
-      Shipping & Timing
+      {{ section.settings.tab_shipping_label }}
     </button>
     
     <button
       class="product-tab py-6 px-5 text-[9px] font-bold tracking-[0.2em] uppercase transition-all relative whitespace-nowrap outline-none text-stone-300 hover:text-stone-400"
       data-tab="warranty"
     >
-      Warranty & Service
+      {{ section.settings.tab_warranty_label }}
     </button>
   </div>
 
   <div class="py-12 min-h-[260px] px-1 md:px-0">
     <!-- Description Tab -->
     <div class="tab-content" data-tab="description">
-      <p class="text-[14px] leading-relaxed text-stone-600 font-light italic serif max-w-2xl">
+      <p class="text-[14px] leading-relaxed text-stone-600 font-light italic font-serif max-w-2xl">
         {{ product.description }}
       </p>
     </div>
@@ -55,11 +60,25 @@
               <p>{{ product.metafields.custom.setting_style }}</p>
             </div>
           {% endif %}
+
+          {% if product.metafields.custom.band_width %}
+            <div class="space-y-1">
+              <p class="font-bold text-black uppercase tracking-widest text-[9px]">Band Width</p>
+              <p>{{ product.metafields.custom.band_width }}</p>
+            </div>
+          {% endif %}
+
+          {% if product.metafields.custom.metal_weight %}
+            <div class="space-y-1">
+              <p class="font-bold text-black uppercase tracking-widest text-[9px]">Metal Weight</p>
+              <p>{{ product.metafields.custom.metal_weight }}</p>
+            </div>
+          {% endif %}
         </div>
         
         <div class="pt-8 border-t border-stone-100 text-center">
-          <p class="text-[11px] text-stone-400 italic serif max-w-xs mx-auto">
-            Prices reflect current gold market conditions and may adjust over time.
+          <p class="text-[11px] text-stone-400 italic font-serif max-w-xs mx-auto">
+            {{ section.settings.details_note }}
           </p>
         </div>
       </div>
@@ -68,14 +87,13 @@
     <!-- Shipping Tab -->
     <div class="tab-content hidden" data-tab="shipping">
       <div class="space-y-6 text-[13px] font-light text-stone-600 leading-relaxed max-w-2xl">
-        <p>
-          Our pieces are made to order and typically take between 2-8 weeks to produce, depending on the design.
-        </p>
-        <p>
-          We also offer a curated selection available to ship within 7-10 days for time-sensitive proposals. If you are working toward a tight timeline or require your piece by a specific date, please contact us and we'll do our best to accommodate.
-        </p>
+        <p>{{ section.settings.shipping_text_1 }}</p>
+        <p>{{ section.settings.shipping_text_2 }}</p>
         <p class="pt-2">
-          For detailed delivery information, please refer to our <a href="/pages/shipping-delivery" class="underline underline-offset-4 hover:text-black transition-colors font-medium">Shipping Information page</a>.
+          {{ section.settings.shipping_text_3 }}
+          <a href="{{ section.settings.shipping_link }}" class="underline underline-offset-4 hover:text-black transition-colors font-medium">
+            {{ section.settings.shipping_link_text }}
+          </a>.
         </p>
       </div>
     </div>
@@ -83,19 +101,24 @@
     <!-- Warranty Tab -->
     <div class="tab-content hidden" data-tab="warranty">
       <div class="space-y-6 text-[13px] font-light text-stone-600 leading-relaxed max-w-2xl">
+        <p>{{ section.settings.warranty_text_1 }}</p>
         <p>
-          ORÉA jewellery is crafted in solid gold or platinum and set with certified, 100% real lab-grown diamonds.
+          {{ section.settings.warranty_text_2 }}
+          <a href="#" class="concierge-link underline underline-offset-4 text-black font-semibold hover:text-stone-500 transition-colors">
+            {{ section.settings.concierge_link_text }}
+          </a>
+          {{ section.settings.warranty_text_2_continued }}
         </p>
         <p>
-          Engagement rings are covered by a Lifetime Manufacturing Warranty. All other fine jewellery is covered by a 1-Year Manufacturing Warranty, with optional <a href="#" class="concierge-link underline underline-offset-4 text-black font-semibold hover:text-stone-500 transition-colors">ORÉA Concierge Service</a> available for extended care.
-        </p>
-        <p>
-          Please check our <a href="/pages/warranty-policy" class="underline underline-offset-4 hover:text-black transition-colors font-medium">Warranty Policy</a>.
+          {{ section.settings.warranty_text_3 }}
+          <a href="{{ section.settings.warranty_link }}" class="underline underline-offset-4 hover:text-black transition-colors font-medium">
+            {{ section.settings.warranty_link_text }}
+          </a>.
         </p>
         
         <div class="pt-6 border-t border-stone-100">
           <p class="text-[11px] text-stone-400 italic leading-relaxed">
-            Please note: Normal wear and tear, improper care, third-party repairs, scratches, loss or theft, and discolouration caused by harsh chemicals are not covered. Each ORÉA piece is handcrafted to order; slight variations are a natural part of its character.
+            {{ section.settings.warranty_disclaimer }}
           </p>
         </div>
       </div>
@@ -142,6 +165,129 @@
 {% schema %}
 {
   "name": "Product Tabs",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tab Labels"
+    },
+    {
+      "type": "text",
+      "id": "tab_description_label",
+      "label": "Description Tab Label",
+      "default": "Description"
+    },
+    {
+      "type": "text",
+      "id": "tab_details_label",
+      "label": "Details Tab Label",
+      "default": "Product Details"
+    },
+    {
+      "type": "text",
+      "id": "tab_shipping_label",
+      "label": "Shipping Tab Label",
+      "default": "Shipping & Timing"
+    },
+    {
+      "type": "text",
+      "id": "tab_warranty_label",
+      "label": "Warranty Tab Label",
+      "default": "Warranty & Service"
+    },
+    {
+      "type": "header",
+      "content": "Details Tab"
+    },
+    {
+      "type": "text",
+      "id": "details_note",
+      "label": "Details Note",
+      "default": "Prices reflect current gold market conditions and may adjust over time."
+    },
+    {
+      "type": "header",
+      "content": "Shipping Tab"
+    },
+    {
+      "type": "textarea",
+      "id": "shipping_text_1",
+      "label": "Shipping Text 1",
+      "default": "Our pieces are made to order and typically take between 2-8 weeks to produce, depending on the design."
+    },
+    {
+      "type": "textarea",
+      "id": "shipping_text_2",
+      "label": "Shipping Text 2",
+      "default": "We also offer a curated selection available to ship within 7-10 days for time-sensitive proposals. If you are working toward a tight timeline or require your piece by a specific date, please contact us and we'll do our best to accommodate."
+    },
+    {
+      "type": "text",
+      "id": "shipping_text_3",
+      "label": "Shipping Text 3",
+      "default": "For detailed delivery information, please refer to our"
+    },
+    {
+      "type": "url",
+      "id": "shipping_link",
+      "label": "Shipping Page Link"
+    },
+    {
+      "type": "text",
+      "id": "shipping_link_text",
+      "label": "Shipping Link Text",
+      "default": "Shipping Information page"
+    },
+    {
+      "type": "header",
+      "content": "Warranty Tab"
+    },
+    {
+      "type": "textarea",
+      "id": "warranty_text_1",
+      "label": "Warranty Text 1",
+      "default": "ORÉA jewellery is crafted in solid gold or platinum and set with certified, 100% real lab-grown diamonds."
+    },
+    {
+      "type": "textarea",
+      "id": "warranty_text_2",
+      "label": "Warranty Text 2",
+      "default": "Engagement rings are covered by a Lifetime Manufacturing Warranty. All other fine jewellery is covered by a 1-Year Manufacturing Warranty, with optional"
+    },
+    {
+      "type": "text",
+      "id": "concierge_link_text",
+      "label": "Concierge Link Text",
+      "default": "ORÉA Concierge Service"
+    },
+    {
+      "type": "text",
+      "id": "warranty_text_2_continued",
+      "label": "Warranty Text 2 Continued",
+      "default": "available for extended care."
+    },
+    {
+      "type": "text",
+      "id": "warranty_text_3",
+      "label": "Warranty Text 3",
+      "default": "Please check our"
+    },
+    {
+      "type": "url",
+      "id": "warranty_link",
+      "label": "Warranty Page Link"
+    },
+    {
+      "type": "text",
+      "id": "warranty_link_text",
+      "label": "Warranty Link Text",
+      "default": "Warranty Policy"
+    },
+    {
+      "type": "textarea",
+      "id": "warranty_disclaimer",
+      "label": "Warranty Disclaimer",
+      "default": "Please note: Normal wear and tear, improper care, third-party repairs, scratches, loss or theft, and discolouration caused by harsh chemicals are not covered. Each ORÉA piece is handcrafted to order; slight variations are a natural part of its character."
+    }
+  ]
 }
 {% endschema %}

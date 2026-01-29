@@ -1,11 +1,10 @@
 {% comment %}
   ORÉA Diamond Shapes Section
-  Add this file to: sections/diamond-shapes.liquid
 {% endcomment %}
 
 <section class="py-32 relative" id="diamond-shapes">
   <div class="max-w-4xl mx-auto flex flex-col items-center mb-20 text-center space-y-8 px-6">
-    <h2 class="text-4xl md:text-6xl font-light text-stone-900 leading-tight serif">{{ section.settings.heading }}</h2>
+    <h2 class="text-4xl md:text-6xl font-light text-stone-900 leading-tight font-serif">{{ section.settings.heading }}</h2>
     <p class="text-stone-500 font-light text-lg max-w-xl leading-relaxed">
       {{ section.settings.description | newline_to_br }}
     </p>
@@ -58,7 +57,7 @@
       <div class="p-10 sm:p-16 flex flex-col items-center text-center space-y-10">
         <div class="space-y-4 relative z-10">
           <span class="text-[9px] uppercase tracking-[0.5em] font-bold text-stone-300">Shape Character</span>
-          <h4 id="shape-modal-name" class="text-3xl font-light text-stone-900 serif"></h4>
+          <h4 id="shape-modal-name" class="text-3xl font-light text-stone-900 font-serif"></h4>
         </div>
         <div class="space-y-6 relative z-10">
           <p id="shape-modal-description" class="text-stone-600 font-light text-base leading-relaxed"></p>

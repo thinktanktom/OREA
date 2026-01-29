@@ -1,66 +1,156 @@
-<header class="sticky top-0 z-50 bg-[#f9f9f7]/95 backdrop-blur-sm border-b border-stone-100">
-  <div class="container mx-auto px-8 h-24 flex items-center justify-between">
-    <!-- Navigation -->
-    <nav class="flex-1 hidden md:flex items-center space-x-10 text-[10px] font-semibold uppercase tracking-widest-plus text-stone-600">
-      {% for link in linklists.main-menu.links %}
-        <a href="{{ link.url }}" class="hover:text-black transition-colors">
-          {{ link.title }}
-        </a>
-      {% endfor %}
-    </nav>
+{% comment %}
+  ORÉA Fine Jewellery - Header Section
+  ====================================
+  Fixed header with glass morphism effect on scroll.
+  Converted from: components/Navbar.tsx
+  
+  Features:
+  - Glass blur effect when scrolled
+  - Logo with tracking
+  - Main navigation
+  - Cart count
+  - Mobile menu
+{% endcomment %}
 
-    <!-- Logo -->
-    <div class="flex-1 flex justify-center">
-      <a href="/" class="text-4xl font-light tracking-[0.2em] text-black">
-        {% if section.settings.logo_text != blank %}
-          {{ section.settings.logo_text }}
-        {% else %}
-          OREA
+<header 
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-700 py-8 md:py-10 bg-transparent"
+  data-scrolled="false"
+>
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="flex justify-between items-center">
+      
+      <!-- Navigation (Desktop) -->
+      <nav class="hidden lg:flex flex-1 items-center space-x-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-stone-600">
+        {% for link in linklists.main-menu.links %}
+          <a 
+            href="{{ link.url }}" 
+            class="hover:text-black transition-colors duration-300 relative group"
+          >
+            {{ link.title }}
+            <span class="absolute -bottom-1 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        {% endfor %}
+      </nav>
+
+      <!-- Logo (Center) -->
+      <div class="flex-1 flex justify-center">
+        <a href="/" class="transition-all duration-700" id="logo-link">
+          <h1 class="font-serif tracking-[0.8em] text-stone-900 text-2xl md:text-3xl transition-all duration-700" id="logo-text">
+            {% if section.settings.logo_text != blank %}
+              {{ section.settings.logo_text }}
+            {% else %}
+              ORÉA
+            {% endif %}
+          </h1>
+        </a>
+      </div>
+
+      <!-- Utilities (Right) -->
+      <div class="flex-1 flex items-center justify-end space-x-6 md:space-x-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-stone-600">
+        {% if shop.customer_accounts_enabled %}
+          <a href="{{ routes.account_url }}" class="hidden md:block hover:text-black transition-colors">
+            {% if customer %}
+              Account
+            {% else %}
+              Login
+            {% endif %}
+          </a>
         {% endif %}
-      </a>
-    </div>
-
-    <!-- Utilities -->
-    <div class="flex-1 flex items-center justify-end space-x-8 text-[10px] font-semibold uppercase tracking-widest-plus text-stone-600">
-      {% if shop.customer_accounts_enabled %}
-        <a href="{{ routes.account_url }}" class="hidden md:block hover:text-black">
-          {% if customer %}
-            Account
-          {% else %}
-            Login
-          {% endif %}
+        
+        <a href="{{ routes.cart_url }}" class="hover:text-black transition-colors relative" id="cart-link">
+          Bag (<span id="cart-count">{{ cart.item_count }}</span>)
         </a>
-      {% endif %}
-      
-      <a href="{{ routes.cart_url }}" class="hover:text-black" id="cart-link">
-        Bag (<span id="cart-count">{{ cart.item_count }}</span>)
-      </a>
-      
-      <button class="md:hidden p-2" id="mobile-menu-toggle">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M4 8h16M4 16h16" />
-        </svg>
-      </button>
+        
+        <!-- Mobile Menu Toggle -->
+        <button 
+          class="lg:hidden p-2 -mr-2 hover:text-black transition-colors" 
+          id="mobile-menu-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M4 8h16M4 16h16" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-100">
-    <nav class="container mx-auto px-8 py-6 space-y-4">
+  <div 
+    id="mobile-menu" 
+    class="hidden lg:hidden bg-bone border-t border-stone-100 mt-4"
+    aria-hidden="true"
+  >
+    <nav class="max-w-7xl mx-auto px-6 py-8 space-y-6">
       {% for link in linklists.main-menu.links %}
-        <a href="{{ link.url }}" class="block text-[11px] font-semibold uppercase tracking-widest text-stone-600 hover:text-black transition-colors">
+        <a 
+          href="{{ link.url }}" 
+          class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-600 hover:text-black transition-colors"
+        >
           {{ link.title }}
         </a>
       {% endfor %}
+      
+      {% if shop.customer_accounts_enabled %}
+        <div class="pt-4 border-t border-stone-100">
+          <a href="{{ routes.account_url }}" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-600 hover:text-black transition-colors">
+            {% if customer %}Account{% else %}Login{% endif %}
+          </a>
+        </div>
+      {% endif %}
     </nav>
   </div>
 </header>
 
+<!-- Spacer for fixed header -->
+<div class="h-20 md:h-24"></div>
+
 <script>
-  document.getElementById('mobile-menu-toggle')?.addEventListener('click', function() {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('hidden');
-  });
+  // Header scroll behavior
+  (function() {
+    const header = document.getElementById('site-header');
+    const logoText = document.getElementById('logo-text');
+    let lastScroll = 0;
+    
+    function updateHeader() {
+      const scrollY = window.scrollY;
+      const scrolled = scrollY > 50;
+      
+      header.setAttribute('data-scrolled', scrolled);
+      
+      if (scrolled) {
+        header.classList.remove('py-8', 'md:py-10', 'bg-transparent');
+        header.classList.add('py-4', 'md:py-5', 'glass-effect', 'border-b', 'border-stone-100');
+        logoText.classList.remove('text-2xl', 'md:text-3xl');
+        logoText.classList.add('text-lg', 'md:text-xl');
+      } else {
+        header.classList.add('py-8', 'md:py-10', 'bg-transparent');
+        header.classList.remove('py-4', 'md:py-5', 'glass-effect', 'border-b', 'border-stone-100');
+        logoText.classList.add('text-2xl', 'md:text-3xl');
+        logoText.classList.remove('text-lg', 'md:text-xl');
+      }
+      
+      lastScroll = scrollY;
+    }
+    
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
+    
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', function() {
+        const isOpen = mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        mobileToggle.setAttribute('aria-expanded', isOpen);
+        mobileMenu.setAttribute('aria-hidden', !isOpen);
+      });
+    }
+  })();
 </script>
 
 {% schema %}
@@ -71,7 +161,13 @@
       "type": "text",
       "id": "logo_text",
       "label": "Logo Text",
-      "default": "OREA"
+      "default": "ORÉA"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Enable Sticky Header",
+      "default": true
     }
   ]
 }

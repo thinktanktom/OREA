@@ -1,3 +1,8 @@
+{% comment %}
+  ORÉA Value Propositions Section
+  Four key value props displayed as interactive cards
+{% endcomment %}
+
 <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-8" id="value-props">
   <!-- Precious Metal -->
   <button 
@@ -11,7 +16,7 @@
         <circle cx="12" cy="12" r="4" stroke-width="0.8" />
       </svg>
     </span>
-    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">Precious Metal</span>
+    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">{{ section.settings.prop_1_title }}</span>
   </button>
 
   <!-- Premium Diamond -->
@@ -26,7 +31,7 @@
         <path d="M8 9L12 2L16 9" stroke-width="0.8" />
       </svg>
     </span>
-    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">Premium Diamond</span>
+    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">{{ section.settings.prop_2_title }}</span>
   </button>
 
   <!-- Free Shipping -->
@@ -39,7 +44,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
       </svg>
     </span>
-    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">Free Shipping</span>
+    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">{{ section.settings.prop_3_title }}</span>
   </button>
 
   <!-- Sustainable Practices -->
@@ -52,16 +57,177 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A11.952 11.952 0 0112 13.5a11.952 11.952 0 01-8.716 1.247M3.284 14.253A8.959 8.959 0 013 12c0-.778.099-1.533.284-2.253" />
       </svg>
     </span>
-    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">sustainable practices</span>
+    <span class="text-[9px] font-bold uppercase tracking-widest text-stone-900 leading-tight">{{ section.settings.prop_4_title }}</span>
   </button>
 </div>
 
 <!-- Value Prop Modals Container -->
 <div id="value-prop-modals"></div>
 
+<script>
+(function() {
+  const modalContent = {
+    'precious-metal': {
+      title: '{{ section.settings.prop_1_title | escape }}',
+      icon: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M12 2v20M2 12h20" stroke-width="0.5" stroke-opacity="0.3" />
+        <circle cx="12" cy="12" r="9" stroke-width="0.8" />
+        <circle cx="12" cy="12" r="4" stroke-width="0.8" />
+      </svg>`,
+      content: `{{ section.settings.prop_1_content | newline_to_br }}`
+    },
+    'premium-diamond': {
+      title: '{{ section.settings.prop_2_title | escape }}',
+      icon: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M12 2L4.5 9L12 22L19.5 9L12 2Z" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M4.5 9H19.5" stroke-width="0.8" />
+        <path d="M8 9L12 2L16 9" stroke-width="0.8" />
+      </svg>`,
+      content: `{{ section.settings.prop_2_content | newline_to_br }}`
+    },
+    'free-shipping': {
+      title: '{{ section.settings.prop_3_title | escape }}',
+      icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+      </svg>`,
+      content: `{{ section.settings.prop_3_content | newline_to_br }}`
+    },
+    'sustainable': {
+      title: '{{ section.settings.prop_4_title | escape }}',
+      icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A11.952 11.952 0 0112 13.5a11.952 11.952 0 01-8.716 1.247M3.284 14.253A8.959 8.959 0 013 12c0-.778.099-1.533.284-2.253" />
+      </svg>`,
+      content: `{{ section.settings.prop_4_content | newline_to_br }}`
+    }
+  };
+
+  function showValuePropModal(data) {
+    const container = document.getElementById('value-prop-modals');
+    
+    const modalHTML = `
+      <div class="value-prop-modal fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-xl p-10 md:p-16 rounded-sm relative shadow-2xl overflow-y-auto max-h-[90vh]">
+          <button class="value-prop-close absolute top-8 right-8 text-stone-400 hover:text-black">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <div class="mb-10 flex justify-center text-stone-800 scale-150">${data.icon}</div>
+          <h4 class="text-2xl md:text-3xl font-light mb-8 text-center font-serif italic tracking-tight uppercase">${data.title}</h4>
+          <div class="text-[14px] text-stone-600 font-light leading-relaxed text-center space-y-6">
+            ${data.content}
+          </div>
+        </div>
+      </div>
+    `;
+    
+    container.innerHTML = modalHTML;
+    document.body.style.overflow = 'hidden';
+    
+    // Close handlers
+    const modal = container.querySelector('.value-prop-modal');
+    const closeBtn = container.querySelector('.value-prop-close');
+    
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    
+    function closeModal() {
+      container.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+  }
+
+  document.querySelectorAll('.value-prop-trigger').forEach(trigger => {
+    trigger.addEventListener('click', function() {
+      const modalType = this.dataset.modal;
+      const data = modalContent[modalType];
+      if (data) showValuePropModal(data);
+    });
+  });
+
+  // ESC key handler
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const container = document.getElementById('value-prop-modals');
+      if (container.innerHTML) {
+        container.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+    }
+  });
+})();
+</script>
+
 {% schema %}
 {
-  "name": "Value Props",
-  "settings": []
+  "name": "Value Propositions",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Precious Metal"
+    },
+    {
+      "type": "text",
+      "id": "prop_1_title",
+      "label": "Title",
+      "default": "Precious Metal"
+    },
+    {
+      "type": "textarea",
+      "id": "prop_1_content",
+      "label": "Content",
+      "default": "At ORÉA, our pieces are made to last a lifetime - not to be discarded.\n\nWe use only solid 14k or 18k gold and platinum, never plated, filled, or vermeil. Precious metals are inherently durable, repairable, and timeless - the ultimate expression of lasting value."
+    },
+    {
+      "type": "header",
+      "content": "Premium Diamond"
+    },
+    {
+      "type": "text",
+      "id": "prop_2_title",
+      "label": "Title",
+      "default": "Premium Diamond"
+    },
+    {
+      "type": "textarea",
+      "id": "prop_2_content",
+      "label": "Content",
+      "default": "ORÉA works exclusively with certified lab-grown diamonds, selected for exceptional brilliance, integrity, and traceable quality.\n\nAll centre stones in our engagement rings, as well as any diamond of 1 carat and above, meet the following minimum standards:\n\n<strong>Cut:</strong> Excellent / Ideal<br><strong>Clarity:</strong> VS and above<br><strong>Colour:</strong> D–F\n\n<em>All diamonds over 1 carat are independently graded by the IGI, the global authority for lab-grown diamond certification.</em>"
+    },
+    {
+      "type": "header",
+      "content": "Free Shipping"
+    },
+    {
+      "type": "text",
+      "id": "prop_3_title",
+      "label": "Title",
+      "default": "Free Shipping"
+    },
+    {
+      "type": "textarea",
+      "id": "prop_3_content",
+      "label": "Content",
+      "default": "Free fully insured shipping on all New Zealand orders.\n\nOrders are dispatched securely with signature required on delivery. Alternatively, you may collect your piece in person from our Christchurch studio.\n\nFor full details, view our <a href=\"/pages/shipping-delivery\" class=\"underline underline-offset-4 hover:text-black transition-colors font-medium\">Shipping & Delivery information</a>."
+    },
+    {
+      "type": "header",
+      "content": "Sustainable Practices"
+    },
+    {
+      "type": "text",
+      "id": "prop_4_title",
+      "label": "Title",
+      "default": "Sustainable Practices"
+    },
+    {
+      "type": "textarea",
+      "id": "prop_4_content",
+      "label": "Content",
+      "default": "<strong>Longevity</strong><br>We use the highest-quality materials to ensure your jewellery can be worn, loved, and passed on for years to come.\n\n<strong>Lab-Grown Diamonds</strong><br>Physically, chemically, and visually identical to mined diamonds. This modern approach reduces environmental impact while creating enduring beauty.\n\n<strong>Carbon Offset Commitment</strong><br>ORÉA plants one tree for every purchase through Trees for Survival, contributing to long-term restoration beyond each piece we create."
+    }
+  ]
 }
 {% endschema %}

@@ -1,11 +1,11 @@
 {% comment %}
   ORÉA Diamond Comparison Section
-  Add this file to: sections/diamond-comparison.liquid
+  Lab-Grown vs Earth-Mined Diamonds
 {% endcomment %}
 
 <section class="px-6 lg:px-20 overflow-hidden relative">
   <div class="max-w-6xl mx-auto text-center mb-24">
-    <h2 class="text-3xl md:text-5xl font-light text-stone-900 leading-[1.1] tracking-tight serif">
+    <h2 class="text-3xl md:text-5xl font-light text-stone-900 leading-[1.1] tracking-tight font-serif">
       {{ section.settings.heading }}
     </h2>
   </div>
@@ -28,8 +28,8 @@
             {%- for block in section.blocks -%}
               <tr class="transition-colors">
                 <td class="py-8 px-10 text-[10px] font-bold text-stone-400 uppercase tracking-widest">{{ block.settings.property }}</td>
-                <td class="py-8 px-10 text-base md:text-lg font-light text-stone-200 serif">{{ block.settings.lab_value }}</td>
-                <td class="py-8 px-10 text-base md:text-lg font-light text-stone-200 serif">{{ block.settings.mined_value }}</td>
+                <td class="py-8 px-10 text-base md:text-lg font-light text-stone-200 font-serif">{{ block.settings.lab_value }}</td>
+                <td class="py-8 px-10 text-base md:text-lg font-light text-stone-200 font-serif">{{ block.settings.mined_value }}</td>
               </tr>
             {%- endfor -%}
           </tbody>

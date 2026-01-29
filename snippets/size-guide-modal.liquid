@@ -1,6 +1,11 @@
+{% comment %}
+  ORÉA Size Guide Modal
+  Ring sizing conversion chart and tips
+{% endcomment %}
+
 <div id="size-guide-modal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4 bg-black/30 backdrop-blur-sm">
   <div class="bg-[#fcfcf9] w-full max-w-2xl p-8 md:p-16 rounded-sm shadow-2xl relative overflow-y-auto max-h-[90vh]">
-    <button class="modal-close absolute top-10 right-10 text-stone-300 hover:text-black transition-colors">
+    <button class="modal-close absolute top-10 right-10 text-stone-300 hover:text-black transition-colors" aria-label="Close">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12" />
       </svg>
@@ -9,7 +14,7 @@
     <div class="space-y-16">
       <!-- Header -->
       <div class="text-center space-y-4">
-        <h3 class="text-4xl md:text-5xl font-light serif italic text-black">Size Guide</h3>
+        <h3 class="text-4xl md:text-5xl font-light font-serif italic text-black">Size Guide</h3>
         <p class="text-[9px] font-bold uppercase tracking-[0.4em] text-stone-400">Finding Your Perfect Fit</p>
       </div>
 
@@ -17,7 +22,7 @@
       <div class="space-y-8">
         <div class="flex justify-between items-baseline border-b border-stone-200 pb-4">
           <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-black">International Conversion</h4>
-          <span class="text-[10px] text-stone-400 italic serif">All measurements are approximate</span>
+          <span class="text-[10px] text-stone-400 italic font-serif">All measurements are approximate</span>
         </div>
         
         <div class="overflow-x-auto">
@@ -39,7 +44,7 @@
                   <td class="py-4 font-medium text-black">{{ s[0] }}</td>
                   <td class="py-4 font-light text-stone-500">{{ s[1] }}</td>
                   <td class="py-4 font-light text-stone-500">{{ s[2] }}</td>
-                  <td class="py-4 font-light text-right text-stone-400 italic serif group-hover:text-black transition-colors">{{ s[3] }}mm</td>
+                  <td class="py-4 font-light text-right text-stone-400 italic font-serif group-hover:text-black transition-colors">{{ s[3] }}mm</td>
                 </tr>
               {% endfor %}
             </tbody>

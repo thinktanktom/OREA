@@ -1,0 +1,37 @@
+{% comment %}
+  ORÉA Fine Jewellery - Homepage Template
+  =======================================
+  The main landing page showcasing the brand's values:
+  - Lab-grown diamonds
+  - Solid precious metals
+  - Bespoke craftsmanship
+  - Sustainable practices
+  
+  Converted from: App.tsx, Hero.tsx, OriginText.tsx, OreaStandards.tsx,
+                  BespokeProcess.tsx, SustainabilityBadge.tsx, LocationContact.tsx
+{% endcomment %}
+
+<div class="animate-in">
+  <!-- Hero Section -->
+  {% section 'homepage-hero' %}
+  
+  <!-- Main Content Container -->
+  <div class="space-y-32 md:space-y-48 pb-32 md:pb-48 max-w-7xl mx-auto px-6">
+    
+    <!-- Lab-Grown Diamond Origin Statement -->
+    {% section 'origin-text' %}
+    
+    <!-- The ORÉA Standards (Metals, Diamonds, Experience, Warranty) -->
+    {% section 'orea-standards' %}
+    
+    <!-- Bespoke Process Description -->
+    {% section 'bespoke-process' %}
+    
+    <!-- Sustainability Badge & Commitment -->
+    {% section 'sustainability-badge' %}
+    
+    <!-- Contact CTA -->
+    {% section 'location-contact' %}
+    
+  </div>
+</div>

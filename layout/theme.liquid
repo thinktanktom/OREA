@@ -1,10 +1,21 @@
+{% comment %}
+  ORÉA Fine Jewellery - Main Theme Layout
+  ========================================
+  A luxury Shopify theme for lab-grown diamond jewellery.
+  
+  Design System:
+  - Typography: Playfair Display (headings), Inter (body)
+  - Colors: Bone (#FDFCFB), Carbon (#1A1A1A), Stone palette
+  - Effects: Film grain, glass morphism, smooth transitions
+{% endcomment %}
+
 <!DOCTYPE html>
-<html lang="{{ request.locale.iso_code }}">
+<html lang="{{ request.locale.iso_code }}" class="scroll-smooth">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#fcfcf9">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#FDFCFB">
   
   <title>
     {{ page_title }}
@@ -19,69 +30,301 @@
 
   <link rel="canonical" href="{{ canonical_url }}">
 
+  <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  
+  <!-- Typography: Playfair Display + Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
   {{ content_for_header }}
 
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
+  <!-- Tailwind Configuration -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            'sans': ['Inter', 'sans-serif'],
-            'serif': ['Playfair Display', 'serif'],
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+            'serif': ['Playfair Display', 'Georgia', 'serif'],
           },
           colors: {
+            'bone': '#FDFCFB',
+            'carbon': '#1A1A1A',
             'orchid-white': '#fcfcf9',
             'petal-pink': '#fff5f7',
             'growth-green': '#e8f3eb',
             'diamond-sparkle': '#f0f0f0',
-          }
+          },
+          letterSpacing: {
+            'widest-plus': '0.2em',
+            'ultra': '0.4em',
+            'extreme': '0.6em',
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.7s ease-out forwards',
+            'slide-up': 'slideUp 0.8s ease-out forwards',
+            'reveal': 'reveal 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+            'noise': 'noise 8s steps(10) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            reveal: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            noise: {
+              '0%': { transform: 'translate(0, 0)' },
+              '100%': { transform: 'translate(3%, 3%)' },
+            },
+          },
         }
       }
     }
   </script>
 
-  {{ 'styles.css' | asset_url | stylesheet_tag }}
-
+  <!-- Custom Styles -->
   <style>
+    /* ============================================
+       ORÉA Fine Jewellery - Custom Styles
+       ============================================ */
+    
+    :root {
+      --color-bone: #FDFCFB;
+      --color-carbon: #1A1A1A;
+      --color-stone-50: #fafaf9;
+      --color-stone-100: #f5f5f4;
+      --color-stone-200: #e7e5e4;
+      --color-stone-300: #d6d3d1;
+      --color-stone-400: #a8a29e;
+      --color-stone-500: #78716c;
+      --color-stone-600: #57534e;
+      --color-stone-700: #44403c;
+      --color-stone-800: #292524;
+      --color-stone-900: #1c1917;
+    }
+
+    /* Base Styles */
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f9f9f7;
-      color: #1a1a1a;
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: var(--color-bone);
+      color: var(--color-carbon);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    h1, h2, h3, .serif {
-      font-family: 'Playfair Display', serif;
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6, .font-serif {
+      font-family: 'Playfair Display', Georgia, serif;
     }
-    .tracking-widest-plus {
-      letter-spacing: 0.2em;
+
+    /* Custom Selection */
+    ::selection {
+      background-color: var(--color-stone-200);
+      color: var(--color-carbon);
     }
+
+    /* Film Grain Effect */
+    .grain::after {
+      content: "";
+      position: fixed;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.015;
+      pointer-events: none;
+      z-index: 9999;
+      animation: noise 8s steps(10) infinite;
+    }
+
+    @keyframes noise {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(3%, 3%); }
+    }
+
+    /* Glass Effect */
+    .glass-effect {
+      background: rgba(253, 252, 251, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 4px;
     }
+
     ::-webkit-scrollbar-track {
-      background: #f9f9f7;
+      background: var(--color-bone);
     }
+
     ::-webkit-scrollbar-thumb {
-      background: #e5e5e5;
+      background: var(--color-stone-200);
+      border-radius: 2px;
     }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-stone-300);
+    }
+
+    /* Hide Scrollbar Utility */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
+
     .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+
+    /* Line Clamp */
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Snap Scroll */
+    .snap-x {
+      scroll-snap-type: x mandatory;
+    }
+
+    .snap-start {
+      scroll-snap-align: start;
+    }
+
+    /* Focus Styles */
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--color-carbon);
+      outline-offset: 2px;
+    }
+
+    /* Animation Utilities */
+    .animate-in {
+      animation: fadeIn 0.7s ease-out forwards;
+    }
+
+    .animate-reveal {
+      animation: reveal 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    /* Staggered Animations */
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .stagger-5 { animation-delay: 0.5s; }
+
+    /* Metal Gradients */
+    .metal-gradient-platinum {
+      background: linear-gradient(135deg, #f0f0f0 0%, #d1d1d1 50%, #e8e8e8 100%);
+    }
+
+    .metal-gradient-18k-yellow-gold,
+    .metal-gradient-14k-yellow-gold {
+      background: linear-gradient(135deg, #efd695 0%, #dfbc5e 50%, #f7e8c1 100%);
+    }
+
+    .metal-gradient-18k-white-gold,
+    .metal-gradient-14k-white-gold {
+      background: linear-gradient(135deg, #f8f8f8 0%, #e2e2e2 50%, #ffffff 100%);
+    }
+
+    /* 4Cs Tab Underline */
+    .fourcs-tab-underline {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: #1c1917;
+      z-index: 10;
+    }
+
+    /* Backdrop Blur Fallback */
+    @supports not (backdrop-filter: blur(15px)) {
+      .glass-effect {
+        background-color: rgba(253, 252, 251, 0.95);
+      }
+    }
+
+    /* Skip to Content */
+    .skip-to-content {
+      position: absolute;
+      left: -9999px;
+      z-index: 9999;
+      padding: 1rem;
+      background: var(--color-carbon);
+      color: white;
+    }
+
+    .skip-to-content:focus {
+      left: 0;
+    }
+
+    /* Print Styles */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      
+      body {
+        background: white;
+      }
+      
+      .grain::after {
+        display: none;
+      }
+    }
   </style>
 
-  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
 </head>
 
-<body class="bg-[#fcfcf9]">
-  {{ content_for_layout }}
+<body class="grain bg-bone text-carbon">
+  <!-- Skip to Content (Accessibility) -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+  <!-- Header -->
+  {% section 'header' %}
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Footer -->
+  {% section 'footer' %}
+
+  <!-- AI Assistant (Optional) -->
+  {% if settings.enable_ai_assistant %}
+    {% section 'ai-assistant' %}
+  {% endif %}
+
+  <!-- Theme JavaScript -->
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
 </body>
 </html>

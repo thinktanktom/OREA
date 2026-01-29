@@ -1,0 +1,159 @@
+{% comment %}
+  ORÉA Fine Jewellery - Sustainability Badge Section
+  =================================================
+  Highlights sustainable practices and tree planting partnership.
+  Converted from: components/SustainabilityBadge.tsx
+  
+  Features:
+  - Circular badge design
+  - Two-column layout
+  - Trees for Survival partnership mention
+{% endcomment %}
+
+<section class="py-24 md:py-32 bg-stone-50 border-y border-stone-100">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+      
+      <!-- Left: Badge -->
+      <div class="lg:col-span-5 flex flex-col items-center justify-center">
+        <div class="relative">
+          <!-- Main Badge -->
+          <div class="w-48 h-48 md:w-56 md:h-56 border border-stone-900 rounded-full flex flex-col items-center justify-center p-6 md:p-8 text-center bg-white shadow-sm transition-transform duration-700 hover:scale-105">
+            
+            <!-- Tree Icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-stone-900 mb-3 md:mb-4">
+              <path d="M12 2L19 21H5L12 2Z" />
+              <path d="M12 16V21" />
+            </svg>
+            
+            <!-- Badge Text -->
+            <span class="text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-bold leading-tight text-stone-900">
+              {{ section.settings.badge_line_1 | default: 'One Tree' }}<br>
+              {{ section.settings.badge_line_2 | default: 'Per Purchase' }}
+            </span>
+            
+          </div>
+          
+          <!-- Decorative Outer Ring -->
+          <div class="absolute -inset-4 border border-stone-200 rounded-full opacity-30 scale-110 pointer-events-none"></div>
+        </div>
+        
+        <!-- Badge Label -->
+        <div class="mt-6 md:mt-8 text-center">
+          <p class="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-stone-400 font-bold">
+            {{ section.settings.badge_label | default: 'Impact Partnership' }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: Content -->
+      <div class="lg:col-span-7 space-y-6 md:space-y-8 text-center lg:text-left">
+        
+        <!-- Eyebrow -->
+        <div class="space-y-4 md:space-y-6">
+          <h4 class="text-[10px] uppercase tracking-[0.6em] text-stone-400 font-bold">
+            {{ section.settings.eyebrow | default: 'Thoughtful Practices' }}
+          </h4>
+          
+          <!-- Text Content -->
+          <p class="text-base md:text-lg leading-relaxed font-serif text-stone-600">
+            {{ section.settings.paragraph_1 | default: 'ORÉA works exclusively with lab-grown diamonds as part of a more considered approach to fine jewellery.' }}
+          </p>
+        </div>
+        
+        <div class="max-w-xl mx-auto lg:mx-0">
+          <p class="text-base md:text-lg leading-relaxed font-serif text-stone-600">
+            {{ section.settings.paragraph_2 | default: 'For every purchase, we plant one tree through Trees for Survival, supporting long-term restoration across Aotearoa.' }}
+          </p>
+        </div>
+        
+        {% if section.settings.cta_text != blank %}
+          <div class="pt-4">
+            <a 
+              href="{{ section.settings.cta_link }}" 
+              class="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold text-stone-900 border-b border-stone-900 pb-2 hover:text-stone-400 hover:border-stone-400 transition-all duration-300"
+            >
+              {{ section.settings.cta_text }}
+            </a>
+          </div>
+        {% endif %}
+        
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sustainability Badge",
+  "tag": "section",
+  "class": "sustainability-badge-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "badge_line_1",
+      "label": "Badge Line 1",
+      "default": "One Tree"
+    },
+    {
+      "type": "text",
+      "id": "badge_line_2",
+      "label": "Badge Line 2",
+      "default": "Per Purchase"
+    },
+    {
+      "type": "text",
+      "id": "badge_label",
+      "label": "Badge Label",
+      "default": "Impact Partnership"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Thoughtful Practices"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "ORÉA works exclusively with lab-grown diamonds as part of a more considered approach to fine jewellery."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "For every purchase, we plant one tree through Trees for Survival, supporting long-term restoration across Aotearoa."
+    },
+    {
+      "type": "header",
+      "content": "Call to Action (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Link Text",
+      "info": "Leave blank to hide"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sustainability Badge"
+    }
+  ]
+}
+{% endschema %}

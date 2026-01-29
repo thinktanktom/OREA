@@ -1,0 +1,103 @@
+{% comment %}
+  ORÉA Fine Jewellery - Origin Text Section
+  =========================================
+  A statement section about lab-grown diamonds.
+  Converted from: components/OriginText.tsx
+  
+  Features:
+  - Centered text layout
+  - Emphasis headline
+  - Supporting paragraphs
+  - CTA link to learn more
+{% endcomment %}
+
+<section class="py-24 md:py-32 border-t border-stone-100">
+  <div class="max-w-4xl mx-auto text-center space-y-8 md:space-y-10 px-6">
+    
+    <!-- Eyebrow -->
+    <div class="space-y-4">
+      <h4 class="text-[10px] uppercase tracking-[0.6em] text-stone-400 font-bold">
+        {{ section.settings.eyebrow | default: 'Lab-Grown, Always' }}
+      </h4>
+      
+      <!-- Main Headline -->
+      <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-serif text-stone-900 leading-snug">
+        {{ section.settings.headline | default: 'ORÉA works exclusively with certified lab-grown diamonds.' }}
+      </h2>
+    </div>
+    
+    <!-- Supporting Text -->
+    <div class="space-y-6 md:space-y-8 text-stone-600 font-light text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+      <p>
+        {{ section.settings.paragraph_1 | default: 'They are real diamonds, identical in beauty and structure — the difference is their origin.' }}
+      </p>
+      <p>
+        {{ section.settings.paragraph_2 | default: 'This is not an alternative for us, but the future of responsible fine jewellery.' }}
+      </p>
+    </div>
+
+    <!-- CTA Link -->
+    {% if section.settings.cta_text != blank %}
+      <div class="pt-4 md:pt-6">
+        <a 
+          href="{{ section.settings.cta_link | default: '/pages/about-diamonds' }}" 
+          class="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold text-stone-900 border-b border-stone-900 pb-2 hover:text-stone-400 hover:border-stone-400 transition-all duration-300"
+        >
+          {{ section.settings.cta_text }}
+        </a>
+      </div>
+    {% endif %}
+    
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Origin Text",
+  "tag": "section",
+  "class": "origin-text-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Lab-Grown, Always"
+    },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Main Headline",
+      "default": "ORÉA works exclusively with certified lab-grown diamonds."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "They are real diamonds, identical in beauty and structure — the difference is their origin."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "This is not an alternative for us, but the future of responsible fine jewellery."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Link Text",
+      "default": "Learn more about diamonds →"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link URL",
+      "default": "/pages/about-diamonds"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Origin Text"
+    }
+  ]
+}
+{% endschema %}
