@@ -1,0 +1,45 @@
+
+<section class="relative h-[90vh] sm:h-screen w-full flex items-end justify-center overflow-hidden bg-orea-linen pb-10 md:pb-14">
+  <div class="absolute inset-0 z-0">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover', loading: 'eager' }}
+    {% else %}
+      <img src="https://placehold.co/1920x1080/F9F6F1/D4C4A8?text=HERO+IMAGE" class="w-full h-full object-cover">
+    {% endif %}
+    <div class="absolute inset-0 bg-orea-dark/[0.02]"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-orea-cream/40 via-transparent to-transparent"></div>
+  </div>
+
+  <div class="relative z-10 text-center px-6 max-w-7xl mx-auto space-y-8 fade-in">
+    <div class="flex flex-col items-center">
+      <h1 class="font-serif text-2xl md:text-4xl text-orea-dark leading-snug font-light tracking-[0.2em] uppercase">
+        {{ section.settings.heading }}
+      </h1>
+      <div class="w-12 h-[1px] bg-orea-dark/20 my-8"></div>
+      <p class="text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-orea-taupe font-medium opacity-90">
+        {{ section.settings.subheading }}
+      </p>
+    </div>
+    
+    <div class="pt-2">
+      <a href="{{ section.settings.button_link }}" class="group relative inline-block overflow-hidden px-12 py-4 border border-orea-dark/30 text-orea-dark text-[9px] tracking-[0.4em] uppercase transition-all duration-700 hover:text-orea-cream">
+        <span class="relative z-10 font-medium">{{ section.settings.button_label }}</span>
+        <div class="absolute inset-0 bg-orea-dark translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ORÉA Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background Image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Diamonds. Grown. Not Mined." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Exceptional pieces, made to keep." },
+    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Explore the Collections" },
+    { "type": "url", "id": "button_link", "label": "Button Link" }
+  ],
+  "presets": [{ "name": "ORÉA Hero" }]
+}
+{% endschema %}
