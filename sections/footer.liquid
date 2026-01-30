@@ -1,198 +1,67 @@
-{% comment %}
-  ORÉA Fine Jewellery - Footer Section
-  ====================================
-  Minimal, elegant footer with:
-  - Brand description
-  - Navigation columns
-  - Newsletter signup
-  - Social links
-  - Copyright
-{% endcomment %}
 
-<footer class="bg-bone border-t border-stone-100 pt-24 md:pt-32 pb-12 md:pb-16">
-  <div class="max-w-7xl mx-auto px-6 md:px-8">
-    
-    <!-- Main Footer Content -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20 md:mb-24">
+<footer class="bg-orea-dark text-orea-cream py-24 px-6 md:px-24">
+  <div class="max-w-[1800px] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
       
-      <!-- Brand Column -->
-      <div class="space-y-6 md:space-y-8">
-        <h5 class="text-2xl md:text-3xl font-light font-serif tracking-[0.2em]">
-          {{ section.settings.brand_name | default: 'ORÉA' }}
-        </h5>
-        <p class="text-[13px] text-stone-500 font-light leading-relaxed max-w-xs">
-          {{ section.settings.brand_description | default: 'Handcrafting timeless artifacts for modern love. Designed and made in Christchurch, New Zealand.' }}
-        </p>
-      </div>
-      
-      <!-- Collections Column -->
-      <div class="space-y-6">
-        <h6 class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">
-          Collections
-        </h6>
-        <ul class="text-[13px] space-y-3 text-stone-600 font-light">
-          {% for link in linklists.footer-collections.links %}
-            <li>
-              <a href="{{ link.url }}" class="hover:text-black transition-colors duration-300">
-                {{ link.title }}
-              </a>
-            </li>
-          {% endfor %}
-          {% if linklists.footer-collections.links.size == 0 %}
-            <li><a href="/collections/engagement-rings" class="hover:text-black transition-colors">Engagement Rings</a></li>
-            <li><a href="/collections/wedding-bands" class="hover:text-black transition-colors">Wedding Bands</a></li>
-            <li><a href="/collections/fine-jewellery" class="hover:text-black transition-colors">Fine Jewellery</a></li>
-            <li><a href="/collections/bespoke" class="hover:text-black transition-colors">Bespoke</a></li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <!-- Concierge Column -->
-      <div class="space-y-6">
-        <h6 class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">
-          Concierge
-        </h6>
-        <ul class="text-[13px] space-y-3 text-stone-600 font-light">
-          {% for link in linklists.footer-concierge.links %}
-            <li>
-              <a href="{{ link.url }}" class="hover:text-black transition-colors duration-300">
-                {{ link.title }}
-              </a>
-            </li>
-          {% endfor %}
-          {% if linklists.footer-concierge.links.size == 0 %}
-            <li><a href="/pages/about" class="hover:text-black transition-colors">About ORÉA</a></li>
-            <li><a href="/pages/about-diamonds" class="hover:text-black transition-colors">About Diamonds</a></li>
-            <li><a href="/pages/contact" class="hover:text-black transition-colors">Contact</a></li>
-            <li><a href="/pages/faq" class="hover:text-black transition-colors">FAQ</a></li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <!-- Newsletter Column -->
-      <div class="space-y-6">
-        <h6 class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">
-          Journal
-        </h6>
-        <p class="text-[13px] text-stone-600 font-light">
-          {{ section.settings.newsletter_text | default: 'Sign up to receive our seasonal journal on craft and design.' }}
-        </p>
-        
-        {% form 'customer', class: 'mt-4' %}
-          {% if form.posted_successfully? %}
-            <p class="text-[11px] text-stone-600 py-3">Thank you for subscribing.</p>
-          {% else %}
-            <div class="flex border-b border-stone-300 pb-2 group focus-within:border-black transition-colors">
-              <input 
-                type="email" 
-                name="contact[email]" 
-                placeholder="Email Address" 
-                class="bg-transparent text-[13px] w-full focus:outline-none placeholder:text-stone-300"
-                required
-                autocomplete="email"
-              />
-              <button 
-                type="submit" 
-                class="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 hover:text-black transition-colors whitespace-nowrap ml-4"
-              >
-                Subscribe
-              </button>
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'menu' %}
+            <div class="flex flex-col space-y-10">
+              <h4 class="text-[10px] tracking-[0.4em] uppercase text-orea-champagne font-semibold">{{ block.settings.title }}</h4>
+              <ul class="space-y-5 text-[10px] tracking-[0.2em] font-light uppercase">
+                {% for link in linklists[block.settings.menu].links %}
+                  <li><a href="{{ link.url }}" class="hover:text-orea-gold transition-colors">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
             </div>
-            {% if form.errors %}
-              <p class="text-[11px] text-red-500 mt-2">{{ form.errors | default_errors }}</p>
-            {% endif %}
-          {% endif %}
-        {% endform %}
-      </div>
+          
+          {% when 'newsletter' %}
+            <div class="flex flex-col space-y-10">
+              <div class="space-y-5">
+                <h4 class="text-[10px] tracking-[0.4em] uppercase text-orea-champagne font-semibold">{{ block.settings.heading }}</h4>
+                <p class="text-[10px] text-orea-oatmeal/70 tracking-[0.1em] uppercase">{{ block.settings.subheading }}</p>
+              </div>
+              
+              {% form 'customer' %}
+                <div class="flex border-b border-orea-champagne/20 pb-3">
+                  <input type="email" name="contact[email]" placeholder="EMAIL ADDRESS" class="bg-transparent text-[10px] tracking-[0.3em] outline-none flex-1 placeholder:text-orea-taupe text-orea-cream uppercase">
+                  <button type="submit" class="text-[10px] tracking-[0.4em] uppercase text-orea-champagne hover:text-orea-gold ml-4 font-semibold">JOIN</button>
+                </div>
+              {% endform %}
+            </div>
+        {% endcase %}
+      {% endfor %}
     </div>
 
-    <!-- Bottom Bar -->
-    <div class="flex flex-col md:flex-row justify-between items-center pt-8 md:pt-12 border-t border-stone-100 space-y-6 md:space-y-0">
-      
-      <!-- Copyright -->
-      <p class="text-[10px] text-stone-400 uppercase tracking-[0.2em]">
-        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text | default: 'Aotearoa.' }}
-      </p>
-      
-      <!-- Social Links -->
-      <div class="flex space-x-8 text-[10px] text-stone-400 uppercase tracking-[0.2em] font-bold">
-        {% for link in linklists.footer-social.links %}
-          <a 
-            href="{{ link.url }}" 
-            class="hover:text-black transition-colors" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            {{ link.title }}
-          </a>
-        {% endfor %}
-        {% if linklists.footer-social.links.size == 0 %}
-          {% if section.settings.instagram_url != blank %}
-            <a href="{{ section.settings.instagram_url }}" class="hover:text-black transition-colors" target="_blank" rel="noopener">Instagram</a>
-          {% endif %}
-          {% if section.settings.pinterest_url != blank %}
-            <a href="{{ section.settings.pinterest_url }}" class="hover:text-black transition-colors" target="_blank" rel="noopener">Pinterest</a>
-          {% endif %}
-        {% endif %}
+    <div class="mt-32 pt-10 border-t border-orea-champagne/10 flex flex-col md:flex-row justify-between items-center text-[8px] tracking-[0.4em] uppercase opacity-60">
+      <p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}</p>
+      <div class="flex gap-8">
+        <a href="/policies/terms-of-service">Terms</a>
+        <a href="/policies/privacy-policy">Privacy</a>
       </div>
     </div>
-
   </div>
 </footer>
 
 {% schema %}
 {
   "name": "Footer",
-  "settings": [
+  "blocks": [
     {
-      "type": "header",
-      "content": "Brand"
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Heading" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
     },
     {
-      "type": "text",
-      "id": "brand_name",
-      "label": "Brand Name",
-      "default": "ORÉA"
-    },
-    {
-      "type": "textarea",
-      "id": "brand_description",
-      "label": "Brand Description",
-      "default": "Handcrafting timeless artifacts for modern love. Designed and made in Christchurch, New Zealand."
-    },
-    {
-      "type": "header",
-      "content": "Newsletter"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_text",
-      "label": "Newsletter Text",
-      "default": "Sign up to receive our seasonal journal on craft and design."
-    },
-    {
-      "type": "header",
-      "content": "Social Media"
-    },
-    {
-      "type": "url",
-      "id": "instagram_url",
-      "label": "Instagram URL"
-    },
-    {
-      "type": "url",
-      "id": "pinterest_url",
-      "label": "Pinterest URL"
-    },
-    {
-      "type": "header",
-      "content": "Copyright"
-    },
-    {
-      "type": "text",
-      "id": "copyright_text",
-      "label": "Copyright Text",
-      "default": "Aotearoa."
+      "type": "newsletter",
+      "name": "Newsletter",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Join Us" },
+        { "type": "text", "id": "subheading", "label": "Subheading" }
+      ]
     }
   ]
 }
