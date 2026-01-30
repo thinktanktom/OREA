@@ -1,37 +1,25 @@
-<!DOCTYPE html>
-<html lang="{{ request.locale.iso_code }}" class="{% unless template == 'index' %}scroll-smooth{% endunless %} no-js">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <link rel="canonical" href="{{ canonical_url }}">
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="canonical" href="{{ canonical_url }}">
 
-  <title>
-    {{ page_title }}
-    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-  </title>
+    <title>{{ page_title }}</title>
 
-  {% if page_description %}
-    <meta name="description" content="{{ page_description | escape }}">
-  {% endif %}
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    {{ content_for_header }}
 
-  {{ content_for_header }}
-
-  {% comment %}
-    ================================================
-    CONDITIONAL LOADING: HOMEPAGE vs GLOBAL
-    ================================================
-  {% endcomment %}
-
-  {% if template == 'index' %}
+    <!-- ORÉA Custom Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 
+    <!-- Tailwind Config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -57,132 +45,3 @@
         }
       }
     </script>
-
-    <style>
-      body {
-        background-color: #F9F6F1;
-        color: #4A3F35;
-        scroll-behavior: smooth;
-        overflow-x: hidden;
-      }
-      .fade-in {
-        animation: fadeIn 1.2s ease-out forwards;
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-    </style>
-
-  {% else %}
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              'sans': ['Inter', 'system-ui', 'sans-serif'],
-              'serif': ['Playfair Display', 'Georgia', 'serif'],
-            },
-            colors: {
-              'bone': '#FDFCFB',
-              'carbon': '#1A1A1A',
-              'orchid-white': '#fcfcf9',
-              'petal-pink': '#fff5f7',
-              'growth-green': '#e8f3eb',
-              'diamond-sparkle': '#f0f0f0',
-            },
-            letterSpacing: {
-              'widest-plus': '0.2em',
-              'ultra': '0.4em',
-              'extreme': '0.6em',
-            },
-            animation: {
-              'fade-in': 'fadeIn 0.7s ease-out forwards',
-              'slide-up': 'slideUp 0.8s ease-out forwards',
-              'reveal': 'reveal 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
-              'noise': 'noise 8s steps(10) infinite',
-            },
-            keyframes: {
-              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-              slideUp: { '0%': { opacity: '0', transform: 'translateY(30px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
-              reveal: { '0%': { opacity: '0', transform: 'translateY(30px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
-              noise: { '0%': { transform: 'translate(0, 0)' }, '100%': { transform: 'translate(3%, 3%)' } },
-            },
-          }
-        }
-      }
-    </script>
-
-    <style>
-      :root {
-        --color-bone: #FDFCFB;
-        --color-carbon: #1A1A1A;
-        --color-stone-200: #e7e5e4;
-        --color-stone-300: #d6d3d1;
-      }
-      html { scroll-behavior: smooth; }
-      body {
-        font-family: 'Inter', system-ui, sans-serif;
-        background-color: var(--color-bone);
-        color: var(--color-carbon);
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-      }
-      h1, h2, h3, h4, h5, h6, .font-serif { font-family: 'Playfair Display', Georgia, serif; }
-      
-      /* Grain Effect */
-      .grain::after {
-        content: ""; position: fixed; top: -100%; left: -100%; width: 300%; height: 300%;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        opacity: 0.015; pointer-events: none; z-index: 9999; animation: noise 8s steps(10) infinite;
-      }
-      @keyframes noise { 0% { transform: translate(0, 0); } 100% { transform: translate(3%, 3%); } }
-
-      /* Scrollbar */
-      ::-webkit-scrollbar { width: 4px; }
-      ::-webkit-scrollbar-track { background: var(--color-bone); }
-      ::-webkit-scrollbar-thumb { background: var(--color-stone-200); border-radius: 2px; }
-      
-      /* Utilities */
-      .glass-effect { background: rgba(253, 252, 251, 0.85); backdrop-filter: blur(15px); }
-      .skip-to-content { position: absolute; left: -9999px; z-index: 9999; padding: 1rem; background: var(--color-carbon); color: white; }
-      .skip-to-content:focus { left: 0; }
-    </style>
-    
-    {{ 'theme.css' | asset_url | stylesheet_tag }}
-  {% endif %}
-</head>
-
-<body class="{% if template == 'index' %}gradient{% else %}grain bg-bone text-carbon{% endif %}">
-  
-  <a href="#main-content" class="skip-to-content {% if template == 'index' %}hidden{% endif %}">Skip to content</a>
-
-  {% section 'header' %}
-
-  <main id="{% if template == 'index' %}MainContent{% else %}main-content{% endif %}" role="main" class="{% if template == 'index' %}content-for-layout focus-none{% endif %}">
-    {{ content_for_layout }}
-  </main>
-
-  {% section 'footer' %}
-
-  {% comment %}
-    Global JS Logic - Only load on non-homepage if it interferes, 
-    otherwise load globally. Keeping it restricted to non-homepage 
-    to be safe based on File 1.
-  {% endcomment %}
-  
-  {% unless template == 'index' %}
-    {% if settings.enable_ai_assistant %}
-      {% section 'ai-assistant' %}
-    {% endif %}
-    <script src="{{ 'theme.js' | asset_url }}" defer></script>
-  {% endunless %}
-
-</body>
-</html>
