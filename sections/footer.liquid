@@ -1,44 +1,217 @@
+{% comment %}
+  ORÉA Fine Jewellery - Footer Section
+  ====================================
+  Converted from: components/Footer.tsx
+  
+  Features:
+  - Three-column layout (Shop, Help, Newsletter)
+  - Newsletter signup
+  - Social media links
+  - Copyright
+  
+  IMPORTANT: This version has hardcoded defaults so text shows up immediately.
+  You can later convert to use Shopify linklists if needed.
+{% endcomment %}
 
-<footer class="bg-orea-dark text-orea-cream py-24 px-6 md:px-24">
-  <div class="max-w-[1800px] mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
+<footer class="bg-stone-900 text-stone-50 py-24 px-6 md:px-16 lg:px-24">
+  <div class="max-w-[1800px] mx-auto relative">
+    
+    <!-- Main Footer Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 lg:gap-x-12 items-start">
       
-      {% for block in section.blocks %}
-        {% case block.type %}
-          {% when 'menu' %}
-            <div class="flex flex-col space-y-10">
-              <h4 class="text-[10px] tracking-[0.4em] uppercase text-orea-champagne font-semibold">{{ block.settings.title }}</h4>
-              <ul class="space-y-5 text-[10px] tracking-[0.2em] font-light uppercase">
-                {% for link in linklists[block.settings.menu].links %}
-                  <li><a href="{{ link.url }}" class="hover:text-orea-gold transition-colors">{{ link.title }}</a></li>
-                {% endfor %}
-              </ul>
-            </div>
-          
-          {% when 'newsletter' %}
-            <div class="flex flex-col space-y-10">
-              <div class="space-y-5">
-                <h4 class="text-[10px] tracking-[0.4em] uppercase text-orea-champagne font-semibold">{{ block.settings.heading }}</h4>
-                <p class="text-[10px] text-orea-oatmeal/70 tracking-[0.1em] uppercase">{{ block.settings.subheading }}</p>
+      {%comment%} COLUMN 1 - SHOP {%endcomment%}
+      <div class="flex flex-col space-y-10">
+        <h4 class="text-[10px] tracking-[0.4em] uppercase text-amber-200 font-semibold leading-none">
+          SHOP
+        </h4>
+        <ul class="space-y-5 text-[10px] tracking-[0.2em] font-light uppercase">
+          {% if linklists['footer-shop'].links.size > 0 %}
+            {% for link in linklists['footer-shop'].links %}
+              <li>
+                <a href="{{ link.url }}" class="hover:text-amber-500 transition-colors duration-500">
+                  {{ link.title }}
+                </a>
+              </li>
+            {% endfor %}
+          {% else %}
+            {%comment%} Hardcoded defaults if no menu exists {%endcomment%}
+            <li><a href="/collections/rings" class="hover:text-amber-500 transition-colors duration-500">Rings</a></li>
+            <li><a href="/collections/necklaces" class="hover:text-amber-500 transition-colors duration-500">Necklaces</a></li>
+            <li><a href="/collections/earrings" class="hover:text-amber-500 transition-colors duration-500">Earrings</a></li>
+            <li><a href="/collections/bracelets" class="hover:text-amber-500 transition-colors duration-500">Bracelets</a></li>
+            <li><a href="/collections/pendants" class="hover:text-amber-500 transition-colors duration-500">Pendants</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      {%comment%} COLUMN 2 - HELP {%endcomment%}
+      <div class="flex flex-col space-y-10">
+        <h4 class="text-[10px] tracking-[0.4em] uppercase text-amber-200 font-semibold leading-none">
+          HELP
+        </h4>
+        <ul class="space-y-5 text-[10px] tracking-[0.2em] font-light uppercase">
+          {% if linklists['footer-help'].links.size > 0 %}
+            {% for link in linklists['footer-help'].links %}
+              <li>
+                <a href="{{ link.url }}" class="hover:text-amber-500 transition-colors duration-500">
+                  {{ link.title }}
+                </a>
+              </li>
+            {% endfor %}
+          {% else %}
+            {%comment%} Hardcoded defaults if no menu exists {%endcomment%}
+            <li><a href="/pages/faq" class="hover:text-amber-500 transition-colors duration-500">FAQs</a></li>
+            <li><a href="/pages/contact" class="hover:text-amber-500 transition-colors duration-500">Contact Us</a></li>
+            <li><a href="/pages/care-guide" class="hover:text-amber-500 transition-colors duration-500">Care Guide</a></li>
+            <li><a href="/pages/shipping" class="hover:text-amber-500 transition-colors duration-500">Shipping & Delivery</a></li>
+            <li><a href="/pages/returns" class="hover:text-amber-500 transition-colors duration-500">Returns & Exchanges</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      {%comment%} COLUMN 3 - NEWSLETTER & SOCIALS {%endcomment%}
+      <div class="flex flex-col space-y-10">
+        
+        {%comment%} Newsletter Heading {%endcomment%}
+        <div class="space-y-5">
+          <h4 class="text-[10px] tracking-[0.4em] uppercase text-amber-200 font-semibold leading-none">
+            {{ section.settings.newsletter_heading | default: 'JOIN OUR COMMUNITY' }}
+          </h4>
+          <div class="space-y-2">
+            <p class="text-[10px] tracking-[0.1em] text-stone-50 font-medium leading-relaxed uppercase">
+              {{ section.settings.newsletter_tagline | default: 'Receive $25 off your first order.' }}
+            </p>
+            <p class="text-[10px] tracking-[0.1em] text-stone-400 font-light leading-relaxed uppercase">
+              {{ section.settings.newsletter_description | default: 'Early access to new pieces, private releases, exclusive offers & more.' }}
+            </p>
+          </div>
+        </div>
+        
+        {%comment%} Newsletter Form {%endcomment%}
+        <div class="space-y-6">
+          {% form 'customer', class: 'space-y-6' %}
+            {% if form.posted_successfully? %}
+              <p class="text-[11px] text-amber-200 py-3">Thank you for subscribing!</p>
+            {% else %}
+              <div class="flex border-b border-amber-200/20 pb-3 group focus-within:border-amber-500 transition-colors duration-700">
+                <input 
+                  type="email" 
+                  name="contact[email]"
+                  placeholder="EMAIL ADDRESS" 
+                  class="bg-transparent text-[10px] tracking-[0.3em] outline-none flex-1 placeholder:text-stone-500 text-stone-50 uppercase"
+                  required
+                  autocomplete="email"
+                />
+                <button 
+                  type="submit"
+                  class="text-[10px] tracking-[0.4em] uppercase text-amber-200 hover:text-amber-500 ml-4 font-semibold transition-colors duration-500"
+                >
+                  JOIN
+                </button>
               </div>
-              
-              {% form 'customer' %}
-                <div class="flex border-b border-orea-champagne/20 pb-3">
-                  <input type="email" name="contact[email]" placeholder="EMAIL ADDRESS" class="bg-transparent text-[10px] tracking-[0.3em] outline-none flex-1 placeholder:text-orea-taupe text-orea-cream uppercase">
-                  <button type="submit" class="text-[10px] tracking-[0.4em] uppercase text-orea-champagne hover:text-orea-gold ml-4 font-semibold">JOIN</button>
-                </div>
-              {% endform %}
-            </div>
-        {% endcase %}
-      {% endfor %}
+              {% if form.errors %}
+                <p class="text-[11px] text-red-400 mt-2">{{ form.errors | default_errors }}</p>
+              {% endif %}
+            {% endif %}
+          {% endform %}
+
+          {%comment%} Social Media Icons {%endcomment%}
+          <div class="flex justify-end space-x-6 pt-1">
+            {% if section.settings.instagram_url != blank %}
+              <a 
+                href="{{ section.settings.instagram_url }}" 
+                class="text-stone-400 hover:text-amber-500 transition-colors duration-500" 
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <!-- Instagram Icon -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+            {% endif %}
+            
+            {% if section.settings.facebook_url != blank %}
+              <a 
+                href="{{ section.settings.facebook_url }}" 
+                class="text-stone-400 hover:text-amber-500 transition-colors duration-500" 
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <!-- Facebook Icon -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+            {% endif %}
+            
+            {% if section.settings.pinterest_url != blank %}
+              <a 
+                href="{{ section.settings.pinterest_url }}" 
+                class="text-stone-400 hover:text-amber-500 transition-colors duration-500" 
+                aria-label="Pinterest"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <!-- Pinterest Icon -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path d="M8 12a4 4 0 1 0 8 0c0-1.7-.9-3.1-2.2-3.8"></path>
+                  <path d="M12 2v10"></path>
+                  <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+              </a>
+            {% endif %}
+            
+            {%comment%} Fallback if no social URLs are set {%endcomment%}
+            {% if section.settings.instagram_url == blank and section.settings.facebook_url == blank and section.settings.pinterest_url == blank %}
+              <a href="#" class="text-stone-400 hover:text-amber-500 transition-colors duration-500" aria-label="Instagram">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="#" class="text-stone-400 hover:text-amber-500 transition-colors duration-500" aria-label="Facebook">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      
     </div>
 
-    <div class="mt-32 pt-10 border-t border-orea-champagne/10 flex flex-col md:flex-row justify-between items-center text-[8px] tracking-[0.4em] uppercase opacity-60">
-      <p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}</p>
-      <div class="flex gap-8">
-        <a href="/policies/terms-of-service">Terms</a>
-        <a href="/policies/privacy-policy">Privacy</a>
+    {%comment%} BOTTOM BAR - Copyright {%endcomment%}
+    <div class="mt-32 pt-10 border-t border-amber-200/10 flex flex-col md:flex-row justify-between items-center text-[8px] tracking-[0.4em] uppercase space-y-6 md:space-y-0">
+      
+      <p class="text-stone-400">
+        &copy; {{ section.settings.brand_name | default: 'ORÉA' }} {{ 'now' | date: '%Y' }}
+      </p>
+      
+      <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-stone-400">
+        {% if section.settings.terms_url != blank %}
+          <a href="{{ section.settings.terms_url }}" class="hover:text-stone-50 transition-colors uppercase">
+            Terms & Conditions
+          </a>
+        {% else %}
+          <a href="/pages/terms" class="hover:text-stone-50 transition-colors uppercase">
+            Terms & Conditions
+          </a>
+        {% endif %}
+        
+        {% if section.settings.privacy_url != blank %}
+          <a href="{{ section.settings.privacy_url }}" class="hover:text-stone-50 transition-colors uppercase">
+            Privacy Policy
+          </a>
+        {% endif %}
       </div>
+      
     </div>
   </div>
 </footer>
@@ -46,22 +219,83 @@
 {% schema %}
 {
   "name": "Footer",
-  "blocks": [
+  "tag": "footer",
+  "class": "orea-footer",
+  "settings": [
     {
-      "type": "menu",
-      "name": "Menu",
-      "settings": [
-        { "type": "text", "id": "title", "label": "Heading" },
-        { "type": "link_list", "id": "menu", "label": "Menu" }
-      ]
+      "type": "header",
+      "content": "Brand"
     },
     {
-      "type": "newsletter",
-      "name": "Newsletter",
-      "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Join Us" },
-        { "type": "text", "id": "subheading", "label": "Subheading" }
-      ]
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "ORÉA",
+      "info": "Used in copyright text"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter Heading",
+      "default": "JOIN OUR COMMUNITY"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_tagline",
+      "label": "Newsletter Tagline",
+      "default": "Receive $25 off your first order."
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_description",
+      "label": "Newsletter Description",
+      "default": "Early access to new pieces, private releases, exclusive offers & more."
+    },
+    {
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL",
+      "info": "Full URL including https://"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL",
+      "info": "Full URL including https://"
+    },
+    {
+      "type": "url",
+      "id": "pinterest_url",
+      "label": "Pinterest URL",
+      "info": "Full URL including https://"
+    },
+    {
+      "type": "header",
+      "content": "Legal Links"
+    },
+    {
+      "type": "url",
+      "id": "terms_url",
+      "label": "Terms & Conditions URL",
+      "default": "/pages/terms"
+    },
+    {
+      "type": "url",
+      "id": "privacy_url",
+      "label": "Privacy Policy URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
     }
   ]
 }
