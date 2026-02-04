@@ -1,60 +1,183 @@
+{% comment %}
+  ORÉA Fine Jewellery - Collections Section
+  =========================================
+  Converted from: components/Collections.tsx
+  
+  Alternating 2-column editorial layout
+  FIXED: Uses standard Tailwind colors + hardcoded fallback content
+{% endcomment %}
 
 <section id="collections" class="pt-24 md:pt-72 pb-32 bg-white overflow-hidden">
   <div class="max-w-[1600px] mx-auto px-6 md:px-24 space-y-24 md:space-y-64">
-    {% for block in section.blocks %}
-      <div class="flex flex-col md:flex-row gap-8 md:gap-24 items-center md:items-end {% cycle '', 'md:flex-row-reverse' %}">
-        
-        <!-- Image Container -->
+    
+    {% if section.blocks.size > 0 %}
+      {%comment%} Use blocks if they exist {%endcomment%}
+      {% for block in section.blocks %}
+        <div class="flex flex-col md:flex-row gap-8 md:gap-24 items-center md:items-end {% cycle '', 'md:flex-row-reverse' %}">
+          
+          <!-- Image Container -->
+          <div class="w-full md:w-3/5 group">
+            <a href="{{ block.settings.collection.url | default: '#' }}" class="relative block w-full aspect-[3/4] overflow-hidden bg-stone-50 shadow-sm">
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105' }}
+              {% elsif block.settings.collection.featured_image %}
+                {{ block.settings.collection.featured_image | image_url: width: 1200 | image_tag: class: 'w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105' }}
+              {% else %}
+                <div class="w-full h-full flex items-center justify-center text-stone-300 text-xs uppercase tracking-widest">
+                  {{ block.settings.collection.title | default: 'Collection Image' }}
+                </div>
+              {% endif %}
+              <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/[0.02] transition-colors duration-1000"></div>
+            </a>
+          </div>
+
+          <!-- Content Area -->
+          <div class="w-full md:w-2/5 pb-4">
+            <div class="space-y-6 md:space-y-10 text-center md:text-left">
+              <div class="space-y-4">
+                <h3 class="font-serif text-3xl md:text-5xl text-stone-900 font-light tracking-tight uppercase">
+                  {{ block.settings.collection.title | default: 'Collection' }}
+                </h3>
+                <p class="text-[11px] md:text-[12px] text-stone-500 font-medium tracking-[0.2em] uppercase leading-relaxed">
+                  {{ block.settings.description | default: 'For the lasting moments.' }}
+                </p>
+              </div>
+              <div class="pt-2">
+                <a href="{{ block.settings.collection.url | default: '#' }}" class="group/btn inline-flex items-center space-x-6 text-[9px] tracking-[0.45em] uppercase text-stone-900 hover:text-amber-600 transition-colors">
+                  <span class="font-semibold border-b border-stone-900/10 pb-1">Explore</span>
+                  <span class="group-hover/btn:translate-x-2 transition-transform">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      {% endfor %}
+      
+    {% else %}
+      {%comment%} HARDCODED FALLBACK - Shows when no blocks added {%endcomment%}
+      
+      <!-- Collection 1: RINGS -->
+      <div class="flex flex-col md:flex-row gap-8 md:gap-24 items-center md:items-end">
         <div class="w-full md:w-3/5 group">
-          <a href="{{ block.settings.collection.url }}" class="relative block w-full aspect-[3/4] overflow-hidden bg-orea-cream shadow-sm">
-            {% if block.settings.image != blank %}
-              {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105' }}
-            {% else %}
-              {{ block.settings.collection.featured_image | image_url: width: 1200 | image_tag: class: 'w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105' }}
-            {% endif %}
-            <div class="absolute inset-0 bg-orea-dark/0 group-hover:bg-orea-dark/[0.02] transition-colors duration-1000"></div>
+          <a href="/collections/rings" class="relative block w-full aspect-[3/4] overflow-hidden bg-stone-50 shadow-sm">
+            <div class="w-full h-full flex items-center justify-center">
+              <span class="text-stone-300 text-xs uppercase tracking-widest">RINGS IMAGE</span>
+            </div>
+            <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/[0.02] transition-colors duration-1000"></div>
           </a>
         </div>
-
-        <!-- Content Area -->
         <div class="w-full md:w-2/5 pb-4">
           <div class="space-y-6 md:space-y-10 text-center md:text-left">
             <div class="space-y-4">
-              <h3 class="font-serif text-3xl md:text-5xl text-orea-dark font-light tracking-tight uppercase">
-                {{ block.settings.collection.title | default: "Collection" }}
-              </h3>
-              <p class="text-[11px] md:text-[12px] text-orea-taupe font-medium tracking-[0.2em] uppercase leading-relaxed">
-                {{ block.settings.description }}
+              <h3 class="font-serif text-3xl md:text-5xl text-stone-900 font-light tracking-tight uppercase">RINGS</h3>
+              <p class="text-[11px] md:text-[12px] text-stone-500 font-medium tracking-[0.2em] uppercase leading-relaxed">
+                For the lasting moments.
               </p>
             </div>
             <div class="pt-2">
-              <a href="{{ block.settings.collection.url }}" class="group/btn inline-flex items-center space-x-6 text-[9px] tracking-[0.45em] uppercase text-orea-dark hover:text-orea-gold transition-colors">
-                <span class="font-semibold border-b border-orea-dark/10 pb-1">Explore</span>
+              <a href="/collections/rings" class="group/btn inline-flex items-center space-x-6 text-[9px] tracking-[0.45em] uppercase text-stone-900 hover:text-amber-600 transition-colors">
+                <span class="font-semibold border-b border-stone-900/10 pb-1">Explore</span>
                 <span class="group-hover/btn:translate-x-2 transition-transform">→</span>
               </a>
             </div>
           </div>
         </div>
-
       </div>
-    {% endfor %}
+
+      <!-- Collection 2: FINE JEWELLERY -->
+      <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-24 items-center md:items-end">
+        <div class="w-full md:w-3/5 group">
+          <a href="/collections/fine-jewellery" class="relative block w-full aspect-[3/4] overflow-hidden bg-stone-50 shadow-sm">
+            <div class="w-full h-full flex items-center justify-center">
+              <span class="text-stone-300 text-xs uppercase tracking-widest">FINE JEWELLERY IMAGE</span>
+            </div>
+            <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/[0.02] transition-colors duration-1000"></div>
+          </a>
+        </div>
+        <div class="w-full md:w-2/5 pb-4">
+          <div class="space-y-6 md:space-y-10 text-center md:text-left">
+            <div class="space-y-4">
+              <h3 class="font-serif text-3xl md:text-5xl text-stone-900 font-light tracking-tight uppercase">FINE JEWELLERY</h3>
+              <p class="text-[11px] md:text-[12px] text-stone-500 font-medium tracking-[0.2em] uppercase leading-relaxed">
+                For every day.
+              </p>
+            </div>
+            <div class="pt-2">
+              <a href="/collections/fine-jewellery" class="group/btn inline-flex items-center space-x-6 text-[9px] tracking-[0.45em] uppercase text-stone-900 hover:text-amber-600 transition-colors">
+                <span class="font-semibold border-b border-stone-900/10 pb-1">Explore</span>
+                <span class="group-hover/btn:translate-x-2 transition-transform">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collection 3: BESPOKE -->
+      <div class="flex flex-col md:flex-row gap-8 md:gap-24 items-center md:items-end">
+        <div class="w-full md:w-3/5 group">
+          <a href="/pages/bespoke" class="relative block w-full aspect-[3/4] overflow-hidden bg-stone-50 shadow-sm">
+            <div class="w-full h-full flex items-center justify-center">
+              <span class="text-stone-300 text-xs uppercase tracking-widest">BESPOKE IMAGE</span>
+            </div>
+            <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/[0.02] transition-colors duration-1000"></div>
+          </a>
+        </div>
+        <div class="w-full md:w-2/5 pb-4">
+          <div class="space-y-6 md:space-y-10 text-center md:text-left">
+            <div class="space-y-4">
+              <h3 class="font-serif text-3xl md:text-5xl text-stone-900 font-light tracking-tight uppercase">BESPOKE</h3>
+              <p class="text-[11px] md:text-[12px] text-stone-500 font-medium tracking-[0.2em] uppercase leading-relaxed">
+                A private consultation experience.
+              </p>
+            </div>
+            <div class="pt-2">
+              <a href="/pages/bespoke" class="group/btn inline-flex items-center space-x-6 text-[9px] tracking-[0.45em] uppercase text-stone-900 hover:text-amber-600 transition-colors">
+                <span class="font-semibold border-b border-stone-900/10 pb-1">Explore</span>
+                <span class="group-hover/btn:translate-x-2 transition-transform">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    {% endif %}
   </div>
 </section>
 
 {% schema %}
 {
   "name": "ORÉA Collection List",
+  "tag": "section",
+  "class": "orea-collections",
   "blocks": [
     {
       "type": "collection",
       "name": "Collection Item",
       "settings": [
-        { "type": "collection", "id": "collection", "label": "Collection" },
-        { "type": "image_picker", "id": "image", "label": "Override Image" },
-        { "type": "text", "id": "description", "label": "Description" }
+        { 
+          "type": "collection", 
+          "id": "collection", 
+          "label": "Collection" 
+        },
+        { 
+          "type": "image_picker", 
+          "id": "image", 
+          "label": "Override Image (optional)",
+          "info": "Use custom image instead of collection featured image"
+        },
+        { 
+          "type": "text", 
+          "id": "description", 
+          "label": "Description" 
+        }
       ]
     }
   ],
-  "presets": [{ "name": "ORÉA Collection List" }]
+  "presets": [
+    { 
+      "name": "ORÉA Collection List"
+    }
+  ]
 }
 {% endschema %}
