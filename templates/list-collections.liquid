@@ -1,0 +1,146 @@
+{% comment %}
+  ORÉA Collections List Page
+  ==========================
+  Displays all available collections in a beautiful grid
+  URL: /collections/
+{% endcomment %}
+
+<div class="min-h-screen bg-[#F9F6F1]">
+  
+  <!-- Hero Section -->
+  <section class="pt-32 md:pt-40 pb-16 md:pb-24 px-6">
+    <div class="max-w-screen-2xl mx-auto text-center space-y-6">
+      <h4 class="text-[10px] uppercase tracking-[0.6em] text-[#7D6B5C] font-bold">
+        Collections
+      </h4>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-[#4A3F35] leading-tight">
+        Explore Our Collections
+      </h1>
+      <p class="text-base md:text-lg text-[#7D6B5C] font-light max-w-2xl mx-auto leading-relaxed">
+        Each collection tells a story of timeless elegance and sustainable luxury.
+      </p>
+    </div>
+  </section>
+
+  <!-- Collections Grid -->
+  <section class="pb-32 px-6 md:px-12">
+    <div class="max-w-screen-2xl mx-auto">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+        
+        {% for collection in collections %}
+          {% unless collection.handle == 'frontpage' %}
+            <div class="group">
+              
+              <!-- Collection Image -->
+              <a href="{{ collection.url }}" class="block relative aspect-[3/4] overflow-hidden bg-[#E8DFD3]/30 mb-6">
+                {% if collection.image %}
+                  <img 
+                    src="{{ collection.image | image_url: width: 800 }}" 
+                    alt="{{ collection.title | escape }}"
+                    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                {% elsif collection.products.first and collection.products.first.featured_image %}
+                  <img 
+                    src="{{ collection.products.first.featured_image | image_url: width: 800 }}" 
+                    alt="{{ collection.title | escape }}"
+                    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                {% else %}
+                  <div class="w-full h-full flex items-center justify-center">
+                    <svg class="w-24 h-24 text-[#D4C4A8]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M12 2L4.5 9L12 22L19.5 9L12 2Z" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M4.5 9H19.5" stroke-width="0.5" />
+                    </svg>
+                  </div>
+                {% endif %}
+                
+                <!-- Overlay on hover -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500"></div>
+                
+                <!-- Product count badge -->
+                {% if collection.products_count > 0 %}
+                  <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 text-[9px] tracking-[0.3em] uppercase font-bold text-[#4A3F35]">
+                    {{ collection.products_count }} {% if collection.products_count == 1 %}Piece{% else %}Pieces{% endif %}
+                  </div>
+                {% endif %}
+              </a>
+
+              <!-- Collection Info -->
+              <div class="text-center space-y-3">
+                <a href="{{ collection.url }}" class="block">
+                  <h2 class="text-xl md:text-2xl font-serif text-[#4A3F35] group-hover:text-[#7D6B5C] transition-colors uppercase tracking-wide">
+                    {{ collection.title }}
+                  </h2>
+                </a>
+                
+                {% if collection.description != blank %}
+                  <p class="text-sm text-[#7D6B5C] font-light leading-relaxed line-clamp-2">
+                    {{ collection.description | strip_html | truncate: 120 }}
+                  </p>
+                {% endif %}
+                
+                <a 
+                  href="{{ collection.url }}" 
+                  class="inline-block text-[10px] uppercase tracking-[0.4em] font-bold text-[#4A3F35] border-b border-[#4A3F35]/20 pb-1 hover:border-[#4A3F35] transition-all mt-2"
+                >
+                  Explore →
+                </a>
+              </div>
+              
+            </div>
+          {% endunless %}
+        {% endfor %}
+        
+      </div>
+
+      <!-- Empty state if no collections -->
+      {% if collections.size == 0 or collections.size == 1 %}
+        <div class="text-center py-32">
+          <div class="space-y-6">
+            <svg class="w-24 h-24 mx-auto text-[#D4C4A8]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2L4.5 9L12 22L19.5 9L12 2Z" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M4.5 9H19.5" stroke-width="0.5" />
+            </svg>
+            <h3 class="text-2xl font-serif text-[#4A3F35]">No Collections Yet</h3>
+            <p class="text-[#7D6B5C] font-light">
+              Our collections are being curated. Check back soon.
+            </p>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 md:py-32 border-t border-[#E8DFD3]/40 px-6">
+    <div class="max-w-2xl mx-auto text-center space-y-8">
+      <h3 class="text-3xl md:text-4xl font-serif text-[#4A3F35]">
+        Looking for Something Unique?
+      </h3>
+      <p class="text-base md:text-lg text-[#7D6B5C] font-light leading-relaxed">
+        Our bespoke service allows you to create a completely custom piece, designed exclusively for you.
+      </p>
+      <a 
+        href="/pages/bespoke" 
+        class="inline-block px-16 py-5 bg-[#4A3F35] text-white text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-[#7D6B5C] transition-all duration-500"
+      >
+        Explore Bespoke
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<style>
+  /* Line clamp utility for description truncation */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
