@@ -1,0 +1,124 @@
+{% comment %}
+  ORÉA Collection Header
+  ======================
+  Converted from: components/CollectionHeader.tsx
+  
+  Category navigation for the collections page
+{% endcomment %}
+
+<header class="pt-16 pb-8 md:pt-24 md:pb-12 px-6 md:px-12 max-w-screen-2xl mx-auto w-full">
+  <div class="flex flex-col items-center">
+    <nav class="w-full flex justify-center py-4">
+      <ul class="flex flex-wrap justify-center gap-x-10 gap-y-6 md:gap-x-16" id="category-nav">
+        
+        {% comment %} All Collections Link {% endcomment %}
+        <li>
+          <a
+            href="/collections/all"
+            class="category-link group relative text-[10px] uppercase tracking-[0.45em] transition-colors duration-500 pb-2 font-bold text-[#4A3F35]/80 hover:text-[#4A3F35]"
+            data-category="all"
+          >
+            All
+            <span class="absolute bottom-0 left-0 w-full h-[1px] bg-[#D4C4A8] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"></span>
+          </a>
+        </li>
+
+        {% comment %} Rings Collection {% endcomment %}
+        <li>
+          <a
+            href="/collections/rings"
+            class="category-link group relative text-[10px] uppercase tracking-[0.45em] transition-colors duration-500 pb-2 font-bold text-[#4A3F35]/80 hover:text-[#4A3F35]"
+            data-category="rings"
+          >
+            Rings
+            <span class="absolute bottom-0 left-0 w-full h-[1px] bg-[#D4C4A8] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"></span>
+          </a>
+        </li>
+
+        {% comment %} Necklaces Collection {% endcomment %}
+        <li>
+          <a
+            href="/collections/necklaces"
+            class="category-link group relative text-[10px] uppercase tracking-[0.45em] transition-colors duration-500 pb-2 font-bold text-[#4A3F35]/80 hover:text-[#4A3F35]"
+            data-category="necklaces"
+          >
+            Necklaces
+            <span class="absolute bottom-0 left-0 w-full h-[1px] bg-[#D4C4A8] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"></span>
+          </a>
+        </li>
+
+        {% comment %} Earrings Collection {% endcomment %}
+        <li>
+          <a
+            href="/collections/earrings"
+            class="category-link group relative text-[10px] uppercase tracking-[0.45em] transition-colors duration-500 pb-2 font-bold text-[#4A3F35]/80 hover:text-[#4A3F35]"
+            data-category="earrings"
+          >
+            Earrings
+            <span class="absolute bottom-0 left-0 w-full h-[1px] bg-[#D4C4A8] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"></span>
+          </a>
+        </li>
+
+        {% comment %} Bracelets Collection {% endcomment %}
+        <li>
+          <a
+            href="/collections/bracelets"
+            class="category-link group relative text-[10px] uppercase tracking-[0.45em] transition-colors duration-500 pb-2 font-bold text-[#4A3F35]/80 hover:text-[#4A3F35]"
+            data-category="bracelets"
+          >
+            Bracelets
+            <span class="absolute bottom-0 left-0 w-full h-[1px] bg-[#D4C4A8] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"></span>
+          </a>
+        </li>
+
+        {% comment %} Pendants Collection {% endcomment %}
+        <li>
+          <a
+            href="/collections/pendants"
+            class="category-link group relative text-[10px] uppercase tracking-[0.45em] transition-colors duration-500 pb-2 font-bold text-[#4A3F35]/80 hover:text-[#4A3F35]"
+            data-category="pendants"
+          >
+            Pendants
+            <span class="absolute bottom-0 left-0 w-full h-[1px] bg-[#D4C4A8] transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100"></span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Highlight active category
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentHandle = '{{ collection.handle }}';
+    const links = document.querySelectorAll('.category-link');
+    
+    links.forEach(link => {
+      const category = link.getAttribute('data-category');
+      const underline = link.querySelector('span');
+      
+      if (
+        (category === 'all' && currentHandle === 'all') ||
+        (category === currentHandle)
+      ) {
+        link.classList.remove('text-[#4A3F35]/80');
+        link.classList.add('text-[#4A3F35]');
+        underline.classList.remove('scale-x-0');
+        underline.classList.add('scale-x-100');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Header",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "This section displays the category navigation for collections. Make sure you have created collections with handles: all, rings, necklaces, earrings, bracelets, and pendants."
+    }
+  ]
+}
+{% endschema %}
