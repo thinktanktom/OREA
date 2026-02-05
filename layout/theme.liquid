@@ -1,47 +1,433 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="canonical" href="{{ canonical_url }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#F9F6F1">
+  
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
 
-    <title>{{ page_title }}</title>
+  {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+  {%- endunless -%}
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | escape }}{% endif -%}
+    {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
 
-    {{ content_for_header }}
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
 
-    <!-- ORÉA Custom Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="canonical" href="{{ canonical_url }}">
 
-    <!-- Tailwind Config -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              orea: {
-                cream: '#F9F6F1',
-                dark: '#4A3F35',
-                champagne: '#D4C4A8',
-                gold: '#C5B8A0',
-                taupe: '#7D6B5C',
-                linen: '#E8DFD3',
-                earth: '#9B8877',
-                oatmeal: '#D9CFC1',
-              }
-            },
-            fontFamily: {
-              serif: ['"Cormorant Garamond"', 'serif'],
-              sans: ['Montserrat', 'sans-serif'],
+  {%- if settings.social_sharing_image -%}
+    <meta property="og:image" content="http:{{ settings.social_sharing_image | image_url: width: 1200 }}">
+    <meta property="og:image:secure_url" content="https:{{ settings.social_sharing_image | image_url: width: 1200 }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+  {%- endif -%}
+
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="{{ page_description | escape }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title | escape }}">
+  <meta name="twitter:description" content="{{ page_description | escape }}">
+
+  <!-- ORÉA Custom Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN with ORÉA Configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            orea: {
+              cream: '#F9F6F1',
+              dark: '#4A3F35',
+              champagne: '#D4C4A8',
+              gold: '#C5B8A0',
+              taupe: '#7D6B5C',
+              linen: '#E8DFD3',
+              earth: '#9B8877',
+              oatmeal: '#D9CFC1',
             }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['Montserrat', 'sans-serif'],
+          },
+          letterSpacing: {
+            'ultra-wide': '0.45em',
+            'extra-wide': '0.3em',
           }
         }
       }
-    </script>
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  {{ 'styles.css' | asset_url | stylesheet_tag }}
+
+  <!-- Shopify Required Header Content -->
+  {{ content_for_header }}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    if (Shopify.designMode) {
+      document.documentElement.classList.add('shopify-design-mode');
+    }
+  </script>
+</head>
+
+<body class="font-sans bg-[#F9F6F1] text-[#4A3F35] antialiased overflow-x-hidden">
+  
+  <!-- Skip to Content (Accessibility) -->
+  <a class="skip-to-content sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-black text-white px-4 py-2 z-[200]" href="#main-content">
+    Skip to content
+  </a>
+
+  <!-- Header Section -->
+  {% section 'header' %}
+
+  <!-- Main Content -->
+  <main id="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  <!-- Footer Section -->
+  {% section 'footer' %}
+
+  <!-- AI Assistant (if enabled in theme settings) -->
+  {%- if settings.enable_ai_assistant -%}
+    {% section 'ai-assistant' %}
+  {%- endif -%}
+
+  <!-- Cart Drawer (optional - if you want a slide-out cart) -->
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-[100] hidden">
+    <div class="p-6 h-full flex flex-col">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-serif uppercase tracking-wide">Your Cart</h2>
+        <button id="cart-drawer-close" class="text-stone-400 hover:text-black">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <div id="cart-drawer-items" class="flex-1 overflow-y-auto">
+        <!-- Cart items will be loaded here dynamically -->
+      </div>
+      
+      <div class="border-t pt-4 mt-4">
+        <div class="flex justify-between text-sm mb-4">
+          <span class="uppercase tracking-wide font-medium">Subtotal</span>
+          <span id="cart-drawer-total" class="font-bold"></span>
+        </div>
+        <a href="/cart" class="block w-full bg-black text-white text-center py-4 uppercase tracking-widest text-xs font-bold hover:bg-stone-800 transition-colors">
+          View Cart
+        </a>
+        <button type="submit" name="checkout" class="block w-full bg-white border border-black text-black text-center py-4 uppercase tracking-widest text-xs font-bold hover:bg-stone-50 transition-colors mt-2">
+          Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer Overlay -->
+  <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] hidden"></div>
+
+  <!-- Mobile Menu (if not in header section) -->
+  <div id="mobile-menu" class="hidden fixed inset-0 bg-[#F9F6F1] z-[60] overflow-y-auto">
+    <div class="min-h-screen p-6">
+      <div class="flex justify-between items-center mb-12">
+        <a href="/" class="font-serif text-2xl tracking-[0.15em] text-stone-900">ORÉA</a>
+        <button id="mobile-menu-close" class="text-stone-900 p-1">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <nav class="space-y-8">
+        <div class="space-y-4">
+          <h3 class="text-xs uppercase tracking-[0.3em] text-stone-400 font-bold">Shop</h3>
+          <ul class="space-y-3">
+            <li><a href="/collections/all" class="text-lg font-serif">All</a></li>
+            <li><a href="/collections/rings" class="text-lg font-serif">Rings</a></li>
+            <li><a href="/collections/necklaces" class="text-lg font-serif">Necklaces</a></li>
+            <li><a href="/collections/earrings" class="text-lg font-serif">Earrings</a></li>
+            <li><a href="/collections/bracelets" class="text-lg font-serif">Bracelets</a></li>
+            <li><a href="/collections/pendants" class="text-lg font-serif">Pendants</a></li>
+          </ul>
+        </div>
+        
+        <div class="space-y-4">
+          <h3 class="text-xs uppercase tracking-[0.3em] text-stone-400 font-bold">Learn</h3>
+          <ul class="space-y-3">
+            <li><a href="/pages/about-diamonds" class="text-lg font-serif">About Diamonds</a></li>
+            <li><a href="/pages/about" class="text-lg font-serif">About ORÉA</a></li>
+          </ul>
+        </div>
+        
+        <div class="space-y-4">
+          <h3 class="text-xs uppercase tracking-[0.3em] text-stone-400 font-bold">Services</h3>
+          <ul class="space-y-3">
+            <li><a href="/pages/bespoke" class="text-lg font-serif">Bespoke Design</a></li>
+            <li><a href="/pages/contact" class="text-lg font-serif">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Core JavaScript -->
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+  <!-- Page-specific JavaScript -->
+  {%- if template contains 'product' -%}
+    <script src="{{ 'product-page.js' | asset_url }}" defer></script>
+    <script src="{{ 'modals.js' | asset_url }}" defer></script>
+  {%- endif -%}
+
+  {%- if template contains 'collection' -%}
+    <script src="{{ 'collection-filtering.js' | asset_url }}" defer></script>
+  {%- endif -%}
+
+  <!-- Shopify Analytics -->
+  {%- if settings.enable_analytics -%}
+    <!-- Add your analytics code here -->
+  {%- endif -%}
+
+  <!-- Grain Effect Overlay -->
+  <div class="grain fixed inset-0 pointer-events-none z-[200] opacity-[0.015]" aria-hidden="true"></div>
+
+  <style>
+    /* Grain texture overlay */
+    .grain::after {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      width: 200%;
+      height: 200%;
+      background: transparent url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=') repeat;
+      animation: grain 8s steps(10) infinite;
+      pointer-events: none;
+    }
+
+    @keyframes grain {
+      0%, 100% { transform: translate(0, 0); }
+      10% { transform: translate(-5%, -10%); }
+      20% { transform: translate(-15%, 5%); }
+      30% { transform: translate(7%, -25%); }
+      40% { transform: translate(-5%, 25%); }
+      50% { transform: translate(-15%, 10%); }
+      60% { transform: translate(15%, 0%); }
+      70% { transform: translate(0%, 15%); }
+      80% { transform: translate(3%, 35%); }
+      90% { transform: translate(-10%, 10%); }
+    }
+
+    /* Screen reader only content */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .sr-only:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0.5rem 1rem;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+    }
+
+    /* Prevent italics globally */
+    * {
+      font-style: normal !important;
+    }
+
+    /* Selection color */
+    ::selection {
+      background: #E8DFD3;
+      color: #4A3F35;
+    }
+
+    /* Custom scrollbar for webkit browsers */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #F9F6F1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #D4C4A8;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C5B8A0;
+    }
+
+    /* Hide scrollbar for content that should scroll without visible scrollbar */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Focus visible styles for accessibility */
+    *:focus-visible {
+      outline: 2px solid #4A3F35;
+      outline-offset: 2px;
+    }
+  </style>
+
+  <script>
+    // Cart drawer functionality
+    (function() {
+      const cartDrawer = document.getElementById('cart-drawer');
+      const cartDrawerOverlay = document.getElementById('cart-drawer-overlay');
+      const cartDrawerClose = document.getElementById('cart-drawer-close');
+      const cartIcon = document.getElementById('cart-icon');
+
+      function openCartDrawer() {
+        if (cartDrawer && cartDrawerOverlay) {
+          cartDrawer.classList.remove('hidden', 'translate-x-full');
+          cartDrawerOverlay.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          loadCartContents();
+        }
+      }
+
+      function closeCartDrawer() {
+        if (cartDrawer && cartDrawerOverlay) {
+          cartDrawer.classList.add('translate-x-full');
+          cartDrawerOverlay.classList.add('hidden');
+          document.body.style.overflow = '';
+          setTimeout(() => {
+            cartDrawer.classList.add('hidden');
+          }, 300);
+        }
+      }
+
+      function loadCartContents() {
+        fetch('/cart.js')
+          .then(res => res.json())
+          .then(cart => {
+            updateCartDrawer(cart);
+          })
+          .catch(err => console.error('Error loading cart:', err));
+      }
+
+      function updateCartDrawer(cart) {
+        const itemsContainer = document.getElementById('cart-drawer-items');
+        const totalElement = document.getElementById('cart-drawer-total');
+
+        if (!itemsContainer || !totalElement) return;
+
+        if (cart.items.length === 0) {
+          itemsContainer.innerHTML = `
+            <div class="flex flex-col items-center justify-center h-full text-center text-stone-400">
+              <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+              <p class="text-sm uppercase tracking-wide">Your cart is empty</p>
+            </div>
+          `;
+          totalElement.textContent = '$0.00';
+        } else {
+          itemsContainer.innerHTML = cart.items.map(item => `
+            <div class="flex gap-4 mb-6 pb-6 border-b border-stone-100">
+              <img src="${item.image}" alt="${item.title}" class="w-20 h-20 object-cover">
+              <div class="flex-1">
+                <h3 class="text-sm font-medium mb-1">${item.product_title}</h3>
+                <p class="text-xs text-stone-500 mb-2">${item.variant_title || ''}</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs">Qty: ${item.quantity}</span>
+                  <span class="text-sm font-bold">${Shopify.formatMoney(item.final_line_price, '{{ cart.currency.symbol }}{{amount}}')}</span>
+                </div>
+              </div>
+            </div>
+          `).join('');
+          
+          totalElement.textContent = Shopify.formatMoney(cart.total_price, '{{ cart.currency.symbol }}{{amount}}');
+        }
+      }
+
+      if (cartIcon) {
+        cartIcon.addEventListener('click', openCartDrawer);
+      }
+
+      if (cartDrawerClose) {
+        cartDrawerClose.addEventListener('click', closeCartDrawer);
+      }
+
+      if (cartDrawerOverlay) {
+        cartDrawerOverlay.addEventListener('click', closeCartDrawer);
+      }
+
+      // Listen for cart update events
+      document.addEventListener('cart:updated', loadCartContents);
+
+      // Mobile menu
+      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+      if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+          mobileMenu.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+
+      if (mobileMenuClose && mobileMenu) {
+        mobileMenuClose.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          document.body.style.overflow = '';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
