@@ -179,14 +179,12 @@
       {
         "type": "link_list",
         "id": "footer_collections_menu",
-        "label": "Collections Menu",
-        "default": "footer-collections"
+        "label": "Collections Menu"
       },
       {
         "type": "link_list",
         "id": "footer_concierge_menu",
-        "label": "Concierge Menu",
-        "default": "footer-concierge"
+        "label": "Concierge Menu"
       },
       {
         "type": "header",
@@ -331,8 +329,9 @@
       },
       {
         "type": "image_picker",
-        "id": "checkout_logo",
-        "label": "Checkout Logo"
+        "id": "checkout_brand_image",
+        "label": "Checkout Logo",
+        "info": "Note: 'checkout_logo' is reserved by Shopify. Use this setting instead."
       },
       {
         "type": "color",

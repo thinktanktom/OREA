@@ -40,7 +40,7 @@
     {% if section.settings.cta_text != blank %}
       <div class="pt-4 md:pt-6">
         <a 
-          href="{{ section.settings.cta_link | default: '/pages/about-diamonds' }}" 
+          href="{{ section.settings.cta_link }}" 
           class="text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold text-stone-900 border-b border-stone-900 pb-2 hover:text-stone-400 hover:border-stone-400 transition-all duration-300"
         >
           {{ section.settings.cta_text }}
@@ -91,7 +91,7 @@
       "type": "url",
       "id": "cta_link",
       "label": "Link URL",
-      "default": "/pages/about-diamonds"
+      "info": "Link to your About Diamonds page"
     }
   ],
   "presets": [

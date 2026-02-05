@@ -35,7 +35,7 @@
     {% if section.settings.cta_text != blank %}
       <div class="pt-6 md:pt-8">
         <a 
-          href="{{ section.settings.cta_link | default: '/pages/bespoke' }}" 
+          href="{{ section.settings.cta_link }}" 
           class="inline-block px-10 md:px-12 py-4 md:py-5 bg-stone-900 text-white text-[10px] md:text-[11px] uppercase tracking-[0.4em] font-bold hover:bg-stone-800 transition-all duration-500"
         >
           {{ section.settings.cta_text }}
@@ -113,7 +113,7 @@
       "type": "url",
       "id": "cta_link",
       "label": "Button Link",
-      "default": "/pages/bespoke"
+      "info": "Link to your Bespoke page"
     },
     {
       "type": "header",
