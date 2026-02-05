@@ -1,0 +1,122 @@
+
+<div class="collection-container min-h-screen bg-orea-cream text-orea-dark selection:bg-orea-linen" data-section-id="{{ section.id }}">
+  
+  {%- comment -%} Collection Navigation {%- endcomment -%}
+  <header class="pt-16 pb-8 md:pt-24 md:pb-12 px-6 md:px-12 max-w-screen-2xl mx-auto w-full">
+    <div class="flex flex-col items-center">
+      <nav class="w-full flex justify-center py-4">
+        <ul class="flex flex-wrap justify-center gap-x-10 gap-y-6 md:gap-x-16">
+          {%- for link in linklists['main-menu'].links -%}
+            {%- if link.type == 'collection_link' or link.url contains '/collections/' -%}
+              <li>
+                <a href="{{ link.url }}" 
+                   class="group relative text-[10px] uppercase tracking-ultra-wide transition-colors duration-500 pb-2 font-bold
+                    {% if collection.url == link.url %}text-orea-dark{% else %}text-orea-dark/60 hover:text-orea-dark{% endif %}">
+                  {{ link.title }}
+                  <span class="absolute bottom-0 left-0 w-full h-[1px] bg-orea-champagne transition-transform duration-500 origin-left 
+                    {% if collection.url == link.url %}scale-x-100{% else %}scale-x-0 group-hover:scale-x-100{% endif %}"></span>
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-screen-2xl mx-auto px-6 md:px-12 pb-32">
+    
+    {%- comment -%} Toolbar: Piece Count, Clear, Shape Filter, Sort {%- endcomment -%}
+    <div class="flex flex-col md:flex-row justify-between items-center mb-16 text-[10px] uppercase tracking-ultra-wide text-orea-dark/70 border-b border-orea-linen/40 pb-6 gap-6">
+      <div class="flex items-center gap-6">
+        <span class="opacity-60">{{ collection.products_count }} Pieces</span>
+        {%- if current_tags or collection.sort_by != blank -%}
+          <a href="{{ collection.url }}" class="hover:text-orea-dark border-l border-orea-linen pl-6 transition-colors font-medium underline underline-offset-4">
+            Clear All
+          </a>
+        {%- endif -%}
+      </div>
+      
+      <div class="flex gap-10 items-center">
+        {%- comment -%} Shape Filter (Based on Tags) {%- endcomment -%}
+        <div class="relative group dropdown-container">
+          <button class="flex items-center gap-2 hover:text-orea-dark transition-colors font-medium">
+            Shape{% if current_tags %}: {{ current_tags | first }}{% endif %}
+            <svg class="w-3 h-3 transition-transform duration-500 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div class="absolute right-0 top-full mt-4 w-48 bg-orea-cream border border-orea-linen shadow-sm z-50 py-4 max-h-80 overflow-y-auto no-scrollbar opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+            <a href="{{ collection.url }}" class="block w-full text-left px-6 py-2 text-[10px] tracking-extra-wide transition-colors hover:bg-orea-linen/20">ALL SHAPES</a>
+            {%- for tag in collection.all_tags -%}
+              {%- if tag contains 'Round' or tag contains 'Oval' or tag contains 'Pear' or tag contains 'Emerald' or tag contains 'Radiant' or tag contains 'Cushion' -%}
+                <a href="{{ tag | link_to_tag: tag | split: 'href="' | last | split: '"' | first }}" 
+                   class="block w-full text-left px-6 py-2 text-[10px] tracking-extra-wide transition-colors uppercase {% if current_tags contains tag %}text-orea-dark font-bold bg-orea-linen/20{% else %}text-orea-dark/60 hover:text-orea-dark{% endif %}">
+                  {{ tag }}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+
+        {%- comment -%} Sort Filter {%- endcomment -%}
+        <div class="relative group dropdown-container">
+          {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+          <button class="flex items-center gap-2 hover:text-orea-dark transition-colors font-medium">
+            Sort: {% if sort_by == 'price-ascending' %}Price, Low to High{% elsif sort_by == 'price-descending' %}Price, High to Low{% elsif sort_by == 'best-selling' %}Best Selling{% else %}Featured{% endif %}
+            <svg class="w-3 h-3 transition-transform duration-500 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div class="absolute right-0 top-full mt-4 w-56 bg-orea-cream border border-orea-linen shadow-sm z-50 py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+            {%- assign sort_options = 'manual,best-selling,price-ascending,price-descending' | split: ',' -%}
+            {%- for option in sort_options -%}
+              <a href="{{ collection.url }}?sort_by={{ option }}" 
+                 class="block w-full text-left px-6 py-2 text-[10px] tracking-extra-wide transition-colors uppercase {% if sort_by == option %}text-orea-dark font-bold bg-orea-linen/20{% else %}text-orea-dark/60 hover:text-orea-dark{% endif %}">
+                {% if option == 'manual' %}Featured{% elsif option == 'best-selling' %}Best Selling{% elsif option == 'price-ascending' %}Price, Low to High{% elsif option == 'price-descending' %}Price, High to Low{% endif %}
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Product Grid {%- endcomment -%}
+    {%- paginate collection.products by 12 -%}
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 md:gap-x-12 md:gap-y-24">
+        {%- for product in collection.products -%}
+          {%- render 'product-card', product: product -%}
+        {%- else -%}
+          <div class="col-span-full py-40 text-center opacity-40">
+            <p class="text-[10px] tracking-[0.5em] uppercase">No pieces found in this selection</p>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div class="mt-24 flex justify-center border-t border-orea-linen/30 pt-12">
+          {{ paginate | default_pagination: next: 'Next', previous: 'Prev' }}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </main>
+</div>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "settings": [
+    {
+      "type": "header",
+      "content": "ORÉA Premium Settings"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Collection"
+    }
+  ]
+}
+{% endschema %}

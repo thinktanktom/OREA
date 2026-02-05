@@ -1,77 +1,53 @@
+
 {% comment %}
-  ORÉA Product Card
-  =================
-  Converted from: components/ProductCard.tsx
-  
-  Displays individual product with hover effect
-  
-  Usage:
-  {% render 'product-card', product: product %}
+  Renders a premium product card for the ORÉA collection.
+  Accepts:
+  - product: {Object} Product object
 {% endcomment %}
 
-{% comment %} Get diamond shape from product metafield or tags {% endcomment %}
-{% assign product_shape = '' %}
-{% if product.metafields.custom.diamond_shape %}
-  {% assign product_shape = product.metafields.custom.diamond_shape | handleize %}
-{% else %}
-  {% comment %} Try to find shape in tags {% endcomment %}
-  {% assign shape_tags = "round,oval,pear,marquise,princess,emerald,radiant,asscher,cushion,heart" | split: "," %}
-  {% for tag in product.tags %}
-    {% assign tag_handle = tag | handleize %}
-    {% if shape_tags contains tag_handle %}
-      {% assign product_shape = tag_handle %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
-
-<div 
-  class="product-card group cursor-pointer flex flex-col space-y-6"
-  data-product-id="{{ product.id }}"
-  data-shape="{{ product_shape }}"
-  data-price="{{ product.price }}"
-  data-is-new="{% if product.tags contains 'new' %}true{% else %}false{% endif %}"
-  data-is-bestseller="{% if product.tags contains 'bestseller' or product.tags contains 'best-seller' %}true{% else %}false{% endif %}"
->
-  
-  <!-- Image Container -->
-  <a href="{{ product.url }}" class="relative aspect-[4/5] overflow-hidden bg-[#E8DFD3]/40 flex items-center justify-center">
-    
-    {% if product.featured_image %}
-      <img
-        src="{{ product.featured_image | image_url: width: 800 }}"
-        alt="{{ product.title | escape }}"
-        class="product-image-main w-full h-full object-cover transition-transform duration-1000 ease-out scale-100 group-hover:scale-105"
-        loading="lazy"
-      />
-      
-      {% comment %} Hover image if available (2nd image in media) {% endcomment %}
-      {% if product.images[1] %}
+<div class="group cursor-pointer flex flex-col space-y-6">
+  <a href="{{ product.url }}" class="block">
+    <div class="relative aspect-[4/5] overflow-hidden bg-orea-linen/40 flex items-center justify-center">
+      {%- if product.featured_image != blank -%}
         <img
-          src="{{ product.images[1] | image_url: width: 800 }}"
-          alt="{{ product.title | escape }}"
-          class="product-image-hover absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+          src="{{ product.featured_image | image_url: width: 800 }}"
+          alt="{{ product.featured_image.alt | escape }}"
           loading="lazy"
-        />
-      {% endif %}
-    {% else %}
-      <div class="text-[10px] uppercase tracking-[0.4em] text-[#7D6B5C]/50 text-center px-4">
-        Product Image
-      </div>
-    {% endif %}
-    
-  </a>
+          class="w-full h-full object-cover transition-transform duration-1000 ease-out scale-100 group-hover:scale-105 {% if product.images[1] != blank %}group-hover:opacity-0{% endif %}"
+        >
+        
+        {%- if product.images[1] != blank -%}
+          <img
+            src="{{ product.images[1] | image_url: width: 800 }}"
+            alt="{{ product.images[1].alt | escape }}"
+            loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-out opacity-0 group-hover:opacity-100 scale-105 group-hover:scale-100"
+          >
+        {%- endif -%}
+      {%- else -%}
+        <div class="text-[10px] uppercase tracking-ultra-wide text-orea-taupe/50 text-center px-4">
+          Image Coming Soon
+        </div>
+      {%- endif -%}
 
-  <!-- Product Details -->
-  <div class="flex flex-col items-center text-center space-y-2 pb-8">
-    <a href="{{ product.url }}" class="hover:opacity-70 transition-opacity">
-      <h3 class="text-[11px] md:text-xs font-medium uppercase tracking-[0.4em] text-[#4A3F35] leading-relaxed">
+      {%- if product.available == false -%}
+        <div class="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[8px] uppercase tracking-extra-wide text-orea-dark">
+          Sold Out
+        </div>
+      {%- elsif product.tags contains 'New' -%}
+        <div class="absolute top-4 left-4 bg-orea-dark px-3 py-1 text-[8px] uppercase tracking-extra-wide text-white">
+          New
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="flex flex-col items-center text-center space-y-2 pt-6 pb-8">
+      <h3 class="text-[11px] md:text-xs font-medium uppercase tracking-ultra-wide text-orea-dark leading-relaxed">
         {{ product.title }}
       </h3>
-    </a>
-    <p class="text-[10px] text-[#7D6B5C] font-light tracking-[0.2em]">
-      {{ product.price | money }} {{ cart.currency.iso_code }}
-    </p>
-  </div>
-  
+      <p class="text-[10px] text-orea-taupe font-light tracking-extra-wide">
+        {{ product.price | money_with_currency }}
+      </p>
+    </div>
+  </a>
 </div>
