@@ -1,0 +1,80 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_text": "ORÉA"
+        }
+      },
+      "orea-hero": {
+        "type": "orea-hero",
+        "settings": {
+          "heading": "Diamonds. Grown. Not Mined.",
+          "subheading": "Exceptional pieces, made to keep.",
+          "button_label": "Explore the Collections",
+          "button_link": ""
+        }
+      },
+      "orea-collections": {
+        "type": "orea-collections",
+        "settings": {}
+      },
+      "orea-featured-products": {
+        "type": "orea-featured-products",
+        "settings": {
+          "title": "ORÉA Classics",
+          "collection": "",
+          "view_all_link": "shopify://collections/all"
+        }
+      },
+      "orea-brand-values": {
+        "type": "orea-brand-values",
+        "settings": {
+          "value_1_title": "Lab-Grown Only",
+          "value_1_subtitle": "Never mined.",
+          "value_2_title": "Solid Gold - Always",
+          "value_2_subtitle": "14k, 18k, Platinum",
+          "value_3_title": "Made to Order",
+          "value_3_subtitle": "Crafted with care."
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "brand_name": "ORÉA",
+          "newsletter_heading": "JOIN OUR COMMUNITY",
+          "newsletter_tagline": "Receive $25 off your first order.",
+          "newsletter_description": "Early access to new pieces, private releases, exclusive offers & more.",
+          "instagram_url": "",
+          "facebook_url": "",
+          "pinterest_url": "",
+          "terms_url": "",
+          "privacy_url": ""
+        }
+      },
+      "ai-assistant": {
+        "type": "ai-assistant",
+        "settings": {
+          "enable_assistant": false,
+          "trigger_text": "Inquiry",
+          "panel_title": "Contact Us",
+          "panel_subtitle": "We typically respond within 24 hours",
+          "welcome_message": "Welcome to ORÉA. How can we assist you today? Whether you're looking for guidance on a piece, sizing help, or have questions about our bespoke services, we're here to help.",
+          "input_placeholder": "Share your thoughts with us...",
+          "input_note": "Bespoke AI Guidance"
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}
