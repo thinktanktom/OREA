@@ -1,437 +1,209 @@
 {% comment %}
-  ORÉA Fine Jewellery - Header/Navbar Section
-  ============================================
-  Converted from: components/Navbar.tsx
-  
-  Key Changes from React:
-  - Removed useState/useEffect (replaced with vanilla JS)
-  - Converted React icons to inline SVG
-  - Changed onClick/onMouseEnter to addEventListener
-  - Replaced shopLinks array with Shopify linklists
-  - Converted ternary operators to Liquid {% if %}
+  ORÉA Header/Navbar Section
+  Converted from React Navbar component
 {% endcomment %}
 
-<header 
-  id="site-header"
-  class="fixed top-0 left-0 w-full z-50 transition-all duration-1000 bg-transparent py-6 md:py-10"
->
-  <div class="max-w-[1800px] mx-auto px-5 md:px-16 flex justify-between items-center">
-    
-    {%comment%} LEFT NAVIGATION - Desktop only {%endcomment%}
-    <div class="hidden lg:flex items-center space-x-12 text-[10px] tracking-[0.4em] font-medium text-stone-900 uppercase">
-      
-      <div class="relative group py-2 cursor-pointer" id="shop-trigger">
-        <span class="hover:text-amber-700 transition-colors duration-500">Shop</span>
+<header class="orea-header" id="orea-header">
+  <div class="header-container">
+    <!-- Left Navigation (Desktop) -->
+    <nav class="nav-main">
+      <div class="nav-item" data-dropdown="shop">
+        <span>Shop</span>
       </div>
-      
-      <div class="relative group py-2 cursor-pointer" id="concierge-trigger">
-        <span class="hover:text-amber-700 transition-colors duration-500">Concierge</span>
+      <div class="nav-item" data-dropdown="concierge">
+        <span>Concierge</span>
       </div>
-      
-    </div>
+    </nav>
 
-    {%comment%} MOBILE MENU TOGGLE {%endcomment%}
-    <button 
-      class="lg:hidden text-stone-900 p-1" 
-      id="mobile-menu-toggle"
-      aria-label="Toggle menu"
-    >
-      <!-- Menu Icon (converted from lucide-react) -->
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle lg:hidden" aria-label="Toggle menu" id="mobile-menu-toggle">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <line x1="3" y1="12" x2="21" y2="12"></line>
         <line x1="3" y1="6" x2="21" y2="6"></line>
         <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
     </button>
 
-    {%comment%} LOGO - Center {%endcomment%}
-    <div class="absolute left-1/2 -translate-x-1/2 text-center">
-      <a 
-        href="/" 
-        class="font-serif text-2xl md:text-4xl tracking-[0.15em] text-stone-900 hover:opacity-70 transition-opacity duration-700"
-      >
-        {{ section.settings.logo_text | default: 'ORÉA' }}
-      </a>
+    <!-- Logo (Center) -->
+    <div class="logo-wrapper">
+      <a href="/" class="orea-logo">ORÉA</a>
     </div>
 
-    {%comment%} RIGHT ICONS {%endcomment%}
-    <div class="flex items-center space-x-4 md:space-x-8 text-stone-900">
-      
-      <!-- Search Icon -->
-      <button class="p-1 hover:text-amber-700 transition-colors duration-500" aria-label="Search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+    <!-- Right Icons -->
+    <div class="nav-icons">
+      <a href="/search" class="nav-icon" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="11" cy="11" r="8"></circle>
           <path d="m21 21-4.35-4.35"></path>
         </svg>
-      </button>
-      
-      <!-- Wishlist Icon - Hidden on mobile -->
-      <button class="hidden sm:block p-1 hover:text-amber-700 transition-colors duration-500" aria-label="Wishlist">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-        </svg>
-      </button>
-      
-      <!-- Account Icon - Hidden on mobile -->
-      <a 
-        href="{{ routes.account_url }}" 
-        class="hidden sm:block p-1 hover:text-amber-700 transition-colors duration-500" 
-        aria-label="Account"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+      </a>
+      <a href="/account" class="nav-icon" aria-label="Account">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
       </a>
-      
-      <!-- Shopping Bag with Cart Count -->
-      <a 
-        href="{{ routes.cart_url }}" 
-        class="p-1 hover:text-amber-700 transition-colors duration-500 relative" 
-        aria-label="Shopping Bag"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <path d="M16 10a4 4 0 0 1-8 0"></path>
+      <a href="{{ routes.cart_url }}" class="nav-icon" aria-label="Cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
         </svg>
-        <span class="absolute -top-0.5 -right-0.5 text-[7px] bg-stone-900 text-white w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold">
-          {{ cart.item_count }}
-        </span>
+        <span class="cart-count" data-cart-count>{{ cart.item_count }}</span>
       </a>
-      
     </div>
   </div>
 
-  {%comment%} SHOP DROPDOWN - Desktop only {%endcomment%}
-  <div 
-    id="shop-dropdown" 
-    class="hidden lg:block absolute left-0 w-full bg-white transition-all duration-700 ease-in-out overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] max-h-0 opacity-0 invisible"
-  >
-    <div class="max-w-[1800px] mx-auto px-16 py-20">
-      <div class="grid grid-cols-6 gap-12">
-        
-        {%comment%} Using Shopify's menu system instead of hardcoded array {%endcomment%}
-        {% for link in linklists.shop-menu.links %}
-          <div>
-            <a 
-              href="{{ link.url }}" 
-              class="text-[13px] tracking-[0.35em] uppercase text-stone-900 hover:text-amber-700 transition-all duration-500 block font-light"
-            >
-              {{ link.title }}
-            </a>
-          </div>
-        {% endfor %}
-        
+  <!-- Shop Dropdown -->
+  <div class="dropdown" id="shop-dropdown">
+    <div class="dropdown-container">
+      <div style="width: 180px; padding-top: 1.6rem;">
+        <ul class="dropdown-links">
+          <li><a href="/collections/rings" class="dropdown-link">RINGS</a></li>
+          <li><a href="/collections/necklaces" class="dropdown-link">NECKLACES</a></li>
+          <li><a href="/collections/earrings" class="dropdown-link">EARRINGS</a></li>
+          <li><a href="/collections/bracelets" class="dropdown-link">BRACELETS</a></li>
+          <li><a href="/collections/pendants" class="dropdown-link">PENDANTS</a></li>
+          <li><a href="/collections/gift-cards" class="dropdown-link">GIFT CARDS</a></li>
+        </ul>
       </div>
-      
-      {%comment%} Bespoke CTA {%endcomment%}
-      <div class="mt-16 pt-12 border-t border-stone-100">
-        <a 
-          href="/pages/bespoke" 
-          class="text-[11px] tracking-[0.15em] text-stone-900 hover:text-amber-700 transition-colors duration-500 font-light flex items-center group"
-        >
-          <span class="opacity-80">Looking for something custom?</span>
-          <span class="text-amber-700 mx-3 group-hover:translate-x-1 transition-transform">→</span>
-          <span class="uppercase tracking-[0.3em] font-medium border-b border-transparent group-hover:border-stone-900 transition-all">Begin Bespoke</span>
+      <div style="width: 100%; max-width: 380px;">
+        <a href="/collections/all" style="display: block; margin-bottom: 4rem;">
+          <div style="position: relative; aspect-ratio: 4/5; overflow: hidden; background-color: var(--color-orea-linen);">
+            <img src="{{ 'signature-product.jpg' | asset_url }}" alt="Featured Product" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%); transition: transform 3s ease;">
+          </div>
+        </a>
+        <a href="/collections/all" style="display: inline-flex; align-items: center; gap: 2.4rem; font-size: 1rem; letter-spacing: 0.4em; text-transform: uppercase; border-bottom: 1px solid rgba(74,63,53,0.1); padding-bottom: 0.8rem; transition: all 0.5s ease;">
+          <span style="font-weight: 500;">View All Pieces</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
         </a>
       </div>
-    </div>
-    
-    <div class="max-w-[1800px] mx-auto px-16 py-8 border-t border-stone-100 flex justify-between items-center text-[8px] tracking-[0.3em] uppercase text-stone-400 font-light">
-      <span>Sustainably grown diamonds</span>
-      <span>Complimentary NZ Delivery</span>
-    </div>
-  </div>
-
-  {%comment%} CONCIERGE DROPDOWN - Desktop only {%endcomment%}
-  <div 
-    id="concierge-dropdown" 
-    class="hidden lg:block absolute left-0 w-full bg-white transition-all duration-700 ease-in-out overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] max-h-0 opacity-0 invisible"
-  >
-    <div class="max-w-[1800px] mx-auto px-16 py-20 grid grid-cols-3 gap-24">
-      
-      {%comment%} ABOUT Section {%endcomment%}
-      <div class="space-y-10">
-        <div class="space-y-4">
-          <h4 class="text-[10px] tracking-[0.6em] text-stone-900 uppercase font-semibold">ABOUT</h4>
-          <div class="w-8 h-[1px] bg-amber-700/30"></div>
+      <div style="width: 100%; max-width: 380px;">
+        <a href="/pages/bespoke" style="display: block; margin-bottom: 4rem;">
+          <div style="position: relative; aspect-ratio: 4/5; overflow: hidden; background-color: var(--color-orea-linen);">
+            <img src="{{ 'bespoke-journey.jpg' | asset_url }}" alt="Bespoke Journey" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: transform 3s ease;">
+          </div>
+        </a>
+        <div>
+          <a href="/pages/bespoke" style="font-size: 1.1rem; letter-spacing: 0.15em; display: flex; align-items: center; gap: 1.2rem;">
+            <span style="opacity: 0.8;">Looking for something custom?</span>
+            <span style="color: var(--color-orea-gold); margin: 0 1.2rem;">→</span>
+            <span style="text-transform: uppercase; letter-spacing: 0.3em; font-weight: 500; border-bottom: 1px solid transparent; transition: border-color 0.3s ease;">Begin Bespoke</span>
+          </a>
         </div>
-        <ul class="space-y-6">
-          <li>
-            <a href="/pages/about" class="text-[12px] tracking-[0.3em] uppercase text-stone-900 hover:text-amber-700 transition-all duration-500 block font-light">
-              Our Story
-            </a>
-          </li>
-          <li>
-            <a href="/pages/about-diamonds" class="text-[12px] tracking-[0.3em] uppercase text-stone-900 hover:text-amber-700 transition-all duration-500 block font-light">
-              About Lab-Grown Diamonds
-            </a>
-          </li>
-        </ul>
       </div>
-
-      {%comment%} BESPOKE Section {%endcomment%}
-      <div class="space-y-10">
-        <div class="space-y-4">
-          <h4 class="text-[10px] tracking-[0.6em] text-stone-900 uppercase font-semibold">BESPOKE</h4>
-          <div class="w-8 h-[1px] bg-amber-700/30"></div>
-        </div>
-        <ul class="space-y-6">
-          <li>
-            <a href="/pages/bespoke" class="text-[12px] tracking-[0.3em] uppercase text-amber-700 hover:opacity-70 transition-all duration-500 block font-light inline-flex items-center group">
-              Bespoke Process
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="ml-4 group-hover:translate-x-2 transition-transform">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="/pages/concierge" class="text-[12px] tracking-[0.3em] uppercase text-stone-900 hover:text-amber-700 transition-all duration-500 block font-light">
-              Concierge Service
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      {%comment%} CLIENT CARE Section {%endcomment%}
-      <div class="space-y-10">
-        <div class="space-y-4">
-          <h4 class="text-[10px] tracking-[0.6em] text-stone-900 uppercase font-semibold">CLIENT CARE</h4>
-          <div class="w-8 h-[1px] bg-amber-700/30"></div>
-        </div>
-        <ul class="space-y-6">
-          <li>
-            <a href="/pages/faq" class="text-[12px] tracking-[0.3em] uppercase text-stone-900 hover:text-amber-700 transition-all duration-500 block font-light">
-              Client Care
-            </a>
-          </li>
-          <li>
-            <a href="/pages/care-guide" class="text-[12px] tracking-[0.3em] uppercase text-stone-900 hover:text-amber-700 transition-all duration-500 block font-light">
-              Jewellery Care
-            </a>
-          </li>
-          <li>
-            <a href="/pages/shipping" class="text-[12px] tracking-[0.3em] uppercase text-stone-900 hover:text-amber-700 transition-all duration-500 block font-light">
-              Delivery
-            </a>
-          </li>
-          <li>
-            <a href="/pages/returns" class="text-[12px] tracking-[0.3em] uppercase text-stone-900 hover:text-amber-700 transition-all duration-500 block font-light">
-              Returns
-            </a>
-          </li>
-          <li>
-            <a href="/pages/contact" class="text-[12px] tracking-[0.3em] uppercase text-amber-700 hover:opacity-70 transition-all duration-500 block font-light inline-flex items-center group">
-              Begin a Conversation
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="ml-4 group-hover:translate-x-2 transition-transform">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </a>
-          </li>
-        </ul>
-      </div>
-      
     </div>
   </div>
 
-  {%comment%} MOBILE MENU OVERLAY {%endcomment%}
-  <div 
-    id="mobile-menu" 
-    class="fixed inset-0 bg-white z-[60] flex flex-col p-8 md:p-12 transition-all duration-700 transform-gpu translate-x-full opacity-0"
-  >
-    <div class="flex justify-between items-center mb-12">
-      <h2 class="font-serif text-2xl tracking-widest text-stone-900 uppercase">
-        {{ section.settings.logo_text | default: 'ORÉA' }}
-      </h2>
-      <button id="mobile-menu-close" class="text-stone-900 p-2">
-        <!-- Close Icon (X) -->
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-    
-    <div class="flex-1 overflow-y-auto pb-12 space-y-12">
-      
-      {%comment%} Shop Links {%endcomment%}
-      <div class="space-y-6">
-        <p class="text-[9px] tracking-[0.4em] uppercase text-amber-700 font-bold">Shop</p>
-        <div class="flex flex-col space-y-6">
-          {% for link in linklists.shop-menu.links %}
-            <a 
-              href="{{ link.url }}" 
-              class="text-base tracking-[0.2em] uppercase text-stone-900 font-light"
-            >
-              {{ link.title }}
-            </a>
-          {% endfor %}
-        </div>
+  <!-- Concierge Dropdown -->
+  <div class="dropdown" id="concierge-dropdown">
+    <div class="dropdown-container" style="grid-template-columns: repeat(3, 1fr);">
+      <div>
+        <h4 style="font-size: 1rem; letter-spacing: 0.6em; text-transform: uppercase; font-weight: 600; margin-bottom: 4rem; color: var(--color-orea-dark);">ABOUT</h4>
+        <ul class="dropdown-links">
+          <li><a href="/pages/about" class="dropdown-link">Our Story</a></li>
+          <li><a href="/pages/diamonds" class="dropdown-link">About Lab-Grown Diamonds</a></li>
+        </ul>
       </div>
-      
-      {%comment%} About Links {%endcomment%}
-      <div class="space-y-6">
-        <p class="text-[9px] tracking-[0.4em] uppercase text-amber-700 font-bold">About</p>
-        <div class="flex flex-col space-y-6">
-          <a href="/pages/about" class="text-base tracking-[0.2em] uppercase text-stone-900 font-light">Our Story</a>
-          <a href="/pages/about-diamonds" class="text-base tracking-[0.2em] uppercase text-stone-900 font-light">About Lab-Grown Diamonds</a>
-        </div>
+      <div>
+        <h4 style="font-size: 1rem; letter-spacing: 0.6em; text-transform: uppercase; font-weight: 600; margin-bottom: 4rem; color: var(--color-orea-dark);">BESPOKE</h4>
+        <ul class="dropdown-links">
+          <li><a href="/pages/bespoke" class="dropdown-link highlighted">Bespoke Process</a></li>
+          <li><a href="/pages/concierge" class="dropdown-link">Concierge Service</a></li>
+        </ul>
       </div>
-      
-      {%comment%} Bespoke Links {%endcomment%}
-      <div class="space-y-6">
-        <p class="text-[9px] tracking-[0.4em] uppercase text-amber-700 font-bold">Bespoke</p>
-        <div class="flex flex-col space-y-6">
-          <a href="/pages/bespoke" class="text-base tracking-[0.2em] uppercase text-amber-700 font-light">Bespoke Process</a>
-          <a href="/pages/concierge" class="text-base tracking-[0.2em] uppercase text-stone-900 font-light">Concierge Service</a>
-        </div>
+      <div>
+        <h4 style="font-size: 1rem; letter-spacing: 0.6em; text-transform: uppercase; font-weight: 600; margin-bottom: 4rem; color: var(--color-orea-dark);">CLIENT CARE</h4>
+        <ul class="dropdown-links">
+          <li><a href="/pages/faq" class="dropdown-link">Client Care</a></li>
+          <li><a href="/pages/care-guide" class="dropdown-link">Jewellery Care</a></li>
+          <li><a href="/pages/shipping" class="dropdown-link">Delivery</a></li>
+          <li><a href="/pages/returns" class="dropdown-link">Returns</a></li>
+          <li><a href="/pages/contact" class="dropdown-link highlighted">Begin a Conversation</a></li>
+        </ul>
       </div>
-      
-      {%comment%} Client Care Links {%endcomment%}
-      <div class="space-y-6">
-        <p class="text-[9px] tracking-[0.4em] uppercase text-amber-700 font-bold">Client Care</p>
-        <div class="flex flex-col space-y-6">
-          <a href="/pages/faq" class="text-base tracking-[0.2em] uppercase text-stone-900 font-light">Client Care</a>
-          <a href="/pages/care-guide" class="text-base tracking-[0.2em] uppercase text-stone-900 font-light">Jewellery Care</a>
-          <a href="/pages/shipping" class="text-base tracking-[0.2em] uppercase text-stone-900 font-light">Delivery</a>
-          <a href="/pages/returns" class="text-base tracking-[0.2em] uppercase text-stone-900 font-light">Returns</a>
-          <a href="/pages/contact" class="text-base tracking-[0.2em] uppercase text-amber-700 font-light">Begin a Conversation</a>
-        </div>
-      </div>
-      
-    </div>
-
-    {%comment%} Mobile Menu Bottom Icons {%endcomment%}
-    <div class="pt-8 border-t border-stone-100 flex justify-center space-x-12">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.35-4.35"></path>
-      </svg>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-      </svg>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
     </div>
   </div>
-  
 </header>
 
-{%comment%} JavaScript for Interactivity (replaces React hooks) {%endcomment%}
-<script>
-(function() {
-  const header = document.getElementById('site-header');
-  const shopTrigger = document.getElementById('shop-trigger');
-  const conciergeTrigger = document.getElementById('concierge-trigger');
-  const shopDropdown = document.getElementById('shop-dropdown');
-  const conciergeDropdown = document.getElementById('concierge-dropdown');
-  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-  const mobileMenuClose = document.getElementById('mobile-menu-close');
-  const mobileMenu = document.getElementById('mobile-menu');
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-menu-close" id="mobile-menu-close" style="position: absolute; top: 2.4rem; right: 2.4rem; cursor: pointer;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
   
-  let activeDropdown = null;
-  let scrollTimeout;
-  
-  // Scroll behavior (replaces useEffect)
-  function handleScroll() {
-    const isScrolled = window.scrollY > 20;
-    
-    if (isScrolled) {
-      header.classList.remove('bg-transparent', 'py-6', 'md:py-10');
-      header.classList.add('bg-white/98', 'backdrop-blur-sm', 'border-b', 'border-stone-100', 'py-4', 'md:py-5');
-    } else {
-      header.classList.add('bg-transparent', 'py-6', 'md:py-10');
-      header.classList.remove('bg-white/98', 'backdrop-blur-sm', 'border-b', 'border-stone-100', 'py-4', 'md:py-5');
-    }
+  <nav style="margin-top: 4.8rem;">
+    <div style="margin-bottom: 4.8rem;">
+      <h4 style="font-size: 0.9rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--color-orea-taupe); margin-bottom: 2.4rem; font-weight: 600;">SHOP</h4>
+      <ul style="display: flex; flex-direction: column; gap: 2rem;">
+        <li><a href="/collections/rings" style="font-size: 1.4rem; letter-spacing: 0.1em;">Rings</a></li>
+        <li><a href="/collections/necklaces" style="font-size: 1.4rem; letter-spacing: 0.1em;">Necklaces</a></li>
+        <li><a href="/collections/earrings" style="font-size: 1.4rem; letter-spacing: 0.1em;">Earrings</a></li>
+        <li><a href="/collections/bracelets" style="font-size: 1.4rem; letter-spacing: 0.1em;">Bracelets</a></li>
+        <li><a href="/collections/pendants" style="font-size: 1.4rem; letter-spacing: 0.1em;">Pendants</a></li>
+      </ul>
+    </div>
+
+    <div style="margin-bottom: 4.8rem;">
+      <h4 style="font-size: 0.9rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--color-orea-taupe); margin-bottom: 2.4rem; font-weight: 600;">ABOUT</h4>
+      <ul style="display: flex; flex-direction: column; gap: 2rem;">
+        <li><a href="/pages/about" style="font-size: 1.4rem; letter-spacing: 0.1em;">Our Story</a></li>
+        <li><a href="/pages/diamonds" style="font-size: 1.4rem; letter-spacing: 0.1em;">About Diamonds</a></li>
+        <li><a href="/pages/bespoke" style="font-size: 1.4rem; letter-spacing: 0.1em;">Bespoke</a></li>
+        <li><a href="/pages/concierge" style="font-size: 1.4rem; letter-spacing: 0.1em;">Concierge</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 style="font-size: 0.9rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--color-orea-taupe); margin-bottom: 2.4rem; font-weight: 600;">HELP</h4>
+      <ul style="display: flex; flex-direction: column; gap: 2rem;">
+        <li><a href="/pages/contact" style="font-size: 1.4rem; letter-spacing: 0.1em;">Contact</a></li>
+        <li><a href="/pages/faq" style="font-size: 1.4rem; letter-spacing: 0.1em;">FAQ</a></li>
+        <li><a href="/pages/care-guide" style="font-size: 1.4rem; letter-spacing: 0.1em;">Care Guide</a></li>
+        <li><a href="/pages/shipping" style="font-size: 1.4rem; letter-spacing: 0.1em;">Shipping</a></li>
+        <li><a href="/pages/returns" style="font-size: 1.4rem; letter-spacing: 0.1em;">Returns</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<style>
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--color-orea-gold);
+    color: var(--color-orea-cream);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  
-  window.addEventListener('scroll', function() {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(handleScroll, 10);
-  });
-  
-  // Dropdown interactions (replaces onMouseEnter)
-  function showDropdown(dropdown) {
-    hideAllDropdowns();
-    dropdown.classList.remove('max-h-0', 'opacity-0', 'invisible');
-    dropdown.classList.add('max-h-[600px]', 'opacity-100', 'visible');
-    activeDropdown = dropdown;
+
+  .nav-icon {
+    position: relative;
   }
-  
-  function hideAllDropdowns() {
-    [shopDropdown, conciergeDropdown].forEach(function(dropdown) {
-      dropdown.classList.add('max-h-0', 'opacity-0', 'invisible');
-      dropdown.classList.remove('max-h-[600px]', 'opacity-100', 'visible');
-    });
-    activeDropdown = null;
-  }
-  
-  if (shopTrigger) {
-    shopTrigger.addEventListener('mouseenter', function() {
-      showDropdown(shopDropdown);
-    });
-  }
-  
-  if (conciergeTrigger) {
-    conciergeTrigger.addEventListener('mouseenter', function() {
-      showDropdown(conciergeDropdown);
-    });
-  }
-  
-  // Hide dropdowns when mouse leaves header area
-  header.addEventListener('mouseleave', function(e) {
-    // Only hide if not moving to dropdown
-    if (!shopDropdown.contains(e.relatedTarget) && !conciergeDropdown.contains(e.relatedTarget)) {
-      hideAllDropdowns();
-    }
-  });
-  
-  // Mobile menu (replaces onClick)
-  if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', function() {
-      mobileMenu.classList.remove('translate-x-full', 'opacity-0');
-      mobileMenu.classList.add('translate-x-0', 'opacity-100');
-      document.body.style.overflow = 'hidden';
-    });
-  }
-  
-  if (mobileMenuClose) {
-    mobileMenuClose.addEventListener('click', function() {
-      mobileMenu.classList.add('translate-x-full', 'opacity-0');
-      mobileMenu.classList.remove('translate-x-0', 'opacity-100');
-      document.body.style.overflow = '';
-    });
-  }
-  
-  // Close mobile menu when clicking links
-  const mobileLinks = mobileMenu.querySelectorAll('a');
-  mobileLinks.forEach(function(link) {
-    link.addEventListener('click', function() {
-      mobileMenu.classList.add('translate-x-full', 'opacity-0');
-      mobileMenu.classList.remove('translate-x-0', 'opacity-100');
-      document.body.style.overflow = '';
-    });
-  });
-  
-  // Initialize
-  handleScroll();
-})();
-</script>
+</style>
 
 {% schema %}
 {
   "name": "Header",
   "settings": [
     {
-      "type": "text",
-      "id": "logo_text",
-      "label": "Logo Text",
-      "default": "ORÉA"
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image (optional)"
     }
   ]
 }

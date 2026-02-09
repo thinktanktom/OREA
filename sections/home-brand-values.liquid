@@ -1,0 +1,169 @@
+{% comment %}
+  Home Brand Values Section
+  Converted from: src/pages/home/BrandValues.tsx
+{% endcomment %}
+
+<section class="home-brand-values py-32 md:py-48 bg-white">
+  <div class="max-w-6xl mx-auto px-6 md:px-12">
+    
+    <!-- Section Header -->
+    <header class="text-center mb-24 space-y-6">
+      <h2 class="text-3xl md:text-4xl font-serif text-orea-dark tracking-wide">
+        {{ section.settings.heading | default: 'The ORÉA Promise' }}
+      </h2>
+      {% if section.settings.subheading != blank %}
+        <p class="text-lg text-orea-brown font-light max-w-2xl mx-auto">
+          {{ section.settings.subheading }}
+        </p>
+      {% endif %}
+      <div class="w-16 h-[1px] bg-orea-gold mx-auto"></div>
+    </header>
+
+    <!-- Values Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
+      {% for block in section.blocks %}
+        <div class="text-center space-y-6 group">
+          <!-- Icon -->
+          <div class="flex justify-center">
+            {% if block.settings.icon == 'shield' %}
+              <svg class="w-12 h-12 text-orea-gold group-hover:text-orea-dark transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+              </svg>
+            {% elsif block.settings.icon == 'gift' %}
+              <svg class="w-12 h-12 text-orea-gold group-hover:text-orea-dark transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+              </svg>
+            {% elsif block.settings.icon == 'truck' %}
+              <svg class="w-12 h-12 text-orea-gold group-hover:text-orea-dark transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.11-.504 1.11-1.125v-3.75m-17.25 0a1.5 1.5 0 010-3m0 3a1.5 1.5 0 000-3m0 3h16.5a1.5 1.5 0 003 0m-3 0a1.5 1.5 0 00-3 0m0 0v-3.375c0-.621-.504-1.125-1.125-1.125M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            {% elsif block.settings.icon == 'globe' %}
+              <svg class="w-12 h-12 text-orea-gold group-hover:text-orea-dark transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
+              </svg>
+            {% else %}
+              <svg class="w-12 h-12 text-orea-gold group-hover:text-orea-dark transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            {% endif %}
+          </div>
+
+          <!-- Content -->
+          <div class="space-y-3">
+            <h3 class="text-[10px] tracking-[0.4em] uppercase font-bold text-orea-dark">
+              {{ block.settings.title }}
+            </h3>
+            {% if block.settings.description != blank %}
+              <p class="text-sm leading-relaxed text-orea-brown font-light">
+                {{ block.settings.description }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Values",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The ORÉA Promise"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "shield",
+              "label": "Shield (Warranty)"
+            },
+            {
+              "value": "gift",
+              "label": "Gift Box"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "globe",
+              "label": "Sustainable"
+            }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Lifetime Warranty"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Every piece is backed by our lifetime craftsmanship guarantee."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Values",
+      "blocks": [
+        {
+          "type": "value",
+          "settings": {
+            "icon": "shield",
+            "title": "Lifetime Warranty",
+            "description": "Every piece is backed by our lifetime craftsmanship guarantee."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "icon": "gift",
+            "title": "Complimentary Gift Box",
+            "description": "Each piece arrives in our signature luxury packaging."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Express Shipping",
+            "description": "Complimentary delivery on all orders, worldwide."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "icon": "globe",
+            "title": "Sustainably Made",
+            "description": "Lab-grown diamonds and recycled precious metals."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

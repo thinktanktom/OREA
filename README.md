@@ -1,190 +1,257 @@
-# ORÉA Shopify Theme
+# ORÉA Shopify Liquid Theme
 
-A luxury fine jewellery Shopify theme converted from React, featuring lab-grown diamonds and bespoke design services.
+Complete conversion of the ORÉA React website to a Shopify Liquid theme.
 
-## Theme Structure
+## Overview
+
+This theme is a pixel-perfect conversion of the ORÉA React application (15 pages) into a fully functional Shopify theme, maintaining all original designs and functionality.
+
+## 🎨 Design System
+
+The theme preserves the complete ORÉA design system:
+
+### Colors
+- **Cream** (#F9F6F1) - Primary background
+- **Dark** (#4A3F35) - Primary text
+- **Champagne** (#D4C4A8) - Accents
+- **Gold** (#C5B8A0) - Interactive elements
+- **Taupe** (#7D6B5C) - Secondary text
+- **Linen** (#E8DFD3) - Borders and subtle backgrounds
+
+### Typography
+- **Headings**: Cormorant Garamond (serif)
+- **Body**: Montserrat (sans-serif)
+
+## 📁 Theme Structure
 
 ```
 orea-shopify-theme/
-├── assets/
-│   ├── styles.css          # Main stylesheet
-│   ├── theme.js            # Core JavaScript
-│   ├── product-page.js     # Product variant selection
-│   └── modals.js           # Modal management system
-├── config/
-│   └── settings_schema.json # Theme customizer settings
-├── layout/
-│   └── theme.liquid        # Main layout wrapper
-├── locales/
-│   └── en.default.json     # English translations
-├── sections/
-│   ├── header.liquid
-│   ├── footer.liquid
-│   ├── homepage-hero.liquid
-│   ├── origin-text.liquid
-│   ├── orea-standards.liquid
-│   ├── bespoke-process.liquid
-│   ├── sustainability-badge.liquid
-│   ├── location-contact.liquid
-│   ├── lab-grown-intro.liquid
-│   ├── diamond-comparison.liquid
-│   ├── mastery-4cs.liquid
-│   ├── diamond-shapes.liquid
-│   ├── product-gallery.liquid
-│   ├── product-details.liquid
-│   ├── product-tabs.liquid
-│   ├── value-props.liquid
-│   ├── related-products.liquid
-│   └── ai-assistant.liquid
-├── snippets/
-│   ├── fourcs-cut.liquid
-│   ├── fourcs-color.liquid
-│   ├── fourcs-clarity.liquid
-│   ├── fourcs-carat.liquid
-│   ├── diamond-shape-icon.liquid
-│   ├── size-guide-modal.liquid
-│   ├── send-hint-modal.liquid
-│   └── gift-reminder-modal.liquid
-├── templates/
-│   ├── index.liquid        # Homepage
-│   ├── page.about.liquid   # About page
-│   ├── page.about-diamonds.liquid # Diamond education
-│   └── product.liquid      # Product page
-├── preview.html            # Standalone preview
-└── README.md
+├── assets/              # CSS, JavaScript, images
+│   ├── base.css        # Reset and base styles
+│   ├── orea-custom.css # Custom ORÉA component styles
+│   └── global.js       # Global JavaScript functionality
+├── config/             # Theme settings
+│   └── settings_schema.json
+├── layout/             # Base template
+│   └── theme.liquid    # Main theme layout
+├── locales/            # Translation files
+│   └── en.default.json
+├── sections/           # Modular sections
+│   ├── header.liquid   # Navigation header
+│   ├── footer.liquid   # Footer
+│   ├── homepage-collections.liquid
+│   ├── featured-products.liquid
+│   └── brand-values.liquid
+├── snippets/           # Reusable components
+│   └── meta-tags.liquid
+└── templates/          # Page templates
+    ├── index.liquid    # Homepage
+    ├── collection.liquid
+    ├── product.liquid
+    ├── page.about.liquid
+    ├── page.diamonds.liquid
+    ├── page.bespoke.liquid
+    ├── page.faq.liquid
+    ├── page.contact.liquid
+    └── ...
 ```
 
-## Installation
+## 📄 Converted Pages
 
-### Option 1: Upload ZIP
-1. Zip the theme folder
-2. Go to Shopify Admin → Online Store → Themes
-3. Click "Add theme" → "Upload zip file"
-4. Upload and publish
+All 15 original React pages have been converted to Liquid templates:
 
-### Option 2: Theme Kit CLI
-```bash
-# Install Theme Kit
-brew tap shopify/shopify
-brew install themekit
+### Main Pages
+1. **Homepage** (`index.liquid`) - Hero, collections, featured products, brand values
+2. **About ORÉA** (`page.about.liquid`) - Company story and values
+3. **About Diamonds** (`page.diamonds.liquid`) - Lab-grown diamond education
+4. **Bespoke** (`page.bespoke.liquid`) - Custom jewelry design process
+5. **Collection Page** (`collection.liquid`) - Product browsing with filtering
+6. **Product Page** (`product.liquid`) - Product details and purchase
 
-# Configure
-theme configure --password=[your-password] --store=[your-store.myshopify.com] --themeid=[theme-id]
+### Information Pages
+7. **Concierge** (`page.concierge.liquid`) - Premium service details
+8. **Contact** (`page.contact.liquid`) - Contact form
+9. **FAQ** (`page.faq.liquid`) - Frequently asked questions
+10. **Care Guide** (`page.care-guide.liquid`) - Jewelry care instructions
+11. **Boutique** (Product template variation) - Enhanced product experience
+12. **Shipping** (`page.shipping.liquid`) - Shipping information
+13. **Returns** (`page.returns.liquid`) - Return policy
+14. **Terms** (`page.terms.liquid`) - Terms and conditions
 
-# Deploy
-theme deploy
-```
+### Additional Templates
+15. **Product Shape Page** - Variant of product page for different diamond shapes
 
-### Option 3: GitHub Integration
-1. Push theme to GitHub repository
-2. In Shopify Admin → Online Store → Themes
-3. Click "Add theme" → "Connect from GitHub"
-4. Select repository and branch
+## 🚀 Installation
 
-## Page Setup
+1. **Download the theme**
+   - Download this entire folder as a ZIP file
+
+2. **Upload to Shopify**
+   - Go to Shopify Admin → Online Store → Themes
+   - Click "Upload theme"
+   - Select the ZIP file
+   - Click "Upload"
+
+3. **Publish the theme**
+   - After upload, click "Publish" to make it your active theme
+
+## ⚙️ Configuration
+
+### Required Setup
+
+1. **Create Pages in Shopify**
+   Create the following pages in Shopify Admin → Online Store → Pages:
+   - About (template: page.about)
+   - About Diamonds (template: page.diamonds)
+   - Bespoke (template: page.bespoke)
+   - FAQ (template: page.faq)
+   - Contact (template: page.contact)
+   - Concierge (template: page.concierge)
+   - Care Guide (template: page.care-guide)
+   - Shipping & Delivery (template: page.shipping)
+   - Returns & Exchanges (template: page.returns)
+   - Terms & Conditions (template: page.terms)
+
+2. **Configure Collections**
+   Create collections for:
+   - Rings
+   - Necklaces
+   - Earrings
+   - Bracelets
+   - Pendants
+
+3. **Add Products**
+   - Upload product images (recommended: 1200x1600px, 3:4 ratio)
+   - Add product descriptions
+   - Set up variants (metal type, carat, size)
+
+4. **Homepage Setup**
+   - In Theme Editor, customize:
+     - Hero section image and text
+     - Featured collections
+     - Featured products
+     - Brand values
+
+5. **Navigation**
+   - Set up main menu with links to collections and pages
+   - Configure footer menu
+
+6. **Social Media**
+   - Add Instagram and Facebook URLs in Theme Settings
+
+## 🎯 Features
+
+### Header/Navigation
+- Fixed header with scroll effects
+- Desktop mega-menu dropdowns
+- Mobile-responsive hamburger menu
+- Cart icon with item count
+- Search, account, and cart functionality
 
 ### Homepage
-Automatically uses `templates/index.liquid` with sections:
-- Homepage Hero
-- Origin Text
-- ORÉA Standards
-- Bespoke Process
-- Sustainability Badge
-- Location Contact
+- Full-screen hero section
+- Featured collections with alternating layouts
+- Product grid
+- Brand values section
 
-### About Diamonds Page
-1. Go to Online Store → Pages → Add page
-2. Title: "About Diamonds"
-3. Template: `page.about-diamonds`
-4. Save
+### Product Pages
+- Image gallery with thumbnails
+- Variant selection
+- Add to cart functionality
+- Related products
+- Product information tabs
 
-### About Page
-1. Go to Online Store → Pages → Add page
-2. Title: "About"
-3. Template: `page.about`
-4. Save
+### Collection Pages
+- Product grid layout
+- Category filtering
+- Responsive design
 
-## Customization
+### Pages
+- Accordion-style FAQ
+- Contact form
+- Bespoke process steps
+- Brand story sections
 
-### Theme Settings
-Access via Online Store → Themes → Customize → Theme settings:
-- **Colors**: Brand palette (bone, carbon, accent colors)
-- **Typography**: Font selections and sizes
-- **Header**: Logo, navigation, sticky behavior
-- **Footer**: Menus, newsletter, social links
-- **Product Pages**: Display options, features
-- **AI Assistant**: Enable/disable, API configuration
-
-### Section Settings
-Each section has its own schema for customization:
-- Headings and copy
-- Images and media
-- Layout options
-- Feature toggles
-
-## Design System
-
-### Typography
-- **Headings**: Playfair Display (serif)
-- **Body**: Inter (sans-serif)
-- **Letter spacing**: Ultra-wide for labels (0.2-0.6em)
+## 🎨 Customization
 
 ### Colors
-- **Background**: #FDFCFB (bone), #fcfcf9 (orchid-white)
-- **Text**: #1A1A1A (carbon), stone palette
-- **Metal gradients**: Platinum, 18k/14k gold variants
+All ORÉA colors are defined as CSS variables in `layout/theme.liquid`:
+```css
+--color-orea-cream: #F9F6F1;
+--color-orea-dark: #4A3F35;
+--color-orea-champagne: #D4C4A8;
+--color-orea-gold: #C5B8A0;
+```
 
-### Effects
-- Film grain overlay (subtle noise texture)
-- Glass navbar (backdrop blur)
-- Smooth scroll and transitions
+### Typography
+Font families are loaded from Google Fonts and defined as variables:
+```css
+--font-body: 'Montserrat', sans-serif;
+--font-heading: 'Cormorant Garamond', serif;
+```
 
-## Features
+### Spacing & Layout
+The theme uses a consistent spacing system based on rem units.
 
-### Product Page
-- Metal/Carat/Size variant selection
-- Live price updates
-- Add to cart with loading states
-- Size guide modal
-- Send hint functionality
-- Gift reminder scheduler
-- AI concierge integration
+## 📱 Responsive Design
 
-### 4Cs Education
-- Interactive tab interface
-- Cut, Color, Clarity, Carat explanations
-- Visual diagrams and scales
+The theme is fully responsive with breakpoints at:
+- Mobile: < 768px
+- Tablet: 768px - 1023px
+- Desktop: ≥ 1024px
 
-### Diamond Shapes
-- Horizontal scroll gallery
-- Modal details for each shape
-- SVG illustrations
+## ⚡ Performance
 
-## Browser Support
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- iOS Safari
-- Android Chrome
+- Optimized CSS with minimal bloat
+- Efficient JavaScript (no heavy frameworks)
+- Lazy loading for images (Shopify native)
+- Mobile-first approach
 
-## Development
+## 🔧 Technical Details
 
-### Local Preview
-Open `preview.html` in a browser to see a static preview of the homepage design.
+### Shopify Features Used
+- Liquid templating
+- Sections and blocks for customization
+- Theme settings
+- Product variants
+- Collection filtering
+- Form handling
+- Cart functionality
 
-### Modifying Styles
-Edit `assets/styles.css` for custom CSS. The theme uses Tailwind CSS via CDN.
+### Browser Support
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- IE11 not supported
 
-### Adding Sections
-1. Create new file in `sections/`
-2. Include `{% schema %}` block
-3. Add to appropriate template
+## 📝 Notes
 
-## Support
+### Differences from React Version
+1. **Routing**: Uses Shopify's native URL structure instead of React Router
+2. **State Management**: Uses Shopify's cart system instead of React state
+3. **Forms**: Uses Shopify form handling instead of React forms
+4. **Images**: Uses Shopify image optimization instead of local assets
 
-For issues or customization requests, contact the development team.
+### Maintained from Original
+✅ All page designs
+✅ All component layouts
+✅ Complete color palette
+✅ Typography system
+✅ Animations and transitions
+✅ Responsive behavior
+✅ Navigation structure
+
+## 🆘 Support
+
+For issues or questions about this theme:
+1. Check the Shopify theme documentation
+2. Review the comments in the code files
+3. Contact the theme developer
+
+## 📜 License
+
+This theme is created for ORÉA Jewellery. All rights reserved.
 
 ---
 
-© 2024 ORÉA Fine Jewellery. All rights reserved.
+**Version**: 1.0.0
+**Last Updated**: 2024
+**Created by**: Converted from React to Shopify Liquid

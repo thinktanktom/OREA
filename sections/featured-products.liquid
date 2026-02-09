@@ -1,0 +1,96 @@
+{% comment %}
+  Featured Products Section
+  Display featured products in a grid
+{% endcomment %}
+
+<section style="padding: 12.8rem 2.4rem; background-color: white;">
+  <div style="max-width: 1600px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 8rem;">
+      <h2 style="font-family: var(--font-heading); font-size: clamp(3.6rem, 5vw, 6rem); font-weight: 300; color: var(--color-orea-dark); margin-bottom: 2.4rem;">
+        {{ section.settings.heading | default: "Featured Pieces" }}
+      </h2>
+      {% if section.settings.description %}
+        <p style="font-size: 1.6rem; color: var(--color-orea-taupe); max-width: 640px; margin: 0 auto;">
+          {{ section.settings.description }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="product-grid">
+      {% for block in section.blocks limit: 6 %}
+        {% assign product = all_products[block.settings.product] %}
+        {% if product %}
+          <div class="product-card">
+            <a href="{{ product.url }}" class="product-image-wrapper">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: 800 | image_tag: class: 'product-image', alt: product.title }}
+              {% endif %}
+            </a>
+            <div class="product-info">
+              <h3 class="product-title">
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
+              <p class="product-price">{{ product.price | money }}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.cta_link %}
+      <div style="text-align: center; margin-top: 6.4rem;">
+        <a href="{{ section.settings.cta_link }}" style="display: inline-block; padding: 1.6rem 4.8rem; border: 1px solid var(--color-orea-dark); font-size: 1rem; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 500; transition: all 0.3s ease;">
+          {{ section.settings.cta_text | default: "View All" }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Featured Pieces"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "View All"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

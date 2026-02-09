@@ -1,0 +1,76 @@
+{% comment %}
+  Collection Page Template
+  Converted from React CollectionPage component
+{% endcomment %}
+
+<main style="min-height: 100vh; background-color: var(--color-orea-cream); padding-top: 12rem; padding-bottom: 6.4rem;">
+  <div style="max-width: 1600px; margin: 0 auto; padding: 0 2.4rem;">
+    
+    <!-- Collection Header -->
+    <div style="text-align: center; margin-bottom: 6.4rem;">
+      <h1 style="font-family: var(--font-heading); font-size: clamp(4rem, 6vw, 8rem); font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-orea-dark); margin-bottom: 2.4rem;">
+        {{ collection.title }}
+      </h1>
+      {% if collection.description != blank %}
+        <div style="max-width: 800px; margin: 0 auto; font-size: 1.6rem; color: var(--color-orea-taupe); line-height: 1.8;">
+          {{ collection.description }}
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Filter Section (Optional) -->
+    <div style="margin-bottom: 4.8rem; text-align: center;">
+      <div style="display: inline-flex; gap: 2.4rem; flex-wrap: wrap; justify-content: center;">
+        <a href="{{ collection.url }}" style="padding: 1.2rem 2.4rem; border: 1px solid var(--color-orea-linen); font-size: 1.1rem; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.3s ease;">
+          All
+        </a>
+        <a href="{{ collection.url }}?filter=rings" style="padding: 1.2rem 2.4rem; border: 1px solid var(--color-orea-linen); font-size: 1.1rem; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.3s ease;">
+          Rings
+        </a>
+        <a href="{{ collection.url }}?filter=necklaces" style="padding: 1.2rem 2.4rem; border: 1px solid var(--color-orea-linen); font-size: 1.1rem; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.3s ease;">
+          Necklaces
+        </a>
+        <a href="{{ collection.url }}?filter=earrings" style="padding: 1.2rem 2.4rem; border: 1px solid var(--color-orea-linen); font-size: 1.1rem; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.3s ease;">
+          Earrings
+        </a>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid">
+      {% for product in collection.products %}
+        <div class="product-card">
+          <a href="{{ product.url }}" class="product-image-wrapper">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 800 | image_tag: class: 'product-image', alt: product.title }}
+            {% else %}
+              <div style="width: 100%; height: 100%; background-color: var(--color-orea-linen); display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 1.2rem; color: var(--color-orea-taupe);">No Image</span>
+              </div>
+            {% endif %}
+          </a>
+          
+          <div class="product-info">
+            <h3 class="product-title">
+              <a href="{{ product.url }}">{{ product.title }}</a>
+            </h3>
+            <p class="product-price">
+              {{ product.price | money }}
+            </p>
+          </div>
+        </div>
+      {% else %}
+        <p style="text-align: center; font-size: 1.6rem; color: var(--color-orea-taupe); grid-column: 1 / -1;">
+          No products found in this collection.
+        </p>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if paginate.pages > 1 %}
+      <div style="margin-top: 8rem; text-align: center;">
+        {{ paginate | default_pagination }}
+      </div>
+    {% endif %}
+  </div>
+</main>

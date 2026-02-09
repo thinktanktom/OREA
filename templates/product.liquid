@@ -1,36 +1,150 @@
 {% comment %}
-  ORÉA Product Page Template
+  Product Page Template
+  Converted from React ProductPage component
 {% endcomment %}
 
-<main class="min-h-screen flex flex-col bg-[#fcfcf9]">
-  <div class="flex-grow container mx-auto px-4 lg:px-12 py-12">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-      
-      <!-- Gallery Column -->
-      <div class="lg:col-span-7 space-y-6">
-        {% section 'product-gallery' %}
-      </div>
-
-      <!-- Configuration Column -->
-      <div class="lg:col-span-5">
-        <div class="lg:sticky lg:top-32 space-y-12">
-          {% section 'product-details' %}
-          {% section 'product-tabs' %}
-          {% section 'value-props' %}
-        </div>
+<main style="min-height: 100vh; background-color: var(--color-orea-cream);">
+  <div style="display: grid; grid-template-columns: 1fr; gap: 0;">
+    
+    <!-- Product Images -->
+    <div style="width: 100%;">
+      <div style="position: sticky; top: 12rem;">
+        {% if product.images.size > 0 %}
+          <div style="aspect-ratio: 3/4; background-color: var(--color-orea-linen); overflow: hidden;">
+            <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title }}" class="product-main-image" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          
+          <!-- Thumbnails -->
+          {% if product.images.size > 1 %}
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 1.2rem; margin-top: 2.4rem; padding: 0 2.4rem;">
+              {% for image in product.images %}
+                <button class="product-thumbnail {% if forloop.first %}active{% endif %}" data-image-src="{{ image | image_url: width: 1200 }}" style="aspect-ratio: 1; border: 2px solid {% if forloop.first %}var(--color-orea-gold){% else %}var(--color-orea-linen){% endif %}; cursor: pointer; overflow: hidden; background: none; padding: 0;">
+                  <img src="{{ image | image_url: width: 200 }}" alt="{{ product.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                </button>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% else %}
+          <div style="aspect-ratio: 3/4; background-color: var(--color-orea-linen); display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 1.6rem; color: var(--color-orea-taupe);">No Image Available</span>
+          </div>
+        {% endif %}
       </div>
     </div>
 
-    <section class="mt-40 border-t border-stone-100 pt-24">
-      {% section 'related-products' %}
-    </section>
+    <!-- Product Details -->
+    <div style="padding: 4.8rem 2.4rem;">
+      <div style="max-width: 560px; margin: 0 auto;">
+        
+        <!-- Product Title & Price -->
+        <div style="margin-bottom: 4.8rem;">
+          <h1 style="font-family: var(--font-heading); font-size: clamp(3.2rem, 5vw, 4.8rem); font-weight: 300; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-orea-dark); margin-bottom: 2.4rem;">
+            {{ product.title }}
+          </h1>
+          <p style="font-size: 2.4rem; color: var(--color-orea-taupe); font-weight: 300;">
+            {{ product.price | money }}
+          </p>
+        </div>
+
+        <!-- Product Description -->
+        {% if product.description != blank %}
+          <div style="margin-bottom: 4.8rem; color: var(--color-orea-taupe); font-size: 1.5rem; line-height: 1.8;">
+            {{ product.description }}
+          </div>
+        {% endif %}
+
+        <!-- Product Form -->
+        {% form 'product', product %}
+          <div style="margin-bottom: 3.2rem;">
+            
+            <!-- Variants -->
+            {% unless product.has_only_default_variant %}
+              {% for option in product.options_with_values %}
+                <div style="margin-bottom: 2.4rem;">
+                  <label style="display: block; font-size: 1.1rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 1.2rem; color: var(--color-orea-dark);">
+                    {{ option.name }}
+                  </label>
+                  <select name="options[{{ option.name | escape }}]" class="variant-selector" style="width: 100%; padding: 1.6rem; border: 1px solid var(--color-orea-linen); background-color: white; font-size: 1.4rem; color: var(--color-orea-dark);">
+                    {% for value in option.values %}
+                      <option value="{{ value | escape }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% endfor %}
+            {% endunless %}
+
+            <!-- Quantity -->
+            <div style="margin-bottom: 2.4rem;">
+              <label style="display: block; font-size: 1.1rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 1.2rem; color: var(--color-orea-dark);">
+                Quantity
+              </label>
+              <input type="number" name="quantity" value="1" min="1" style="width: 100%; padding: 1.6rem; border: 1px solid var(--color-orea-linen); background-color: white; font-size: 1.4rem; color: var(--color-orea-dark);">
+            </div>
+
+            <!-- Add to Cart Button -->
+            <button type="submit" name="add" style="width: 100%; padding: 2rem; background-color: var(--color-orea-dark); color: var(--color-orea-cream); font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; border: none; cursor: pointer; transition: background-color 0.3s ease;">
+              {% if product.available %}
+                Add to Cart
+              {% else %}
+                Sold Out
+              {% endif %}
+            </button>
+          </div>
+        {% endform %}
+
+        <!-- Additional Info -->
+        <div style="padding-top: 3.2rem; border-top: 1px solid var(--color-orea-linen);">
+          <div style="display: flex; flex-direction: column; gap: 1.6rem; font-size: 1.3rem; color: var(--color-orea-taupe);">
+            <div style="display: flex; align-items: center; gap: 1.2rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Complimentary NZ Delivery</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1.2rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>30-Day Returns</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1.2rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2v20M2 12h20"/>
+              </svg>
+              <span>IGI Certified Diamonds</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Related Products -->
+  {% if collection.products.size > 1 %}
+    <div style="max-width: 1400px; margin: 0 auto; padding: 12.8rem 2.4rem;">
+      <h2 style="font-family: var(--font-heading); font-size: clamp(3.2rem, 5vw, 5rem); font-weight: 300; text-align: center; margin-bottom: 6.4rem; color: var(--color-orea-dark);">
+        You May Also Like
+      </h2>
+      
+      <div class="product-grid">
+        {% for related_product in collection.products limit: 3 %}
+          {% if related_product.id != product.id %}
+            <div class="product-card">
+              <a href="{{ related_product.url }}" class="product-image-wrapper">
+                {{ related_product.featured_image | image_url: width: 600 | image_tag: class: 'product-image', alt: related_product.title }}
+              </a>
+              <div class="product-info">
+                <h3 class="product-title">
+                  <a href="{{ related_product.url }}">{{ related_product.title }}</a>
+                </h3>
+                <p class="product-price">{{ related_product.price | money }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 </main>
-
-<!-- Include all modals -->
-{% render 'size-guide-modal' %}
-{% render 'send-hint-modal' %}
-{% render 'gift-reminder-modal' %}
-
-<script src="{{ 'product-page.js' | asset_url }}" defer></script>
-<script src="{{ 'modals.js' | asset_url }}" defer></script>

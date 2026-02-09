@@ -1,0 +1,70 @@
+{% comment %}
+  About Diamonds Page Template
+  Converted from React AboutDiamondsPage component
+{% endcomment %}
+
+<main style="background-color: var(--color-orea-cream); padding-bottom: 19.2rem;">
+  <!-- Hero Section -->
+  <section style="padding: 12rem 2.4rem 6.4rem; text-align: center;">
+    <h1 style="font-family: var(--font-heading); font-size: clamp(3.6rem, 6vw, 8rem); font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-orea-dark); margin-bottom: 3.2rem;">
+      {{ page.title }}
+    </h1>
+    <div style="width: 6.4rem; height: 1px; background-color: var(--color-orea-gold); margin: 0 auto 4rem;"></div>
+  </section>
+
+  <!-- Lab-Grown Intro -->
+  <section style="padding: 6.4rem 2.4rem; max-width: 1000px; margin: 0 auto;">
+    {{ page.content }}
+  </section>
+
+  <!-- Diamond Comparison Table -->
+  <section style="padding: 6.4rem 2.4rem; max-width: 1200px; margin: 0 auto;">
+    <h2 style="font-family: var(--font-heading); font-size: clamp(3rem, 5vw, 5rem); text-align: center; margin-bottom: 9.6rem; font-weight: 300; color: var(--color-orea-dark);">
+      Lab-Grown vs Earth-Mined Diamonds
+    </h2>
+    
+    <div style="background-color: var(--color-orea-dark); color: var(--color-orea-cream); border-radius: 4px; overflow-x: auto; padding: 4.8rem;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 1px solid rgba(249, 246, 241, 0.1);">
+            <th style="padding: 4rem; text-align: left; font-size: 1rem; letter-spacing: 0.45em; text-transform: uppercase; font-weight: 700; color: var(--color-orea-gold);">Property</th>
+            <th style="padding: 4rem; text-align: left; font-size: 1rem; letter-spacing: 0.45em; text-transform: uppercase; font-weight: 700; color: var(--color-orea-gold);">Lab-Grown</th>
+            <th style="padding: 4rem; text-align: left; font-size: 1rem; letter-spacing: 0.45em; text-transform: uppercase; font-weight: 700; color: var(--color-orea-gold);">Earth-Mined</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid rgba(249, 246, 241, 0.05);">
+            <td style="padding: 2.4rem 4rem; font-weight: 500;">Origin</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">Grown in a lab</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">Formed in the earth</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(249, 246, 241, 0.05);">
+            <td style="padding: 2.4rem 4rem; font-weight: 500;">Chemical Composition</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">Pure carbon</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">Pure carbon</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(249, 246, 241, 0.05);">
+            <td style="padding: 2.4rem 4rem; font-weight: 500;">Hardness</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">10/10 (Mohs)</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">10/10 (Mohs)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(249, 246, 241, 0.05);">
+            <td style="padding: 2.4rem 4rem; font-weight: 500;">Appearance</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">Identical brilliance</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">Identical brilliance</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(249, 246, 241, 0.05);">
+            <td style="padding: 2.4rem 4rem; font-weight: 500;">Price</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">More accessible</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.9;">Higher cost</td>
+          </tr>
+          <tr>
+            <td style="padding: 2.4rem 4rem; font-weight: 500;">ORÉA Offering</td>
+            <td style="padding: 2.4rem 4rem; color: var(--color-orea-gold); font-weight: 600;">Always lab-grown</td>
+            <td style="padding: 2.4rem 4rem; opacity: 0.5;">Not offered</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>

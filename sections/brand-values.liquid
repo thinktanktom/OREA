@@ -1,0 +1,71 @@
+{% comment %}
+  Brand Values Section
+  Display brand values and commitments
+{% endcomment %}
+
+<section style="padding: 12.8rem 2.4rem; background-color: var(--color-orea-cream);">
+  <div style="max-width: 1400px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 9.6rem;">
+      <h2 style="font-family: var(--font-heading); font-size: clamp(3.6rem, 5vw, 6rem); font-weight: 300; color: var(--color-orea-dark); margin-bottom: 2.4rem;">
+        {{ section.settings.heading | default: "Why ORÉA" }}
+      </h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr; gap: 6.4rem;">
+      {% for block in section.blocks %}
+        <div style="text-align: center; max-width: 640px; margin: 0 auto;">
+          <div style="font-size: 4.8rem; margin-bottom: 2.4rem;">{{ block.settings.icon }}</div>
+          <h3 style="font-size: 2rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-orea-dark); margin-bottom: 1.6rem;">
+            {{ block.settings.title }}
+          </h3>
+          <p style="font-size: 1.6rem; line-height: 1.8; color: var(--color-orea-taupe); font-weight: 300;">
+            {{ block.settings.description }}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Values",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Why ORÉA"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "💎"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Values"
+    }
+  ]
+}
+{% endschema %}

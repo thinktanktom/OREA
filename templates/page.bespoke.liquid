@@ -1,162 +1,88 @@
 {% comment %}
-  ORÉA Bespoke Design Page Template
-  
-  To use this template:
-  1. Go to Online Store → Pages → Add page
-  2. Enter your title (e.g., "Bespoke Design")
-  3. In the Template dropdown at the bottom, select "page.bespoke"
+  Bespoke Page Template
+  Converted from React BespokePage component
 {% endcomment %}
 
-<main class="min-h-screen bg-[#fcfcf9]">
-  
+<main>
   <!-- Hero Section -->
-  <section class="relative min-h-[60vh] flex flex-col items-center justify-center pt-32 pb-20 px-6">
-    <div class="w-full max-w-4xl mx-auto text-center space-y-8">
-      <h4 class="text-[10px] uppercase tracking-[0.6em] text-stone-400 font-bold">Bespoke Design</h4>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-stone-900 leading-tight">
-        {{ page.title | default: 'Your Vision, Realised' }}
+  <section style="position: relative; padding: 9.6rem 2.4rem; text-align: center; overflow: hidden; border-bottom: 1px solid rgba(212, 196, 168, 0.3);">
+    <div style="position: absolute; inset: 0; background-color: rgba(232, 223, 211, 0.4); display: flex; align-items: center; justify-content: center; opacity: 0.3; z-index: 0;"></div>
+    
+    <div style="position: relative; z-index: 10; max-width: 1600px; margin: 0 auto;">
+      <h2 style="color: var(--color-orea-taupe); font-size: clamp(1rem, 2vw, 1.1rem); text-transform: uppercase; letter-spacing: 0.45em; margin-bottom: 3.2rem; font-weight: 500;">
+        Collaborative, Considered, and not rushed
+      </h2>
+      <h1 style="font-family: var(--font-heading); font-size: clamp(4rem, 8vw, 9rem); color: var(--color-orea-dark); margin-bottom: 4rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 300;">
+        Bespoke Jewellery
       </h1>
-      <p class="text-lg md:text-xl text-stone-500 font-light max-w-2xl mx-auto leading-relaxed">
-        Create something entirely your own. From concept to creation, we guide you through every step of the bespoke journey.
-      </p>
-    </div>
-  </section>
-
-  <!-- Process Section -->
-  <section class="py-24 md:py-32 border-t border-stone-100">
-    <div class="max-w-6xl mx-auto px-6">
-      
-      <div class="text-center mb-20">
-        <h2 class="text-3xl md:text-4xl font-serif text-stone-900 mb-4">The Bespoke Process</h2>
-        <p class="text-stone-500 font-light">A considered journey from inspiration to heirloom</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-        
-        <!-- Step 1: Consultation -->
-        <div class="text-center space-y-6 p-8 border border-stone-100 bg-white">
-          <div class="w-16 h-16 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
-            <span class="text-2xl font-serif text-stone-900">1</span>
-          </div>
-          <h3 class="text-lg font-serif text-stone-900 uppercase tracking-wide">Consultation</h3>
-          <p class="text-stone-500 font-light text-sm leading-relaxed">
-            We begin with a conversation — understanding your vision, preferences, and the story you want your piece to tell.
-          </p>
-        </div>
-        
-        <!-- Step 2: Design -->
-        <div class="text-center space-y-6 p-8 border border-stone-100 bg-white">
-          <div class="w-16 h-16 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
-            <span class="text-2xl font-serif text-stone-900">2</span>
-          </div>
-          <h3 class="text-lg font-serif text-stone-900 uppercase tracking-wide">Design</h3>
-          <p class="text-stone-500 font-light text-sm leading-relaxed">
-            Our designers translate your vision into detailed renderings. We refine together until every detail is perfect.
-          </p>
-        </div>
-        
-        <!-- Step 3: Creation -->
-        <div class="text-center space-y-6 p-8 border border-stone-100 bg-white">
-          <div class="w-16 h-16 mx-auto border border-stone-200 rounded-full flex items-center justify-center">
-            <span class="text-2xl font-serif text-stone-900">3</span>
-          </div>
-          <h3 class="text-lg font-serif text-stone-900 uppercase tracking-wide">Creation</h3>
-          <p class="text-stone-500 font-light text-sm leading-relaxed">
-            Master craftspeople bring your design to life using the finest materials and time-honoured techniques.
-          </p>
-        </div>
-        
+      <div style="color: var(--color-orea-taupe); font-size: clamp(1.6rem, 2vw, 1.8rem); font-weight: 300; letter-spacing: 0.05em; max-width: 560px; margin: 0 auto;">
+        <p style="margin-bottom: 1.2rem;">At the heart of every product lies a unique story.</p>
+        <p>Each item enhances your everyday life and sparks joy.</p>
       </div>
     </div>
   </section>
 
-  <!-- Options Section -->
-  <section class="py-24 md:py-32 bg-stone-50 border-y border-stone-100">
-    <div class="max-w-5xl mx-auto px-6">
+  <!-- Process Steps -->
+  <section style="padding: 12.8rem 2.4rem; background-color: white;">
+    <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+      <h2 style="font-family: var(--font-heading); font-size: clamp(3.2rem, 5vw, 5rem); font-weight: 300; color: var(--color-orea-dark); margin-bottom: 9.6rem;">
+        The Bespoke Process
+      </h2>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-        
-        <!-- Partial Bespoke -->
-        <div class="space-y-6">
-          <h3 class="text-2xl font-serif text-stone-900">Partial Bespoke</h3>
-          <p class="text-stone-600 font-light leading-relaxed">
-            Start with one of our signature designs and personalise it to your preferences. Choose your diamond, metal, and subtle modifications to make it uniquely yours.
+      <div style="display: flex; flex-direction: column; gap: 8rem;">
+        <div>
+          <div style="width: 8rem; height: 8rem; border-radius: 50%; background-color: var(--color-orea-linen); display: flex; align-items: center; justify-content: center; margin: 0 auto 2.4rem;">
+            <span style="font-size: 3.2rem; color: var(--color-orea-dark);">01</span>
+          </div>
+          <h3 style="font-size: 2rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-orea-dark); margin-bottom: 1.6rem;">
+            Consultation
+          </h3>
+          <p style="font-size: 1.6rem; line-height: 1.8; color: var(--color-orea-taupe); max-width: 600px; margin: 0 auto;">
+            We begin with a conversation about your vision, preferences, and the story you want your piece to tell.
           </p>
-          <ul class="space-y-3 text-stone-500 font-light text-sm">
-            <li class="flex items-start">
-              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              <span>Select from existing ORÉA designs</span>
-            </li>
-            <li class="flex items-start">
-              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              <span>Customise metal, diamond specifications</span>
-            </li>
-            <li class="flex items-start">
-              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              <span>Add personal engravings</span>
-            </li>
-            <li class="flex items-start">
-              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              <span>4-6 week timeline</span>
-            </li>
-          </ul>
         </div>
-        
-        <!-- Full Bespoke -->
-        <div class="space-y-6">
-          <h3 class="text-2xl font-serif text-stone-900">Full Bespoke</h3>
-          <p class="text-stone-600 font-light leading-relaxed">
-            Create something entirely new. Work directly with our design team to bring a completely original piece to life, from initial sketch to final masterpiece.
+
+        <div>
+          <div style="width: 8rem; height: 8rem; border-radius: 50%; background-color: var(--color-orea-linen); display: flex; align-items: center; justify-content: center; margin: 0 auto 2.4rem;">
+            <span style="font-size: 3.2rem; color: var(--color-orea-dark);">02</span>
+          </div>
+          <h3 style="font-size: 2rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-orea-dark); margin-bottom: 1.6rem;">
+            Design
+          </h3>
+          <p style="font-size: 1.6rem; line-height: 1.8; color: var(--color-orea-taupe); max-width: 600px; margin: 0 auto;">
+            Our designers translate your ideas into detailed renderings, refining every detail until it's perfect.
           </p>
-          <ul class="space-y-3 text-stone-500 font-light text-sm">
-            <li class="flex items-start">
-              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              <span>Original design from concept</span>
-            </li>
-            <li class="flex items-start">
-              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              <span>Multiple design iterations</span>
-            </li>
-            <li class="flex items-start">
-              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              <span>3D rendering and prototyping</span>
-            </li>
-            <li class="flex items-start">
-              <span class="w-1.5 h-1.5 bg-stone-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              <span>8-12 week timeline</span>
-            </li>
-          </ul>
         </div>
-        
+
+        <div>
+          <div style="width: 8rem; height: 8rem; border-radius: 50%; background-color: var(--color-orea-linen); display: flex; align-items: center; justify-content: center; margin: 0 auto 2.4rem;">
+            <span style="font-size: 3.2rem; color: var(--color-orea-dark);">03</span>
+          </div>
+          <h3 style="font-size: 2rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-orea-dark); margin-bottom: 1.6rem;">
+            Creation
+          </h3>
+          <p style="font-size: 1.6rem; line-height: 1.8; color: var(--color-orea-taupe); max-width: 600px; margin: 0 auto;">
+            Your piece is crafted with precision, using only the finest lab-grown diamonds and precious metals.
+          </p>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- Page Content (from Shopify admin) -->
-  {% if page.content != blank %}
-    <section class="py-24 md:py-32">
-      <div class="max-w-3xl mx-auto px-6 prose prose-stone font-light">
-        {{ page.content }}
-      </div>
-    </section>
-  {% endif %}
 
   <!-- CTA Section -->
-  <section class="py-24 md:py-32 text-center px-6">
-    <div class="max-w-2xl mx-auto space-y-8">
-      <h2 class="text-3xl font-serif text-stone-900">Begin Your Bespoke Journey</h2>
-      <p class="text-stone-500 font-light leading-relaxed">
-        Every bespoke piece starts with a conversation. Share your vision and we'll guide you from there.
+  <section style="padding: 16rem 2.4rem; background-color: var(--color-orea-cream); text-align: center; border-top: 1px solid rgba(212, 196, 168, 0.3);">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h3 style="font-family: var(--font-heading); font-size: clamp(3.6rem, 6vw, 6rem); color: var(--color-orea-dark); margin-bottom: 4rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 300; line-height: 1.2;">
+        The Journey Begins With A Conversation
+      </h3>
+      <p style="color: var(--color-orea-taupe); margin-bottom: 6.4rem; font-weight: 300; font-size: 1.8rem; line-height: 1.8; max-width: 640px; margin: 0 auto 6.4rem;">
+        Whether you arrive with a fully formed vision or just the earliest spark of an idea, we are here to guide you through the art of creation with care and expertise.
       </p>
-      <div class="pt-4">
-        <a 
-          href="/pages/contact" 
-          class="inline-block px-16 py-5 bg-stone-900 text-white text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-stone-800 transition-all duration-500"
-        >
-          Schedule a Consultation
+      <div>
+        <a href="/pages/contact" style="position: relative; display: inline-block; padding: 2.8rem 6.4rem; background-color: var(--color-orea-dark); color: var(--color-orea-cream); font-size: clamp(1rem, 2vw, 1.1rem); text-transform: uppercase; letter-spacing: 0.45em; font-weight: 700; transition: background-color 0.5s ease;">
+          Book a consultation
         </a>
       </div>
     </div>
   </section>
-
 </main>

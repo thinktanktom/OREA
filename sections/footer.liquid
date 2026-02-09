@@ -1,311 +1,113 @@
 {% comment %}
-  ORÉA Fine Jewellery - Footer Section (FINAL FIX)
-  ================================================
-  Handles the case where menus exist but are empty (size = 0)
+  ORÉA Footer Section
+  Converted from React Footer component
 {% endcomment %}
 
-<footer style="background-color: #1c1917; color: white; padding: 80px 20px;">
-  <div style="max-width: 1400px; margin: 0 auto;">
-    
-    <!-- Three Columns -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px; margin-bottom: 80px;">
-      
-      <!-- SHOP Column -->
-      <div>
-        <h4 style="font-size: 12px; letter-spacing: 0.3em; margin-bottom: 30px; color: #fbbf24; font-weight: bold;">
-          SHOP
-        </h4>
-        <ul style="list-style: none; padding: 0; margin: 0;">
-          
-          {% comment %} Check if menu has links (not just if menu exists) {% endcomment %}
-          {% assign shop_menu_size = linklists['footer-shop'].links.size | default: 0 %}
-          
-          {% if shop_menu_size > 0 %}
-            {% comment %} Use menu links if available {% endcomment %}
-            {% for link in linklists['footer-shop'].links %}
-              <li style="margin-bottom: 15px;">
-                <a href="{{ link.url }}" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                  {{ link.title }}
-                </a>
-              </li>
-            {% endfor %}
-          {% else %}
-            {% comment %} Fallback: Hardcoded links when menu is empty {% endcomment %}
-            <li style="margin-bottom: 15px;">
-              <a href="/collections/rings" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                Rings
-              </a>
-            </li>
-            <li style="margin-bottom: 15px;">
-              <a href="/collections/necklaces" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                Necklaces
-              </a>
-            </li>
-            <li style="margin-bottom: 15px;">
-              <a href="/collections/earrings" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                Earrings
-              </a>
-            </li>
-            <li style="margin-bottom: 15px;">
-              <a href="/collections/bracelets" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                Bracelets
-              </a>
-            </li>
-            <li style="margin-bottom: 15px;">
-              <a href="/collections/pendants" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                Pendants
-              </a>
-            </li>
-          {% endif %}
+<footer class="orea-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <!-- Column 1 - SHOP -->
+      <div class="footer-column">
+        <h4>SHOP</h4>
+        <ul class="footer-links">
+          <li><a href="/collections/rings" class="footer-link">Rings</a></li>
+          <li><a href="/collections/necklaces" class="footer-link">Necklaces</a></li>
+          <li><a href="/collections/earrings" class="footer-link">Earrings</a></li>
+          <li><a href="/collections/bracelets" class="footer-link">Bracelets</a></li>
+          <li><a href="/collections/pendants" class="footer-link">Pendants</a></li>
         </ul>
       </div>
 
-      <!-- HELP Column -->
-      <div>
-        <h4 style="font-size: 12px; letter-spacing: 0.3em; margin-bottom: 30px; color: #fbbf24; font-weight: bold;">
-          HELP
-        </h4>
-        <ul style="list-style: none; padding: 0; margin: 0;">
-          
-          {% assign help_menu_size = linklists['footer-help'].links.size | default: 0 %}
-          
-          {% if help_menu_size > 0 %}
-            {% for link in linklists['footer-help'].links %}
-              <li style="margin-bottom: 15px;">
-                <a href="{{ link.url }}" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                  {{ link.title }}
-                </a>
-              </li>
-            {% endfor %}
-          {% else %}
-            <li style="margin-bottom: 15px;">
-              <a href="/pages/faq" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                FAQs
-              </a>
-            </li>
-            <li style="margin-bottom: 15px;">
-              <a href="/pages/contact" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                Contact Us
-              </a>
-            </li>
-            <li style="margin-bottom: 15px;">
-              <a href="/pages/care-guide" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                Care Guide
-              </a>
-            </li>
-            <li style="margin-bottom: 15px;">
-              <a href="/pages/shipping" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                Shipping & Delivery
-              </a>
-            </li>
-            <li style="margin-bottom: 15px;">
-              <a href="/pages/returns" style="color: white; text-decoration: none; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
-                Returns & Exchanges
-              </a>
-            </li>
-          {% endif %}
+      <!-- Column 2 - HELP -->
+      <div class="footer-column">
+        <h4>HELP</h4>
+        <ul class="footer-links">
+          <li><a href="/pages/faq" class="footer-link">FAQs</a></li>
+          <li><a href="/pages/contact" class="footer-link">Contact Us</a></li>
+          <li><a href="/pages/care-guide" class="footer-link">Care Guide</a></li>
+          <li><a href="/pages/shipping" class="footer-link">Shipping & Delivery</a></li>
+          <li><a href="/pages/returns" class="footer-link">Returns & Exchanges</a></li>
         </ul>
       </div>
 
-      <!-- NEWSLETTER Column -->
-      <div>
-        <h4 style="font-size: 12px; letter-spacing: 0.3em; margin-bottom: 30px; color: #fbbf24; font-weight: bold;">
-          {{ section.settings.newsletter_heading | default: 'JOIN OUR COMMUNITY' }}
-        </h4>
-        <p style="color: white; font-size: 11px; letter-spacing: 0.05em; margin-bottom: 10px; font-weight: 500; text-transform: uppercase;">
-          {{ section.settings.newsletter_tagline | default: 'Receive $25 off your first order.' }}
-        </p>
-        <p style="color: #9ca3af; font-size: 11px; letter-spacing: 0.05em; margin-bottom: 25px; text-transform: uppercase;">
-          {{ section.settings.newsletter_description | default: 'Early access to new pieces, private releases, exclusive offers & more.' }}
-        </p>
-        
-        {% form 'customer' %}
-          {% if form.posted_successfully? %}
-            <p style="color: #fbbf24; font-size: 12px; padding: 15px 0;">
-              Thank you for subscribing!
+      <!-- Column 3 - Newsletter -->
+      <div class="footer-column">
+        <div style="margin-bottom: 4rem;">
+          <h4>JOIN OUR COMMUNITY</h4>
+          <div style="margin-bottom: 0.8rem;">
+            <p style="font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; line-height: 1.8; margin-bottom: 0;">
+              Receive $25 off your first order.
             </p>
-          {% else %}
-            <div style="border-bottom: 1px solid rgba(251, 191, 36, 0.2); padding-bottom: 12px; display: flex; align-items: center; margin-bottom: 25px;">
+          </div>
+          <div>
+            <p style="font-size: 1rem; letter-spacing: 0.1em; color: rgba(217, 207, 193, 0.7); font-weight: 300; line-height: 1.8; text-transform: uppercase; margin: 0;">
+              Early access to new pieces, private releases, exclusive offers & more.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 2.4rem;">
+          {% form 'customer', class: 'newsletter-form' %}
+            {% if form.posted_successfully? %}
+              <p style="color: var(--color-orea-gold); font-size: 1rem;">Thanks for subscribing!</p>
+            {% else %}
               <input 
                 type="email" 
-                name="contact[email]"
-                placeholder="EMAIL ADDRESS" 
-                style="background: transparent; border: none; color: white; outline: none; flex: 1; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;"
+                name="contact[email]" 
+                placeholder="EMAIL ADDRESS"
+                class="newsletter-input"
                 required
-                autocomplete="email"
               />
-              <button 
-                type="submit"
-                style="background: none; border: none; color: #fbbf24; font-size: 11px; letter-spacing: 0.3em; font-weight: bold; cursor: pointer; padding-left: 15px; text-transform: uppercase;"
-              >
-                JOIN
-              </button>
-            </div>
-            {% if form.errors %}
-              <p style="color: #ef4444; font-size: 11px; margin-top: 10px;">
-                {{ form.errors | default_errors }}
-              </p>
+              <button type="submit" class="newsletter-submit">JOIN</button>
             {% endif %}
-          {% endif %}
-        {% endform %}
-        
+          {% endform %}
+        </div>
+
         <!-- Social Icons -->
-        <div style="display: flex; gap: 25px; justify-content: flex-end;">
-          {% if section.settings.instagram_url != blank %}
-            <a href="{{ section.settings.instagram_url }}" style="color: #9ca3af; text-decoration: none;" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <div class="social-icons">
+          {% if settings.social_instagram_link != blank %}
+            <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
               </svg>
             </a>
           {% endif %}
-          
-          {% if section.settings.facebook_url != blank %}
-            <a href="{{ section.settings.facebook_url }}" style="color: #9ca3af; text-decoration: none;" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
-            </a>
-          {% endif %}
-          
-          {% if section.settings.pinterest_url != blank %}
-            <a href="{{ section.settings.pinterest_url }}" style="color: #9ca3af; text-decoration: none;" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M8 12a4 4 0 1 0 8 0c0-1.7-.9-3.1-2.2-3.8"></path>
-                <path d="M12 2v10"></path>
-              </svg>
-            </a>
-          {% endif %}
-          
-          {% if section.settings.instagram_url == blank and section.settings.facebook_url == blank and section.settings.pinterest_url == blank %}
-            {% comment %} Fallback social icons {% endcomment %}
-            <a href="#" style="color: #9ca3af; text-decoration: none;" aria-label="Instagram">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
-            <a href="#" style="color: #9ca3af; text-decoration: none;" aria-label="Facebook">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          {% if settings.social_facebook_link != blank %}
+            <a href="{{ settings.social_facebook_link }}" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
             </a>
           {% endif %}
         </div>
       </div>
-      
     </div>
 
-    <!-- Bottom Bar -->
-    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-      <p style="color: #6b7280; font-size: 10px; letter-spacing: 0.3em; margin: 0; text-transform: uppercase;">
-        © {{ section.settings.brand_name | default: 'ORÉA' }} {{ 'now' | date: '%Y' }}
-      </p>
-      <div style="display: flex; gap: 30px; flex-wrap: wrap;">
-        {% if section.settings.terms_url != blank %}
-          <a href="{{ section.settings.terms_url }}" style="color: #6b7280; text-decoration: none; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;">
-            Terms & Conditions
-          </a>
-        {% else %}
-          <a href="/pages/terms" style="color: #6b7280; text-decoration: none; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;">
-            Terms & Conditions
-          </a>
-        {% endif %}
-        
-        {% if section.settings.privacy_url != blank %}
-          <a href="{{ section.settings.privacy_url }}" style="color: #6b7280; text-decoration: none; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;">
-            Privacy Policy
-          </a>
-        {% endif %}
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p>© ORÉA {{ 'now' | date: '%Y' }}</p>
+      <div class="footer-bottom-links">
+        <a href="/pages/terms">Terms & Conditions</a>
       </div>
     </div>
-    
   </div>
 </footer>
 
 {% schema %}
 {
   "name": "Footer",
-  "tag": "footer",
-  "class": "orea-footer",
   "settings": [
     {
-      "type": "header",
-      "content": "Brand"
-    },
-    {
-      "type": "text",
-      "id": "brand_name",
-      "label": "Brand Name",
-      "default": "ORÉA",
-      "info": "Used in copyright text"
-    },
-    {
-      "type": "header",
-      "content": "Newsletter"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_heading",
-      "label": "Newsletter Heading",
-      "default": "JOIN OUR COMMUNITY"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_tagline",
-      "label": "Newsletter Tagline",
-      "default": "Receive $25 off your first order."
-    },
-    {
-      "type": "textarea",
-      "id": "newsletter_description",
-      "label": "Newsletter Description",
-      "default": "Early access to new pieces, private releases, exclusive offers & more."
-    },
-    {
-      "type": "header",
-      "content": "Social Media"
+      "type": "url",
+      "id": "social_instagram_link",
+      "label": "Instagram URL"
     },
     {
       "type": "url",
-      "id": "instagram_url",
-      "label": "Instagram URL",
-      "info": "Full URL including https://"
-    },
-    {
-      "type": "url",
-      "id": "facebook_url",
-      "label": "Facebook URL",
-      "info": "Full URL including https://"
-    },
-    {
-      "type": "url",
-      "id": "pinterest_url",
-      "label": "Pinterest URL",
-      "info": "Full URL including https://"
-    },
-    {
-      "type": "header",
-      "content": "Legal Links"
-    },
-    {
-      "type": "url",
-      "id": "terms_url",
-      "label": "Terms & Conditions URL",
-      "info": "Leave blank to use /pages/terms"
-    },
-    {
-      "type": "url",
-      "id": "privacy_url",
-      "label": "Privacy Policy URL"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Footer"
+      "id": "social_facebook_link",
+      "label": "Facebook URL"
     }
   ]
 }
