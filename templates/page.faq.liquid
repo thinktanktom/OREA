@@ -18,21 +18,52 @@
   <section style="padding: 0 2.4rem 12.8rem;">
     <div style="max-width: 1000px; margin: 0 auto;">
       <div style="border-top: 1px solid var(--color-orea-linen);">
-        {% for block in section.blocks %}
-          <div class="accordion-item" style="border-bottom: 1px solid var(--color-orea-linen);">
-            <button class="accordion-header" style="width: 100%; padding: 3.2rem 0; text-align: left; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: none; border: none;">
-              <span style="font-size: 1.6rem; font-weight: 500; letter-spacing: 0.05em; color: var(--color-orea-dark);">
-                {{ block.settings.question }}
-              </span>
-              <span class="accordion-icon" style="font-size: 2rem; color: var(--color-orea-taupe); transition: transform 0.3s ease;">+</span>
-            </button>
-            <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
-              <div style="padding-bottom: 3.2rem; color: var(--color-orea-taupe); font-size: 1.5rem; line-height: 1.8;">
-                {{ block.settings.answer }}
-              </div>
+        
+        <!-- FAQ Item 1 -->
+        <div class="accordion-item" style="border-bottom: 1px solid var(--color-orea-linen);">
+          <button class="accordion-header" style="width: 100%; padding: 3.2rem 0; text-align: left; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: none; border: none;">
+            <span style="font-size: 1.6rem; font-weight: 500; letter-spacing: 0.05em; color: var(--color-orea-dark);">
+              What are lab-grown diamonds?
+            </span>
+            <span class="accordion-icon" style="font-size: 2rem; color: var(--color-orea-taupe); transition: transform 0.3s ease;">+</span>
+          </button>
+          <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+            <div style="padding-bottom: 3.2rem; color: var(--color-orea-taupe); font-size: 1.5rem; line-height: 1.8;">
+              Lab-grown diamonds are real diamonds created in a controlled laboratory environment using advanced technology. They have the same chemical, physical, and optical properties as mined diamonds.
             </div>
           </div>
-        {% endfor %}
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="accordion-item" style="border-bottom: 1px solid var(--color-orea-linen);">
+          <button class="accordion-header" style="width: 100%; padding: 3.2rem 0; text-align: left; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: none; border: none;">
+            <span style="font-size: 1.6rem; font-weight: 500; letter-spacing: 0.05em; color: var(--color-orea-dark);">
+              Do you offer international shipping?
+            </span>
+            <span class="accordion-icon" style="font-size: 2rem; color: var(--color-orea-taupe); transition: transform 0.3s ease;">+</span>
+          </button>
+          <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+            <div style="padding-bottom: 3.2rem; color: var(--color-orea-taupe); font-size: 1.5rem; line-height: 1.8;">
+              Yes, we ship worldwide. Complimentary shipping is available for New Zealand orders. International shipping rates vary by location.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="accordion-item" style="border-bottom: 1px solid var(--color-orea-linen);">
+          <button class="accordion-header" style="width: 100%; padding: 3.2rem 0; text-align: left; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: none; border: none;">
+            <span style="font-size: 1.6rem; font-weight: 500; letter-spacing: 0.05em; color: var(--color-orea-dark);">
+              What is your return policy?
+            </span>
+            <span class="accordion-icon" style="font-size: 2rem; color: var(--color-orea-taupe); transition: transform 0.3s ease;">+</span>
+          </button>
+          <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+            <div style="padding-bottom: 3.2rem; color: var(--color-orea-taupe); font-size: 1.5rem; line-height: 1.8;">
+              We offer a 30-day return policy on all items. Products must be in original condition with all packaging and certificates.
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -46,28 +77,3 @@
     transform: rotate(45deg);
   }
 </style>
-
-{% schema %}
-{
-  "name": "FAQ Page",
-  "settings": [],
-  "blocks": [
-    {
-      "type": "faq_item",
-      "name": "FAQ Item",
-      "settings": [
-        {
-          "type": "text",
-          "id": "question",
-          "label": "Question"
-        },
-        {
-          "type": "richtext",
-          "id": "answer",
-          "label": "Answer"
-        }
-      ]
-    }
-  ]
-}
-{% endschema %}

@@ -6,8 +6,8 @@
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="hero-background">
-    {% if section.settings.hero_image %}
-      {{ section.settings.hero_image | image_url: width: 1920 | image_tag }}
+    {% if settings.hero_image %}
+      {{ settings.hero_image | image_url: width: 1920 | image_tag }}
     {% else %}
       <img src="{{ 'hero-placeholder.jpg' | asset_url }}" alt="ORÉA Diamonds">
     {% endif %}
@@ -18,19 +18,19 @@
   <div class="hero-content fade-in">
     <div>
       <h1 class="hero-title">
-        {{ section.settings.hero_heading | default: "Diamonds. Grown. Not Mined." }}
+        Diamonds. Grown. Not Mined.
       </h1>
       
       <div class="hero-divider"></div>
       
       <p class="hero-subtitle">
-        {{ section.settings.hero_subheading | default: "Exceptional pieces, made to keep." }}
+        Exceptional pieces, made to keep.
       </p>
     </div>
     
     <div style="padding-top: 0.8rem;">
       <a href="/collections/all" class="hero-cta">
-        {{ section.settings.hero_button_text | default: "Explore the Collections" }}
+        Explore the Collections
       </a>
     </div>
   </div>
@@ -46,34 +46,3 @@
 
 <!-- Brand Values Section -->
 {% section 'brand-values' %}
-
-{% schema %}
-{
-  "name": "Homepage",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero Background Image"
-    },
-    {
-      "type": "text",
-      "id": "hero_heading",
-      "label": "Hero Heading",
-      "default": "Diamonds. Grown. Not Mined."
-    },
-    {
-      "type": "text",
-      "id": "hero_subheading",
-      "label": "Hero Subheading",
-      "default": "Exceptional pieces, made to keep."
-    },
-    {
-      "type": "text",
-      "id": "hero_button_text",
-      "label": "Hero Button Text",
-      "default": "Explore the Collections"
-    }
-  ]
-}
-{% endschema %}
