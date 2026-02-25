@@ -5,7 +5,8 @@ import { HomeProduct, HomeCollection } from '../types/common';
 import { Product as CollectionProduct } from '../pages/collection/types';
 import { Product as BoutiqueProduct } from '../pages/boutique/types';
 import { Product as ProductShapeProduct } from '../pages/product-shape/types';
-
+import { ProductVariant, PRODUCT_VARIANTS_MAP } from './shopifyVariants';
+export { buildCheckoutUrl, PRODUCT_VARIANTS_MAP } from './shopifyVariants';
 // ---------------------------------------------------------------------------
 // Home page product data (previously in src/pages/home/constants.tsx)
 // ---------------------------------------------------------------------------
@@ -436,3 +437,69 @@ export const PRODUCT_SHAPE_PRODUCT: ProductShapeProduct = {
     { id: 1002, title: '18k White Gold', option1: '18k White Gold', option2: 'Emerald', option3: '45cm', price: 1850, available: true },
   ]
 };
+// ---------------------------------------------------------------------------
+// It bridges the internal collection product IDs (e.g. "bracelet-1") to the
+// keys used in PRODUCT_VARIANTS_MAP (e.g. "solitaire-bracelet").
+// ---------------------------------------------------------------------------
+
+export const PRODUCT_SHOPIFY_HANDLES: Record<string, string> = {
+  // Bracelets
+  'bracelet-1': 'solitaire-bracelet',
+  'bracelet-2': 'five-stone-bezel-diamond-bracelet',
+  'bracelet-3': 'floating-bezel-diamond-bracelet',
+  // Pendants
+  'pendant-1': 'solitaire-pendant',
+  'pendant-2': 'cross-diamond-pendant',
+  // Earrings
+  'earring-1': 'solitaire-studs',
+  'earring-2': 'cascade-diamond-earrings',
+  'earring-3': 'clover-diamond-studs',
+  'earring-4': 'heart-diamond-studs',
+  'earring-5': 'orbit-bezel-diamond-studs',
+  // Necklaces
+  'necklace-1': 'solitaire-necklace',
+  'necklace-2': 'curved-bar-diamond-necklace',
+  'necklace-3': 'floating-diamond-necklace',
+  'necklace-4': 'heart-diamond-necklace',
+  'necklace-5': 'orbit-bezel-diamond-necklace',
+  // Rings
+  'ring-1':  'alternating-diamond-band',
+  'ring-2':  'asscher-solitaire-ring',
+  'ring-3':  'cushion-solitaire-ring',
+  'ring-4':  'emerald-solitaire-ring',
+  'ring-5':  'hera-trilogy-three-stone-ring',
+  'ring-6':  'marquise-solitaire-ring',
+  'ring-7':  'nova-trilogy-three-stone-ring',
+  'ring-8':  'oval-half-eternity-band',
+  'ring-9':  'oval-solitaire-ring',
+  'ring-10': 'pave-half-eternity-band',
+  'ring-11': 'pear-solitaire-ring',
+  'ring-12': 'princess-solitaire-ring',
+  'ring-13': 'radiant-solitaire-ring',
+  'ring-14': 'round-solitaire-ring',
+  'ring-15': 'signature-marquise-ring',
+  'ring-16': 'the-rose-trilogy-ring',
+};
+
+/**
+ * Returns all unique metal options for a given collection product ID.
+ * Falls back to the standard 4-metal set if the handle is not mapped.
+ */
+export function getMetalsForProduct(collectionId: string): string[] {
+  const handle = PRODUCT_SHOPIFY_HANDLES[collectionId];
+  const variants: ProductVariant[] | undefined = handle ? PRODUCT_VARIANTS_MAP[handle] : undefined;
+  if (!variants?.length) return ['18k Yellow Gold', '18k White Gold', '14k Yellow Gold', '14k White Gold'];
+  return [...new Set(variants.map(v => v.option1))];
+}
+
+/**
+ * Returns all unique carat options for a given collection product ID.
+ * Returns an empty array for metal-only products (bands, drop earrings, etc.)
+ */
+export function getCaratsForProduct(collectionId: string): string[] {
+  const handle = PRODUCT_SHOPIFY_HANDLES[collectionId];
+  const variants: ProductVariant[] | undefined = handle ? PRODUCT_VARIANTS_MAP[handle] : undefined;
+  if (!variants?.length) return [];
+  const carats = variants.map(v => v.option2).filter((c): c is string => c !== null);
+  return [...new Set(carats)];
+}

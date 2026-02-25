@@ -11,6 +11,25 @@ import RelatedProducts from './RelatedProducts';
 
 import { Product } from './types';
 import { PRODUCTS } from '../collection/constants';
+import {
+  PRODUCT_SHOPIFY_HANDLES,
+  PRODUCT_VARIANTS_MAP,
+  getMetalsForProduct,
+  getCaratsForProduct,
+} from '../../data/products';
+
+// Rings that have no carat selection (metal-only variants)
+const NO_CARAT_RINGS = new Set([
+  'Alternating Diamond Band',
+  'Hera Trilogy Three-Stone Ring',
+  'Nova Trilogy Three-Stone Ring',
+  'The Rosé Trilogy Ring',
+  'Oval Half Eternity Band',
+  'Pavé Half Eternity Band',
+]);
+
+const ALL_RING_SIZES = ['F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+const ALL_SHAPES     = ['Round','Oval','Emerald','Pear','Marquise','Princess','Radiant','Asscher','Cushion','Heart'];
 
 const ProductPage: React.FC = () => {
   const { id } = useParams();
@@ -24,108 +43,45 @@ const ProductPage: React.FC = () => {
     const base = PRODUCTS.find(p => p.id === id);
     if (!base) return undefined;
 
-    const NO_CARAT_RINGS = [
-      'Alternating Diamond Band',
-      'Hera Trilogy Three-Stone Ring',
-      'Nova Trilogy Three-Stone Ring',
-      'The Rosé Trilogy Ring',
-      'Oval Half Eternity Band',
-      'Pavé Half Eternity Band'
-    ];
-
-    const ringOptions = {
-      metal: ['Platinum', '18k Yellow Gold', '18k White Gold', '14k Yellow Gold', '14k White Gold'],
-      shape: ['Round', 'Oval', 'Emerald', 'Pear', 'Marquise', 'Princess', 'Radiant', 'Asscher', 'Cushion', 'Heart'],
-      carat: NO_CARAT_RINGS.includes(base.name) ? [] : ['1.0CT', '1.5CT', '2.0CT', '2.5CT', '3.0CT', '3+ ct'],
-      size: ['F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    };
-
-    const defaultOptions = {
-      metal: ['18k Yellow Gold', '18k White Gold', '14k Yellow Gold', '14k White Gold'],
-      shape: ['Round', 'Oval', 'Pear', 'Marquise', 'Princess', 'Emerald', 'Radiant', 'Asscher', 'Cushion', 'Heart'],
-      carat: ['1.0CT'],
-      size: ['Standard']
-    };
-
     const isRingProduct = base.category === 'Rings';
 
-    const ringVariants = [
-      {
-        id: 1,
-        title: 'Platinum / Emerald',
-        option1: 'Platinum',
-        option2: 'Emerald',
-        price: base.price,
-        available: true
-      },
-      {
-        id: 2,
-        title: '18k Yellow Gold / Emerald',
-        option1: '18k Yellow Gold',
-        option2: 'Emerald',
-        price: base.price,
-        available: true
-      },
-      {
-        id: 3,
-        title: '18k White Gold / Emerald',
-        option1: '18k White Gold',
-        option2: 'Emerald',
-        price: base.price,
-        available: true
-      },
-      {
-        id: 4,
-        title: '14k Yellow Gold / Emerald',
-        option1: '14k Yellow Gold',
-        option2: 'Emerald',
-        price: base.price,
-        available: true
-      },
-      {
-        id: 5,
-        title: '14k White Gold / Emerald',
-        option1: '14k White Gold',
-        option2: 'Emerald',
-        price: base.price,
-        available: true
-      }
-    ];
+    // ── Real Shopify variant data ──────────────────────────────────────────
+    const shopifyHandle   = PRODUCT_SHOPIFY_HANDLES[base.id];
+    const realVariants    = shopifyHandle ? PRODUCT_VARIANTS_MAP[shopifyHandle] : undefined;
 
-    const nonRingVariants = [
-      {
-        id: 1,
-        title: '18k Yellow Gold / Emerald',
-        option1: '18k Yellow Gold',
-        option2: 'Emerald',
-        price: base.price,
-        available: true
-      },
-      {
-        id: 2,
-        title: '18k White Gold / Emerald',
-        option1: '18k White Gold',
-        option2: 'Emerald',
-        price: base.price,
-        available: true
-      },
-      {
-        id: 3,
-        title: '14k Yellow Gold / Emerald',
-        option1: '14k Yellow Gold',
-        option2: 'Emerald',
-        price: base.price,
-        available: true
-      },
-      {
-        id: 4,
-        title: '14k White Gold / Emerald',
-        option1: '14k White Gold',
-        option2: 'Emerald',
-        price: base.price,
-        available: true
-      }
-    ];
+    // Derive option lists directly from real variant data
+    const metals  = getMetalsForProduct(base.id);
+    const carats  = getCaratsForProduct(base.id);
+
+    // ── Options objects ────────────────────────────────────────────────────
+    const ringOptions = {
+      metal:  metals,
+      shape:  ALL_SHAPES,
+      carat:  NO_CARAT_RINGS.has(base.name) ? [] : (carats.length ? carats : ['1.0CT','1.5CT','2.0CT','2.5CT','3.0CT','3+ ct']),
+      size:   ALL_RING_SIZES,
+    };
+
+    // Non-ring: carat array is populated only for pieces that actually have
+    // carat variants (Solitaire Bracelet, Orbit Necklace, etc.)
+    const defaultOptions = {
+      metal:  metals,
+      shape:  ALL_SHAPES,
+      carat:  carats,   // empty [] for metal-only non-ring products
+      size:   ['Standard'],
+    };
+
+    // ── Variants ───────────────────────────────────────────────────────────
+    // Use real Shopify variants when available; fall back to lightweight
+    // placeholders (id = 0, price only — no checkout URL will be built) so
+    // the UI still renders while a handle is being mapped.
+    const builtVariants = realVariants ?? metals.map((metal, i) => ({
+      id: 0,                // placeholder — will not produce a checkout URL
+      title: metal,
+      option1: metal,
+      option2: null as string | null,
+      price: base.price,
+      available: true,
+    }));
 
     return {
       ...base,
@@ -135,26 +91,16 @@ const ProductPage: React.FC = () => {
         : ['14k Gold', '18k Gold', 'Lab Grown Diamond'],
       images: base.imageUrl
         ? [base.imageUrl]
-        : [
-            'https://www.orea.co.nz/cdn/shop/files/ClassicSolitaireRing-Emerald-1_1200x.jpg?v=1710924432'
-          ],
+        : ['https://www.orea.co.nz/cdn/shop/files/ClassicSolitaireRing-Emerald-1_1200x.jpg?v=1710924432'],
       options: isRingProduct ? ringOptions : defaultOptions,
-      variants: isRingProduct ? ringVariants : nonRingVariants
+      variants: builtVariants,
     } as Product;
   }, [id]);
 
-  const [selectedMetal, setSelectedMetal] = useState(
-    product?.options.metal[0] || ''
-  );
-  const [selectedShape, setSelectedShape] = useState(
-    product?.options.shape[0] || 'Emerald'
-  );
-  const [selectedCarat, setSelectedCarat] = useState(
-    product?.options.carat[0] || ''
-  );
-  const [selectedSize, setSelectedSize] = useState(
-    isRing ? 'L' : 'Standard'
-  );
+  const [selectedMetal, setSelectedMetal] = useState(product?.options.metal[0] || '');
+  const [selectedShape, setSelectedShape]  = useState(product?.options.shape[0] || 'Emerald');
+  const [selectedCarat, setSelectedCarat]  = useState(product?.options.carat[0] || '');
+  const [selectedSize, setSelectedSize]    = useState(isRing ? 'L' : 'Standard');
 
   if (!product) {
     return (
