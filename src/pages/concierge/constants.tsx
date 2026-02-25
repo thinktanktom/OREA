@@ -1,4 +1,5 @@
-import { ConciergeFeature, NavLink } from './types';
+import { NavLink } from '../../types/common';
+import { ConciergeFeature } from './types';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Collections', href: '#' },

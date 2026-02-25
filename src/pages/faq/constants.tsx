@@ -1,4 +1,4 @@
-import { FAQItem, NavLink } from './types';
+import { FAQItem, NavLink } from '../../types/common';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Collections', href: '#' },
@@ -22,11 +22,11 @@ export const GENERAL_FAQ: FAQItem[] = [
   },
   {
     question: "Is the diamond certified?",
-    answer: "Our tiny diamond rings are not certified. We supply certification to all lab-grown diamonds with an individual carat weight of 0.50ct and above. Our certified diamonds come with an IGI certification matching the inscription on the girdle of the stone."
+    answer: "We supply certification to all lab-grown diamonds with an individual carat weight of 1.0ct and above. Our certified diamonds come with an IGI certification matching the inscription on the girdle of the stone. If you have questions regarding individual carat weight below 1.0ct, please contact us."
   },
   {
     question: "Do your pieces come with a warranty?",
-    answer: "Yes. To find out the details of our Warranty Policy, please visit the separate link here:\n\nORÉA jewellery is crafted to high standards, and we stand behind the quality of our workmanship.\n\n• Rings are covered by a lifetime manufacturing warranty.\n• All other fine jewellery pieces (including earrings, necklaces, bracelets, and pendants) are covered by a two-year manufacturing warranty.\n\nThis warranty covers manufacturing faults but does not include general wear and tear, accidental damage, or misuse."
+    answer: "ORÉA jewellery is crafted to high standards, and we stand behind the quality of our workmanship.\n\n• Rings are covered by a lifetime manufacturing warranty.\n• All other fine jewellery pieces (including earrings, necklaces, bracelets, and pendants) are covered by a two-year manufacturing warranty.\n\nThis warranty covers manufacturing faults but does not include general wear and tear, accidental damage, or misuse."
   },
   {
     question: "How do I find my ring size?",
@@ -42,11 +42,11 @@ export const GENERAL_FAQ: FAQItem[] = [
   },
   {
     question: "Can you help keep my purchase a surprise?",
-    answer: "Absolutely! We understand many of our pieces are purchased for meaningful moments such as proposals or special gifts.\n\nOur packaging is discreet and does not reveal the contents. If you have specific concerns or requests to help maintain the surprise, feel free to let us know and we’re happy to assist where possible."
+    answer: "Absolutely! We understand many of our pieces are purchased for meaningful moments such as proposals or special gifts. If you have specific concerns or requests to help maintain the surprise, feel free to let us know and we’re happy to assist where possible."
   },
   {
     question: "Do you ship worldwide?",
-    answer: "Yes. ORÉA offers international shipping, allowing you to shop with us from anywhere in the world.\n\nMost orders are sent with duties and taxes covered. However, some countries do not allow these charges to be prepaid by the sender. In those cases, local import duties or taxes may be payable upon delivery. We recommend checking your local customs regulations or contacting us if you’re unsure."
+    answer: "ORÉA offers international shipping to most countries.\n\nMost orders are sent with duties and taxes covered. However, some countries do not allow these charges to be prepaid by the sender. In those cases, local import duties or taxes may be payable upon delivery. We recommend checking your local customs regulations or contacting us if you’re unsure."
   },
   {
     question: "Still Have Questions?",

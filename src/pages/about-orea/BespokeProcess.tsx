@@ -1,30 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const BespokeProcess: React.FC = () => {
   return (
-    <section className="max-w-4xl mx-auto py-32 space-y-24">
-      <div className="text-center space-y-8">
-        <h4 className="text-[10px] uppercase tracking-[0.45em] text-[#7D6B5C] font-semibold">A More Personal Way to Choose</h4>
-        <h2 className="text-4xl font-serif text-[#4A3F35] leading-tight">
-          Choosing fine jewellery should feel considered, not transactional.
+    <section className="max-w-content mx-auto py-section flex flex-col gap-section-sm">
+      <div className="text-center flex flex-col gap-8">
+        <h4 className="text-caption uppercase tracking-[0.45em] text-orea-taupe font-semibold">A More Personal Way to Choose</h4>
+        <h2 className="text-body-lg md:text-h3 font-serif text-orea-dark leading-tight whitespace-nowrap text-center">
+          {'Choosing fine jewellery should feel considered, not transactional.'}
         </h2>
-        <div className="space-y-6 text-[#7D6B5C] font-light text-lg leading-relaxed max-w-3xl mx-auto">
-          <p>ORÉA offers a thoughtful experience from start to finish, with personalised guidance online or by appointment at our Christchurch studio.</p>
-          <p>For those seeking something personal, we offer both partial and fully bespoke services.</p>
+        <div className="flex flex-col gap-6 text-orea-taupe font-light text-body-lg leading-relaxed max-w-content mx-auto">
+          <p>{'ORÉA offers a thoughtful experience from start to finish, with personalised guidance online or by appointment at our Christchurch studio.'}</p>
+          <p className="whitespace-nowrap text-body md:text-body-lg">{'For those seeking something personal, we offer both partial and fully bespoke services.'}</p>
         </div>
         <div className="pt-8">
-          <a 
-            href="/pages/bespoke" 
-            className="inline-block px-12 py-5 bg-[#4A3F35] text-white text-[10px] uppercase tracking-[0.45em] font-bold hover:bg-[#7D6B5C] transition-all"
+          <Link 
+            to="/bespoke" 
+            className="inline-block px-12 py-5 bg-orea-dark text-orea-cream text-caption uppercase tracking-[0.45em] font-bold hover:bg-orea-taupe transition-all"
           >
-            Discover Bespoke →
-          </a>
+            {'Discover Bespoke →'}
+          </Link>
         </div>
       </div>
       
-      <div className="w-full aspect-video bg-[#E8DFD3] border border-[#D4C4A8]/20 flex items-center justify-center">
-        <span className="text-[9px] uppercase tracking-[0.4em] text-[#7D6B5C] font-semibold">Studio / Process Image Slot</span>
-      </div>
     </section>
   );
 };

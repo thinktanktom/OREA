@@ -1,5 +1,5 @@
 
-import { FAQItem, NavLink } from './types';
+import { FAQItem, NavLink } from '../../types/common';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Collections', href: '#' },
@@ -27,7 +27,7 @@ export const SHIPPING_FAQ: FAQItem[] = [
   },
   {
     question: "What if my order is lost or damaged in transit?",
-    answer: "All shipments are fully insured. If your order arrives damaged or is lost in transit, please notify us within 48 hours of delivery (or expected delivery date) so we can arrange a replacement or resolution as quickly as possible."
+    answer: "All shipments are fully insured. Please notify us as soon as possible so we can find a resolution as quickly as possible."
   },
   {
     question: "Can I change my delivery address after placing an order?",

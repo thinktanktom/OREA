@@ -1,10 +1,10 @@
 
 export interface Variant {
   id: number; // Shopify Variant ID
-  title: string; // e.g., "Platinum / 1.0CT / H"
+  title: string; // e.g., "Platinum / Emerald"
   option1: string; // Metal
-  option2: string; // Carat
-  option3: string; // Size
+  option2: string; // Shape
+  option3?: string; // Size (optional)
   price: number;
   available: boolean;
 }
@@ -17,6 +17,7 @@ export interface Product {
   materials: string[];
   options: {
     metal: string[];
+    shape: string[];
     carat: string[];
     size: string[];
   };

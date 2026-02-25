@@ -1,32 +1,38 @@
+'use client';
+
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Category, Product, DiamondShape } from './types';
+import { Category } from './types';
 import { PRODUCTS } from './constants';
 import ProductCard from './ProductCard';
 import CollectionHeader from './CollectionHeader';
-import { Link } from 'react-router-dom';
-
-
-const DIAMOND_SHAPES: DiamondShape[] = ['Round', 'Oval', 'Pear', 'Marquise', 'Princess', 'Emerald', 'Radiant', 'Asscher', 'Cushion', 'Heart'];
+import { Link, useSearchParams } from 'react-router-dom';
 
 type SortOption = 'Featured' | 'Best Selling' | 'Price, Low To High' | 'Price, High To Low';
 
+const VALID_CATEGORIES: Category[] = ['All', 'Rings', 'Necklaces', 'Earrings', 'Bracelets', 'Pendants'];
+
 const CollectionPage: React.FC = () => {
-  const [currentCategory, setCurrentCategory] = useState<Category>('All');
-  const [currentShape, setCurrentShape] = useState<DiamondShape | 'All'>('All');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const initialCategory: Category = VALID_CATEGORIES.includes(categoryParam as Category) ? (categoryParam as Category) : 'All';
+
+  const [currentCategory, setCurrentCategory] = useState<Category>(initialCategory);
   const [sortBy, setSortBy] = useState<SortOption>('Featured');
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  
+
   const sortRef = useRef<HTMLDivElement>(null);
-  const filterRef = useRef<HTMLDivElement>(null);
+
+  // Sync category from URL params when they change (e.g. navigating from navbar)
+  useEffect(() => {
+    const param = searchParams.get('category');
+    const newCategory: Category = VALID_CATEGORIES.includes(param as Category) ? (param as Category) : 'All';
+    setCurrentCategory(newCategory);
+  }, [searchParams]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (sortRef.current && !sortRef.current.contains(event.target as Node)) {
         setIsSortOpen(false);
-      }
-      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
-        setIsFilterOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -37,9 +43,6 @@ const CollectionPage: React.FC = () => {
     let result = [...PRODUCTS];
     if (currentCategory !== 'All') {
       result = result.filter(p => p.category === currentCategory);
-    }
-    if (currentShape !== 'All') {
-      result = result.filter(p => p.shape === currentShape);
     }
     switch (sortBy) {
       case 'Best Selling':
@@ -57,97 +60,75 @@ const CollectionPage: React.FC = () => {
         break;
     }
     return result;
-  }, [currentCategory, currentShape, sortBy]);
+  }, [currentCategory, sortBy]);
 
   const handleSortSelect = (option: SortOption) => {
     setSortBy(option);
     setIsSortOpen(false);
   };
 
-  const handleShapeSelect = (shape: DiamondShape | 'All') => {
-    setCurrentShape(shape);
-    setIsFilterOpen(false);
-  };
-
   return (
-    <div>
-      <CollectionHeader 
-        currentCategory={currentCategory} 
-        onCategoryChange={setCurrentCategory} 
+    <div className="bg-[#FFFFFF] pb-[120px] -mb-[120px]">
+      <CollectionHeader
+        currentCategory={currentCategory}
+        onCategoryChange={(category) => {
+          setCurrentCategory(category);
+          if (category === 'All') {
+            setSearchParams({});
+          } else {
+            setSearchParams({ category });
+          }
+        }}
       />
 
-      <main className="max-w-screen-2xl mx-auto px-6 md:px-12 pb-32">
+      <main className="max-w-wide mx-auto px-6 md:px-12 pb-section-xl">
         {/* Toolbar */}
-        <div className="flex justify-between items-center mb-16 text-[10px] uppercase tracking-[0.4em] text-[#4A3F35]/70 border-b border-[#E8DFD3]/40 pb-6">
+        <div className="flex justify-between items-center mb-16 text-caption uppercase tracking-widest text-orea-dark/70 border-b border-orea-linen/40 pb-6">
           <div className="flex items-center gap-6">
             <span className="opacity-60">{processedProducts.length} Pieces</span>
-            {(currentCategory !== 'All' || currentShape !== 'All') && (
-              <button 
-                onClick={() => { setCurrentCategory('All'); setCurrentShape('All'); }}
-                className="hover:text-[#4A3F35] border-l border-[#E8DFD3] pl-6 transition-colors font-medium underline underline-offset-4"
+            {currentCategory !== 'All' && (
+              <button
+                onClick={() => { setCurrentCategory('All'); setSearchParams({}); }}
+                className="hover:text-orea-dark border-l border-orea-linen pl-6 transition-colors font-medium underline underline-offset-4"
               >
                 Clear
               </button>
             )}
           </div>
-          
-          <div className="flex gap-10 items-center">
-            {/* Filter */}
-            <div className="relative" ref={filterRef}>
-              <button 
-                onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-2 hover:text-[#4A3F35] transition-colors font-medium"
-              >
-                Shape{currentShape !== 'All' ? `: ${currentShape}` : ''}
-                <svg className={`w-3 h-3 transition-transform duration-500 ${isFilterOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
 
-              {isFilterOpen && (
-                <div className="absolute right-0 top-full mt-4 w-48 bg-[#F9F6F1] border border-[#E8DFD3] shadow-sm z-50 py-4 max-h-80 overflow-y-auto no-scrollbar">
-                  <button onClick={() => handleShapeSelect('All')} className={`w-full text-left px-6 py-2 text-[10px] tracking-[0.35em] transition-colors ${currentShape === 'All' ? 'text-[#4A3F35] font-bold bg-[#E8DFD3]/20' : 'text-[#4A3F35]/60 hover:text-[#4A3F35]'}`}>ALL SHAPES</button>
-                  {DIAMOND_SHAPES.map((shape) => (
-                    <button key={shape} onClick={() => handleShapeSelect(shape)} className={`w-full text-left px-6 py-2 text-[10px] tracking-[0.35em] transition-colors uppercase ${currentShape === shape ? 'text-[#4A3F35] font-bold bg-[#E8DFD3]/20' : 'text-[#4A3F35]/60 hover:text-[#4A3F35]'}`}>{shape}</button>
-                  ))}
-                </div>
-              )}
-            </div>
+          {/* Sort */}
+          <div className="relative" ref={sortRef}>
+            <button
+              onClick={() => setIsSortOpen(!isSortOpen)}
+              className="flex items-center gap-2 hover:text-orea-dark transition-colors font-medium"
+            >
+              Sort: {sortBy}
+              <svg className={`w-3 h-3 transition-transform duration-500 ${isSortOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
 
-            {/* Sort */}
-            <div className="relative" ref={sortRef}>
-              <button 
-                onClick={() => setIsSortOpen(!isSortOpen)}
-                className="flex items-center gap-2 hover:text-[#4A3F35] transition-colors font-medium"
-              >
-                Sort: {sortBy}
-                <svg className={`w-3 h-3 transition-transform duration-500 ${isSortOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {isSortOpen && (
-                <div className="absolute right-0 top-full mt-4 w-56 bg-[#F9F6F1] border border-[#E8DFD3] shadow-sm z-50 py-4">
-                  {(['Featured', 'Best Selling', 'Price, Low To High', 'Price, High To Low'] as SortOption[]).map((option) => (
-                    <button key={option} onClick={() => handleSortSelect(option)} className={`w-full text-left px-6 py-2 text-[10px] tracking-[0.35em] transition-colors uppercase ${sortBy === option ? 'text-[#4A3F35] font-bold bg-[#E8DFD3]/20' : 'text-[#4A3F35]/60 hover:text-[#4A3F35]'}`}>{option}</button>
-                  ))}
-                </div>
-              )}
-            </div>
+            {isSortOpen && (
+              <div className="absolute right-0 top-full mt-4 w-56 bg-[#FFFFFF] border border-orea-linen shadow-sm z-50 py-4">
+                {(['Featured', 'Best Selling', 'Price, Low To High', 'Price, High To Low'] as SortOption[]).map((option) => (
+                  <button key={option} onClick={() => handleSortSelect(option)} className={`w-full text-left px-6 py-2 text-caption tracking-widest transition-colors uppercase ${sortBy === option ? 'text-orea-dark font-bold bg-orea-linen/20' : 'text-orea-dark/60 hover:text-orea-dark'}`}>{option}</button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 md:gap-x-12 md:gap-y-24">
           {processedProducts.map((product) => (
-  <Link key={product.id} to={`/product/${product.id}`}>
-    <ProductCard product={product} />
-  </Link>
-))}
+            <Link key={product.id} to={`/product/${product.id}`}>
+              <ProductCard product={product} />
+            </Link>
+          ))}
 
           {processedProducts.length === 0 && (
-            <div className="col-span-full py-40 text-center opacity-40">
-              <p className="text-[10px] tracking-[0.5em] uppercase">No pieces found in this selection</p>
+            <div className="col-span-full py-section-xl text-center opacity-40">
+              <p className="text-caption tracking-widest uppercase">No pieces found in this selection</p>
             </div>
           )}
         </div>

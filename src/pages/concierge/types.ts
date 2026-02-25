@@ -1,7 +1,4 @@
-export interface NavLink {
-  label: string;
-  href: string;
-}
+// NavLink has been consolidated into src/types/common.ts
 
 export interface ConciergeFeature {
   label: string;

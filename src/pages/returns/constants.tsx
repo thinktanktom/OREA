@@ -1,4 +1,4 @@
-import { FAQItem, NavLink } from './types';
+import { FAQItem, NavLink } from '../../types/common';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Collections', href: '#' },

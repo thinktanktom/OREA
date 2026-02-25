@@ -1,35 +1,27 @@
-import React, { useEffect, useState } from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import ContactHero from './ContactHero';
 import ContactCards from './ContactCards';
 import ContactForm from './ContactForm';
 
 const SignatureMotif = () => (
   <div className="flex items-center justify-center py-20">
-    <div className="text-[11px] tracking-[0.6em] uppercase text-orea-taupe font-bold opacity-40">ORÉA</div>
+    <div className="text-body-sm tracking-widest uppercase text-orea-taupe font-bold opacity-40">ORÉA</div>
   </div>
 );
 
 const ContactPage: React.FC = () => {
-  const [activeBanner, setActiveBanner] = useState(0);
-
-  useEffect(() => {
-    const messages = [
-      "Complimentary NZ delivery",
-      "30-day returns, always",
-      "Book a private viewing"
-    ];
-    const interval = setInterval(() => {
-      setActiveBanner((prev) => (prev + 1) % messages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  const [selectedType, setSelectedType] = useState('consultation');
 
   return (
     <main className="min-h-screen">
       <ContactHero />
-      <ContactCards />
+      <ContactCards onSelectType={setSelectedType} />
       <SignatureMotif />
-      <ContactForm />
+      <div className="bg-[#F9F6F1] py-16 px-4">
+        <ContactForm selectedType={selectedType} />
+      </div>
     </main>
   );
 };

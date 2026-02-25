@@ -1,10 +1,3 @@
-
-export interface FAQItem {
-  question: string;
-  answer: string | string[];
-}
-
-export interface NavLink {
-  label: string;
-  href: string;
-}
+// Types have been consolidated into src/types/common.ts.
+// This file re-exports for backwards-compatible local imports.
+export type { FAQItem, NavLink } from '../../types/common';

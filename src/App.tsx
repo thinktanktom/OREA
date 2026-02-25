@@ -1,8 +1,19 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
+import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
+
+/** Scrolls to the top of the page on every route or query-string change */
+function ScrollToTop() {
+  const { pathname, search } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname, search]);
+  return null;
+}
 
 // Main Pages
 import HomePage from './pages/home/HomePage';
@@ -20,14 +31,23 @@ import ProductShapePage from './pages/product-shape/ProductShapePage';
 import ReturnsPage from './pages/returns/ReturnsPage';
 import ShippingPage from './pages/shipping/ShippingPage';
 import TermsPage from './pages/terms/TermsPage';
+import AuthPage from './pages/auth/AuthPage';
+import ProfilePage from './pages/auth/ProfilePage';
+import CartPage from './pages/cart/CartPage';
+import CheckoutPage from './pages/cart/CheckoutPage';
 
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+    <AuthProvider>
+    <CartProvider>
+      <ScrollToTop />
       <div className="min-h-screen">{/*Each page has its own background and styling*/}
         <Navbar />
         
+        {/* Global spacer: 120px breathing room below the fixed navbar */}
+        <main className="pt-[120px]">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutOreaPage />} />
@@ -44,10 +64,18 @@ const App: React.FC = () => {
           <Route path="/returns" element={<ReturnsPage />} />
           <Route path="/shipping" element={<ShippingPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/signup" element={<AuthPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
+        </main>
 
         <Footer />
       </div>
+    </CartProvider>
+    </AuthProvider>
     </BrowserRouter>
   );
 };

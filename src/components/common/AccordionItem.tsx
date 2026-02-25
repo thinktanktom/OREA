@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Plus, Minus } from 'lucide-react';
 
@@ -10,19 +12,19 @@ interface AccordionItemProps {
 
 const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen, onClick }) => {
   return (
-    <div className="border-b border-[#E8DFD3] last:border-0 group">
+    <div className="border-b border-orea-linen last:border-0 group">
       <button
         onClick={onClick}
         className="w-full flex items-center justify-between py-8 text-left focus:outline-none"
       >
-        <span className="serif-heading text-xl md:text-2xl font-light tracking-wide text-[#4A3F35] group-hover:text-[#7D6B5C] transition-colors">
+        <span className="font-serif text-h4 font-light tracking-wide text-orea-dark group-hover:text-orea-taupe transition-colors">
           {question}
         </span>
         <div className="ml-4 flex-shrink-0">
           {isOpen ? (
-            <Minus size={20} strokeWidth={1} className="text-[#7D6B5C]" />
+            <Minus size={20} strokeWidth={1} className="text-orea-taupe" />
           ) : (
-            <Plus size={20} strokeWidth={1} className="text-[#7D6B5C]" />
+            <Plus size={20} strokeWidth={1} className="text-orea-taupe" />
           )}
         </div>
       </button>
@@ -31,7 +33,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
           isOpen ? 'max-h-[500px] pb-10 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="text-[15px] leading-relaxed text-[#7D6B5C] font-light max-w-4xl whitespace-pre-wrap">
+        <div className="text-body leading-relaxed text-orea-taupe font-light max-w-content whitespace-pre-wrap">
           {answer}
         </div>
       </div>

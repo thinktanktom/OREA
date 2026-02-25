@@ -17,38 +17,35 @@ export const DiamondComparison: React.FC = () => {
   ];
 
   return (
-    <section className="px-6 lg:px-20 overflow-hidden relative">
-      {/* Table Title */}
-      <div className="max-w-6xl mx-auto text-center mb-24">
-        <h2 className="text-3xl md:text-5xl font-serif text-[#4A3F35] leading-[1.1] tracking-tight">
-          Lab-Grown vs Earth-Mined Diamonds
+    <section className="px-4 sm:px-6 lg:px-8 overflow-hidden relative">
+      <div className="max-w-container mx-auto text-center mb-section-sm">
+        <h2 className="text-h3 md:text-h2 font-serif text-orea-dark leading-relaxed tracking-wider">
+          <span className="underline decoration-orea-champagne/60 decoration-[0.5px] underline-offset-[10px]">Lab-Grown</span> vs <span className="underline decoration-orea-champagne/60 decoration-[0.5px] underline-offset-[10px]">Earth-Mined</span> Diamonds
         </h2>
       </div>
 
-      {/* Comparison Table Stage */}
-      <div className="max-w-6xl mx-auto">
-        <div className="bg-[#4A3F35] text-[#F9F6F1] rounded-sm overflow-hidden shadow-2xl relative">
-          {/* Subtle scientific grid pattern background */}
+      <div className="max-w-container mx-auto">
+        <div className="bg-orea-dark text-orea-cream rounded-sm overflow-hidden shadow-2xl relative">
           <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
-               style={{backgroundImage: 'radial-gradient(circle, #fff 0.5px, transparent 0.5px)', backgroundSize: '40px 40px'}}></div>
+               style={{backgroundImage: 'radial-gradient(circle, #F9F6F1 0.5px, transparent 0.5px)', backgroundSize: '40px 40px'}}></div>
           
           <div className="relative z-10 overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[750px]">
               <thead>
-                <tr className="border-b border-[#F9F6F1]/10">
-                  <th className="py-10 px-10 text-[10px] uppercase tracking-[0.45em] font-bold text-[#C5B8A0] w-1/4">Property</th>
-                  <th className="py-10 px-10 text-[10px] uppercase tracking-[0.45em] font-bold text-[#F9F6F1] w-[37.5%]">Lab-Grown</th>
-                  <th className="py-10 px-10 text-[10px] uppercase tracking-[0.45em] font-bold text-[#F9F6F1] w-[37.5%]">Earth-Mined</th>
+                <tr className="border-b border-orea-cream/10">
+                  <th className="py-10 px-10 text-caption uppercase tracking-[0.45em] font-bold text-orea-gold w-1/4">Property</th>
+                  <th className="py-10 px-10 text-caption uppercase tracking-[0.45em] font-bold text-orea-cream w-[37.5%]">Lab-Grown</th>
+                  <th className="py-10 px-10 text-caption uppercase tracking-[0.45em] font-bold text-orea-cream w-[37.5%]">Earth-Mined</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#F9F6F1]/5">
+              <tbody className="divide-y divide-orea-cream/5">
                 {specs.map((s, i) => (
-                  <tr key={i} className="transition-colors hover:bg-white/[0.02]">
-                    <td className="py-8 px-10 text-[10px] font-bold text-[#D4C4A8] uppercase tracking-[0.4em]">{s.label}</td>
-                    <td className="py-8 px-10 text-base md:text-lg font-serif text-[#F9F6F1]">
+                  <tr key={i} className="transition-colors hover:bg-orea-cream/[0.02]">
+                    <td className="py-8 px-10 text-caption font-bold text-orea-champagne uppercase tracking-[0.4em]">{s.label}</td>
+                    <td className="py-8 px-10 text-body font-serif text-orea-cream">
                       {s.lab}
                     </td>
-                    <td className="py-8 px-10 text-base md:text-lg font-serif text-[#F9F6F1]">
+                    <td className="py-8 px-10 text-body font-serif text-orea-cream">
                       {s.mined}
                     </td>
                   </tr>
@@ -57,8 +54,8 @@ export const DiamondComparison: React.FC = () => {
             </table>
           </div>
           
-          <div className="p-12 border-t border-[#F9F6F1]/10 bg-white/[0.01] text-center space-y-4">
-            <p className="text-[10px] text-[#7D6B5C] uppercase tracking-[0.4em]">
+          <div className="p-12 border-t border-orea-cream/10 bg-orea-cream/[0.01] text-center flex flex-col gap-4">
+            <p className="text-caption text-orea-taupe uppercase tracking-[0.4em]">
               This is a high-level comparison for general guidance.
             </p>
           </div>

@@ -11,7 +11,7 @@ const AboutOreaPage: React.FC = () => {
     <main className="flex-grow">
       <Hero />
       
-      <div className="space-y-48 pb-48 max-w-7xl mx-auto px-6">
+      <div className="flex flex-col gap-section-lg pb-section-lg max-w-container mx-auto px-4 sm:px-6 lg:px-8">
         <OriginText />
         <OreaStandards />
         <BespokeProcess />

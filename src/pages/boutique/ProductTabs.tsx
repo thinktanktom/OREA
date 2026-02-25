@@ -1,5 +1,19 @@
-
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+/* ──────────────────────────────────────────────
+   CMS-EDITABLE CONTENT
+   Update the description and details per product
+   through your content management system.
+   ────────────────────────────────────────────── */
+const PRODUCT_DESCRIPTION = 'A celebration of modern love and classic architecture. The Emerald focal stone is held in a minimalist cathedral setting, meticulously engineered to allow your wedding band to sit completely flush.';
+
+const PRODUCT_DETAILS = [
+  { label: 'Diamond Shape', value: 'Emerald Cut (IGI Certified)' },
+  { label: 'Band Width', value: '1.6mm Slender Profile' },
+  { label: 'Metal Choice', value: 'Solid 14k/18k Gold or Platinum' },
+  { label: 'Setting Style', value: 'Low Profile, Flush-Stacking Cathedral' },
+];
 
 const ProductTabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState('description');
@@ -7,56 +21,45 @@ const ProductTabs: React.FC = () => {
   const tabs = [
     { id: 'description', label: 'Description' },
     { id: 'details', label: 'Details' },
-    { id: 'shipping', label: 'ORDERING' },
-    { id: 'warranty', label: 'Our SERVICE' },
+    { id: 'shipping', label: 'Ordering' },
+    { id: 'warranty', label: 'Our Service' },
   ];
 
   const renderContent = () => {
     switch (activeTab) {
       case 'description':
         return (
-          <div className="space-y-6 animate-in fade-in duration-700">
-             <p className="text-[16px] leading-relaxed text-orea-dark/80 font-serif">
-              A celebration of modern love and classic architecture. The Emerald focal stone is held in a minimalist cathedral setting, meticulously engineered to allow your wedding band to sit completely flush.
-             </p>
+          <div className="flex flex-col gap-6 animate-in fade-in duration-700">
+            <p className="text-body leading-relaxed font-serif" style={{ color: '#4A3F35' }}>
+              {PRODUCT_DESCRIPTION}
+            </p>
           </div>
         );
       case 'details':
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-[12px] font-sans tracking-wide text-orea-taupe animate-in fade-in duration-700">
-            <div className="space-y-2">
-              <p className="text-[9px] font-bold text-orea-dark uppercase tracking-[0.3em]">Diamond Shape</p>
-              <p>Emerald Cut (IGI Certified)</p>
-            </div>
-            <div className="space-y-2">
-              <p className="text-[9px] font-bold text-orea-dark uppercase tracking-[0.3em]">Band Width</p>
-              <p>1.6mm Slender Profile</p>
-            </div>
-            <div className="space-y-2">
-              <p className="text-[9px] font-bold text-orea-dark uppercase tracking-[0.3em]">Metal Choice</p>
-              <p>Solid 14k/18k Gold or Platinum</p>
-            </div>
-            <div className="space-y-2">
-              <p className="text-[9px] font-bold text-orea-dark uppercase tracking-[0.3em]">Setting Style</p>
-              <p>Low Profile, Flush-Stacking Cathedral</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 text-body font-serif leading-relaxed animate-in fade-in duration-700" style={{ color: '#4A3F35' }}>
+            {PRODUCT_DETAILS.map((item) => (
+              <div key={item.label} className="flex flex-col gap-2">
+                <p className="text-micro font-bold uppercase tracking-widest" style={{ color: '#4A3F35' }}>{item.label}</p>
+                <p>{item.value}</p>
+              </div>
+            ))}
           </div>
         );
       case 'shipping':
         return (
-          <div className="space-y-4 text-[13px] font-light text-orea-taupe leading-relaxed animate-in fade-in duration-700">
-            <p>Our pieces are made to order and typically take between 2–8 weeks to produce, depending on the design.</p>
-            <p>We also offer a curated selection available to ship within 7–10 days for time-sensitive proposals. If you are working toward a tight timeline or require your piece by a specific date, please contact us and we'll do our best to accommodate.</p>
-            <p>For detailed delivery information, please refer to our <a href="/pages/shipping-delivery" className="text-orea-dark border-b border-orea-champagne pb-0.5">Shipping Information page</a>.</p>
+          <div className="flex flex-col gap-4 text-body font-serif leading-relaxed animate-in fade-in duration-700" style={{ color: '#4A3F35' }}>
+            <p>Our pieces are made to order and typically take between 2-8 weeks to produce, depending on the design.</p>
+            <p>We also offer a curated selection available to ship within 7-10 days for time-sensitive proposals. If you are working toward a tight timeline or require your piece by a specific date, please contact us and we'll do our best to accommodate.</p>
+            <p>For detailed delivery information, please refer to our <Link to="/shipping" className="border-b border-orea-champagne pb-0.5 hover:opacity-70 transition-opacity" style={{ color: '#4A3F35' }}>Shipping Information page</Link>.</p>
           </div>
         );
       case 'warranty':
         return (
-          <div className="space-y-4 text-[13px] font-light text-orea-taupe leading-relaxed animate-in fade-in duration-700">
+          <div className="flex flex-col gap-4 text-body font-serif leading-relaxed animate-in fade-in duration-700" style={{ color: '#4A3F35' }}>
             <p>ORÉA jewellery is crafted in solid gold or platinum and set with certified, 100% real lab-grown diamonds.</p>
-            <p>Engagement rings are covered by a Lifetime Manufacturing Warranty. All other fine jewellery is covered by a 1-Year Manufacturing Warranty, with optional <a href="/pages/concierge" className="underline underline-offset-4 text-orea-dark hover:text-orea-gold transition-colors">ORÉA Concierge Service</a> available for extended care.</p>
-            <p>Please check our <a href="/pages/warranty-policy" className="text-orea-dark border-b border-orea-champagne pb-0.5">Warranty Policy</a>.</p>
-            <p className="text-[12px] pt-2 text-orea-taupe/70 leading-relaxed font-sans">
+            <p>Fine jewellery is covered by a 2-Year Manufacturing Warranty, with optional <Link to="/concierge" className="underline underline-offset-4 hover:opacity-70 transition-opacity" style={{ color: '#4A3F35' }}>ORÉA Concierge Service</Link> available for extended care.</p>
+            <p className="text-body pt-2 leading-relaxed font-serif opacity-70">
               Please note: Normal wear and tear, improper care, third-party repairs, scratches, loss or theft, and discolouration caused by harsh chemicals are not covered. Each ORÉA piece is handcrafted to order; slight variations are a natural part of its character.
             </p>
           </div>
@@ -67,18 +70,18 @@ const ProductTabs: React.FC = () => {
   };
 
   return (
-    <div className="border-t border-orea-linen">
-      <div className="flex border-b border-orea-linen/50 overflow-x-auto no-scrollbar lg:overflow-visible">
+    <div className="border-t border-orea-sand">
+      <div className="flex border-b border-orea-sand/50 overflow-x-auto no-scrollbar lg:overflow-visible">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`py-6 px-4 md:px-5 text-[9px] font-bold tracking-[0.35em] uppercase transition-all relative whitespace-nowrap outline-none flex-grow lg:flex-grow-0 ${
+            className={`py-6 px-2 text-micro font-bold tracking-widest uppercase transition-all relative whitespace-nowrap outline-none flex-1 text-center ${
               activeTab === tab.id ? 'text-orea-dark' : 'text-orea-taupe hover:text-orea-dark/60'
             }`}
           >
             {tab.label}
-            {activeTab === tab.id && <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-orea-gold" />}
+            {activeTab === tab.id && <div className="absolute bottom-0 left-0 right-0 h-px bg-orea-champagne" />}
           </button>
         ))}
       </div>

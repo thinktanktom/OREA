@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useRef } from 'react';
 
 interface ContactCardsProps {
@@ -46,7 +48,7 @@ const ContactCards: React.FC<ContactCardsProps> = ({ onSelectType }) => {
 
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     let nextIndex = index;
-    
+
     switch (e.key) {
       case 'ArrowRight':
         nextIndex = (index + 1) % slides.length;
@@ -78,13 +80,13 @@ const ContactCards: React.FC<ContactCardsProps> = ({ onSelectType }) => {
 
     if (formContainer) {
       formContainer.scrollIntoView({ behavior: 'smooth' });
-      
+
       if (targetSection) {
         setTimeout(() => {
           targetSection.classList.add('is-highlighted');
           setTimeout(() => {
             targetSection.classList.remove('is-highlighted');
-          }, 1250);
+          }, 2000);
         }, 600);
       }
     }
@@ -93,10 +95,10 @@ const ContactCards: React.FC<ContactCardsProps> = ({ onSelectType }) => {
   return (
     <div className="py-12 relative flex flex-col items-center select-none w-full">
       {/* ARIA Tablist Navigation */}
-      <div 
-        role="tablist" 
+      <div
+        role="tablist"
         aria-label="Contact pathways"
-        className="mb-24 flex space-x-12 md:space-x-20 items-center border-b border-orea-linen pb-5"
+        className="mb-24 flex gap-12 md:gap-20 items-center border-b border-orea-linen pb-5"
       >
         {slides.map((slide, idx) => (
           <button
@@ -109,22 +111,22 @@ const ContactCards: React.FC<ContactCardsProps> = ({ onSelectType }) => {
             tabIndex={idx === activeIndex ? 0 : -1}
             onClick={() => setActiveIndex(idx)}
             onKeyDown={(e) => handleKeyDown(e, idx)}
-            className={`text-[10px] uppercase tracking-[0.45em] font-bold luxury-transition relative pb-2 outline-none group ${
-              idx === activeIndex 
-                ? 'text-orea-espresso' 
+            className={`text-caption uppercase tracking-widest font-bold transition-colors duration-500 relative pb-2 outline-none group ${
+              idx === activeIndex
+                ? 'text-orea-dark'
                 : 'text-orea-taupe/40 hover:text-orea-taupe/80'
             }`}
           >
             {slide.label}
             {idx === activeIndex && (
-              <span className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-orea-champagne fade-in"></span>
+              <span className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-orea-champagne" />
             )}
             <span className="sr-only">{slide.title} category</span>
           </button>
         ))}
       </div>
 
-      <div className="relative w-full max-w-4xl h-[520px] flex items-center justify-center perspective-1200">
+      <div className="relative w-full max-w-content h-[520px] flex items-center justify-center">
         {slides.map((slide, idx) => {
           const isActive = idx === activeIndex;
           const isNext = (idx === (activeIndex + 1) % slides.length);
@@ -149,46 +151,46 @@ const ContactCards: React.FC<ContactCardsProps> = ({ onSelectType }) => {
           }
 
           return (
-            <div 
+            <div
               key={slide.id}
               role="tabpanel"
               id={`panel-${slide.id}`}
               aria-labelledby={`tab-${slide.id}`}
               hidden={!isActive && !isNext && !isPrev}
               onClick={() => !isActive && setActiveIndex(idx)}
-              className={`absolute w-full bg-white border luxury-transition shadow-[0_30px_70px_rgba(74,63,53,0.03)] ${
-                isActive 
-                ? 'border-orea-linen p-14 md:p-20' 
+              className={`absolute w-full bg-[#FFFFFF] border transition-all duration-500 shadow-sm ${
+                isActive
+                ? 'border-orea-linen p-14 md:p-20'
                 : 'border-orea-linen/50 p-12 md:p-16 cursor-pointer hover:border-orea-champagne/40'
               }`}
-              style={{ 
-                zIndex, 
-                opacity, 
+              style={{
+                zIndex,
+                opacity,
                 transform,
                 visibility: (isActive || isNext || isPrev) ? 'visible' : 'hidden'
               }}
             >
-              <h3 className="font-serif text-3xl md:text-4xl mb-8 font-light text-orea-espresso tracking-[0.15em] leading-tight uppercase">
+              <h3 className="font-serif text-h2 mb-8 font-light text-orea-dark tracking-wider leading-tight uppercase">
                 {slide.title}
               </h3>
-              <p className="text-[11px] uppercase tracking-[0.3em] mb-12 text-orea-taupe font-medium">
+              <p className="text-body-sm uppercase tracking-widest mb-12 text-orea-taupe font-medium">
                 {slide.description}
               </p>
-              <ul className="space-y-6 mb-16 inline-block text-left">
+              <ul className="flex flex-col gap-6 mb-16 inline-block text-left">
                 {slide.points.map((point, pIdx) => (
-                  <li key={pIdx} className="text-[10px] md:text-[11px] uppercase tracking-[0.35em] text-orea-espresso font-normal flex items-center">
-                    <span className="w-4 h-[1px] bg-orea-champagne/60 mr-6"></span>
+                  <li key={pIdx} className="text-caption uppercase tracking-widest text-orea-dark font-normal flex items-center">
+                    <span className="w-4 h-px bg-orea-champagne/60 mr-6" />
                     {point}
                   </li>
                 ))}
               </ul>
               <div className="pt-4">
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     handleCTAClick(slide.id);
                   }}
-                  className="text-[10px] md:text-[11px] uppercase tracking-[0.45em] font-bold border-b border-orea-linen pb-2 text-orea-taupe hover:text-orea-espresso hover:border-orea-espresso transition-all duration-700 ease-in-out"
+                  className="text-caption uppercase tracking-widest font-bold border-b border-orea-linen pb-2 text-orea-taupe hover:text-orea-dark hover:border-orea-dark transition-all duration-700 ease-in-out"
                 >
                   {slide.cta}
                 </button>
